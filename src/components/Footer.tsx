@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Box, Twitter, Linkedin, Facebook, Instagram, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import compLogo from '../assets/comp_logo.png';
 
 export default function Footer() {
   const [logoError, setLogoError] = useState(false);
@@ -13,7 +14,7 @@ export default function Footer() {
               <div className="flex items-center transition-all duration-500 rounded-xl bg-black px-4 py-1.5 shadow-lg shadow-black/10 scale-105 dark:bg-transparent dark:px-0 dark:py-0 dark:shadow-none dark:scale-100">
                 {!logoError ? (
                   <img 
-                    src="/comp_logo.png" 
+                    src={compLogo} 
                     alt="Solo Softwares" 
                     className="h-20 w-auto object-contain transition-opacity group-hover:opacity-90 dark:brightness-100 brightness-110"
                     onError={() => setLogoError(true)}

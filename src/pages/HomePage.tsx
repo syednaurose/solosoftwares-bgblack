@@ -3,6 +3,8 @@ import { motion } from 'motion/react';
 import { ArrowRight, ChevronRight, Globe, Cpu, BarChart3, Users2, Code2, Settings, Check, Shield, Zap, Layers } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import appLogin from '../assets/app_login.png';
+import dashboard from '../assets/dashboard.png';
 
 interface HomePageProps {
   isDarkMode: boolean;
@@ -334,7 +336,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
             >
               <div className="h-full w-full rounded-[calc(1rem-4px)] bg-brand-bg overflow-hidden flex items-center justify-center p-4">
                 <img 
-                  src="/app_login.png" 
+                  src={appLogin} 
                   alt="Secure Portal Preview" 
                   className="max-h-full w-auto object-contain opacity-90 transition-opacity hover:opacity-100"
                   referrerPolicy="no-referrer"
@@ -349,7 +351,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
             >
               <div className="h-full w-full rounded-[calc(1rem-4px)] bg-brand-bg overflow-hidden flex items-center justify-center p-4">
                 <img 
-                  src="/dashboard.png" 
+                  src={dashboard} 
                   alt="SoloAccount Dashboard Preview" 
                   className="max-h-full w-auto object-contain opacity-90 transition-opacity hover:opacity-100"
                   referrerPolicy="no-referrer"

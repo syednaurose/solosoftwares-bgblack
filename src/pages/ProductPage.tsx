@@ -5,6 +5,13 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+import appLogin from '../assets/app_login.png';
+import dashboard from '../assets/dashboard.png';
+import inputFile2 from '../assets/input_file_2.png';
+import inputFile3 from '../assets/input_file_3.png';
+import inputFile4 from '../assets/input_file_4.png';
+import inputFile5 from '../assets/input_file_5.png';
+
 interface ProductPageProps {
   isDarkMode: boolean;
   setIsDarkMode: (val: boolean) => void;
@@ -16,7 +23,7 @@ const screens = [
     title: 'Secure Portal',
     description: 'Enterprise-grade authentication with SSO, multi-factor security, and granular access controls for your entire team.',
     icon: <Shield className="h-6 w-6" />,
-    image: '/app_login.png',
+    image: appLogin,
     features: ['SAML/SSO Integration', 'Multi-factor Auth', 'Role-based Access', 'Device Management']
   },
   {
@@ -24,7 +31,7 @@ const screens = [
     title: 'Executive Dashboard',
     description: 'A birds-eye view of your global financial health. Real-time metrics, liquidity ratios, and automated cash flow forecasting.',
     icon: <BarChart3 className="h-6 w-6" />,
-    image: '/dashboard.png',
+    image: dashboard,
     features: ['Total Revenue Tracking', 'Expense Breakdown', 'Cash Flow Forecasts', 'Entity Performance Overlay']
   },
   {
@@ -32,7 +39,7 @@ const screens = [
     title: 'Global Reconciliation',
     description: 'Automated matching engine that processes millions of transactions across diverse accounts and currencies.',
     icon: <Zap className="h-6 w-6" />,
-    image: '/input_file_2.png',
+    image: inputFile2,
     features: ['Auto-Matching System', 'Discrepancy Resolution', 'Audit-Ready Reporting', 'Bank-to-Book Sync']
   },
   {
@@ -40,7 +47,7 @@ const screens = [
     title: 'Treasury Analytics',
     description: 'Sophisticated treasury management for global operations, optimizing liquidity and minimizing risk.',
     icon: <BarChart3 className="h-6 w-6" />,
-    image: '/input_file_3.png',
+    image: inputFile3,
     features: ['Liquidity Buffers', 'Investment Tracking', 'Hedge Management', 'Currency Risk Reports']
   },
   {
@@ -48,7 +55,7 @@ const screens = [
     title: 'Live Cashflow',
     description: 'Real-time visibility into incoming and outgoing funds with predictive modeling for future capital needs.',
     icon: <BarChart3 className="h-6 w-6" />,
-    image: '/input_file_4.png',
+    image: inputFile4,
     features: ['Velocity Metrics', 'Burn Rate Analysis', 'Forecast Comparisons', 'Cash Runway View']
   },
   {
@@ -56,7 +63,7 @@ const screens = [
     title: 'Liquidity Management',
     description: 'Deep visibility into cash positions across all global regions and bank accounts.',
     icon: <Shield className="h-6 w-6" />,
-    image: '/input_file_5.png',
+    image: inputFile5,
     features: ['Concentration Reports', 'Sweeping Automation', 'Pool Visibility', 'Intra-day Positions']
   },
   {

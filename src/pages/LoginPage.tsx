@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Mail, Lock, CheckCircle2, ChevronRight, Github } from 'lucide-react';
+import compLogo from '../assets/comp_logo.png';
+import appLogin from '../assets/app_login.png';
 
 interface LoginPageProps {
   isDarkMode: boolean;
@@ -45,7 +47,7 @@ export default function LoginPage({ isDarkMode, setIsDarkMode }: LoginPageProps)
           >
             <div className={`mb-10 flex items-center transition-all duration-500 rounded-xl max-w-fit ${!isDarkMode ? 'bg-black px-4 py-1.5 shadow-lg shadow-black/10' : ''}`}>
               <img 
-                src="/comp_logo.png" 
+                src={compLogo} 
                 alt="Solo Softwares Logo" 
                 className={`h-12 w-auto object-contain transition-all ${!isDarkMode ? 'brightness-110' : ''}`}
                 referrerPolicy="no-referrer"
@@ -132,7 +134,7 @@ export default function LoginPage({ isDarkMode, setIsDarkMode }: LoginPageProps)
       <div className="hidden flex-1 relative bg-brand-card md:block">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-text/5 to-transparent z-10" />
         <img 
-          src="/app_login.png" 
+          src={appLogin} 
           alt="Login Visual" 
           className="h-full w-full object-cover object-center opacity-80"
           referrerPolicy="no-referrer"

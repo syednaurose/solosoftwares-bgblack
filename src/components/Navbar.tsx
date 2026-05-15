@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Box, Sun, Moon } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import compLogo from '../assets/comp_logo.png';
 
 interface NavbarProps {
   isDarkMode: boolean;
@@ -31,7 +32,7 @@ export default function Navbar({ isDarkMode, setIsDarkMode, activeSection }: Nav
           <div className={`flex items-center transition-all duration-500 rounded-xl ${!isDarkMode ? 'bg-black px-4 py-1.5 shadow-lg shadow-black/10 scale-105' : ''}`}>
             {!logoError ? (
               <img 
-                src="/comp_logo.png" 
+                src={compLogo} 
                 alt="Solo Softwares" 
                 className={`h-20 w-auto object-contain transition-opacity group-hover:opacity-90 ${!isDarkMode ? 'brightness-110' : ''}`}
                 onError={() => setLogoError(true)}
