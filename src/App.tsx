@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
 import LoginPage from './pages/LoginPage';
+import PrivacyPage from './pages/PrivacyPage';
 import DashboardLayout from './components/dashboard/DashboardLayout';
 import DashboardHome from './pages/dashboard/DashboardHome';
 import TransactionsPage from './pages/dashboard/TransactionsPage';
@@ -32,6 +33,7 @@ export default function App() {
       <Route path="/" element={<HomePage isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
       <Route path="/product" element={<ProductPage isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
       <Route path="/login" element={<LoginPage isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
+      <Route path="/privacy" element={<PrivacyPage isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
 
       {/* Dashboard Application */}
       <Route path="/dashboard" element={<ProtectedRoute><DashboardHome /></ProtectedRoute>} />
