@@ -9,6 +9,7 @@ import DashboardHome from './pages/dashboard/DashboardHome';
 import TransactionsPage from './pages/dashboard/TransactionsPage';
 import AccountsPage from './pages/dashboard/AccountsPage';
 import NotesPage from './pages/dashboard/NotesPage';
+import BudgetsPage from './pages/dashboard/BudgetsPage';
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -40,6 +41,7 @@ export default function App() {
       <Route path="/dashboard/transactions" element={<ProtectedRoute><TransactionsPage /></ProtectedRoute>} />
       <Route path="/dashboard/accounts" element={<ProtectedRoute><AccountsPage /></ProtectedRoute>} />
       <Route path="/dashboard/notes" element={<ProtectedRoute><NotesPage /></ProtectedRoute>} />
+      <Route path="/dashboard/budgets" element={<ProtectedRoute><BudgetsPage /></ProtectedRoute>} />
       
       {/* Catch-all/Redirects */}
       <Route path="/dashboard/*" element={<Navigate to="/dashboard" replace />} />

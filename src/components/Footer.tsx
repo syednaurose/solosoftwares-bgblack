@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Twitter, Linkedin, Facebook, Instagram, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import compLogo from '../assets/comp_logo.png';
+import soloLogo from '../assets/solo_logo.png';
 
 export default function Footer() {
   const [logoError, setLogoError] = useState(false);
@@ -10,11 +10,11 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-2 gap-12 md:grid-cols-4 lg:grid-cols-5">
           <div className="col-span-2 lg:col-span-2">
-            <div className="flex items-center mb-20 group">
+            <div className="flex items-center gap-3 mb-20 group">
               <div className="flex items-center transition-all duration-500 rounded-xl bg-black px-4 py-1.5 shadow-lg shadow-black/10 scale-105 dark:bg-transparent dark:px-0 dark:py-0 dark:shadow-none dark:scale-100">
                 {!logoError ? (
                   <img 
-                    src={compLogo} 
+                    src={soloLogo} 
                     alt="Solo Softwares" 
                     className="h-20 w-auto object-contain transition-opacity group-hover:opacity-90 dark:brightness-100 brightness-110"
                     onError={() => setLogoError(true)}
@@ -25,6 +25,14 @@ export default function Footer() {
                     <Box className="h-10 w-10 text-brand-bg" />
                   </div>
                 )}
+              </div>
+              <div className="flex flex-col font-display leading-[0.9] group-hover:opacity-90 transition-opacity">
+                <span className="text-2xl font-black tracking-[0.39em] text-brand-text mr-[-0.39em] uppercase">
+                  SOLO
+                </span>
+                <span className="text-[10px] font-bold tracking-[0.41em] text-brand-muted mr-[-0.41em] uppercase mt-1">
+                  SOFTWARES
+                </span>
               </div>
             </div>
             <p className="max-w-xs text-sm leading-relaxed text-brand-muted">

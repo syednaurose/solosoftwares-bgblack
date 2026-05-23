@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Mail, Lock, CheckCircle2, ChevronRight, Github } from 'lucide-react';
-import compLogo from '../assets/comp_logo.png';
+import soloLogo from '../assets/solo_logo.png';
 import appLogin from '../assets/app_login.png';
 
 interface LoginPageProps {
@@ -45,13 +45,21 @@ export default function LoginPage({ isDarkMode, setIsDarkMode }: LoginPageProps)
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className={`mb-10 flex items-center transition-all duration-500 rounded-xl max-w-fit ${!isDarkMode ? 'bg-black px-4 py-1.5 shadow-lg shadow-black/10' : ''}`}>
+            <div className={`mb-10 flex items-center gap-3 transition-all duration-500 rounded-xl max-w-fit ${!isDarkMode ? 'bg-black px-4 py-1.5 shadow-lg shadow-black/10' : ''}`}>
               <img 
-                src={compLogo} 
+                src={soloLogo} 
                 alt="Solo Softwares Logo" 
                 className={`h-12 w-auto object-contain transition-all ${!isDarkMode ? 'brightness-110' : ''}`}
                 referrerPolicy="no-referrer"
               />
+              <div className="flex flex-col font-display leading-[0.9] pr-3 select-none">
+                <span className="text-xl font-black tracking-[0.34em] text-brand-text mr-[-0.34em] uppercase">
+                  SOLO
+                </span>
+                <span className="text-[8px] font-bold tracking-[0.41em] text-brand-muted mr-[-0.41em] uppercase mt-1">
+                  SOFTWARES
+                </span>
+              </div>
             </div>
             <h1 className="font-display text-4xl font-bold tracking-tight text-brand-text mb-2">Welcome back</h1>
             <p className="text-brand-muted mb-10">Access your SoloAccount enterprise dashboard</p>

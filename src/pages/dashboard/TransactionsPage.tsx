@@ -342,9 +342,10 @@ const TransactionsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Transactions Table */}
+      {/* Transactions Table & Mobile Feed Wrapper */}
       <div className="bg-brand-card border border-brand-border rounded-2xl overflow-hidden">
-        <div className="overflow-x-auto no-scrollbar">
+        {/* Desktop View Table */}
+        <div className="hidden md:block overflow-x-auto no-scrollbar">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-brand-border bg-brand-text/[0.02]">
@@ -423,14 +424,59 @@ const TransactionsPage: React.FC = () => {
           </table>
         </div>
 
+        {/* Mobile View Stacked List */}
+        <div className="md:hidden divide-y divide-brand-border">
+          {transactions.map((tx) => (
+            <div 
+              key={tx.id} 
+              onClick={() => handleRowClick(tx)}
+              className="p-4 flex items-center justify-between active:bg-brand-text/5 transition-colors cursor-pointer gap-3"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div className={cn(
+                  "h-10 w-10 rounded-xl flex items-center justify-center text-xs font-bold shrink-0",
+                  tx.amount > 0 ? "bg-green-500/10 text-green-500" : "bg-red-500/10 text-red-500"
+                )}>
+                  {tx.amount > 0 ? <ArrowUpRight size={18} /> : <ArrowDownRight size={18} />}
+                </div>
+                <div className="min-w-0">
+                  <h4 className="text-sm font-bold text-brand-text truncate">{tx.name}</h4>
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-1">
+                    <span className="text-[10px] text-brand-muted font-mono">{tx.date}</span>
+                    <span className="h-1 w-1 rounded-full bg-brand-border shrink-0" />
+                    <span className="text-[10px] text-brand-muted truncate max-w-[100px]">{tx.account}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-right shrink-0">
+                <p className={cn(
+                  "text-sm font-display font-black",
+                  tx.amount > 0 ? "text-green-500" : "text-brand-text"
+                )}>
+                  {tx.amount > 0 ? '+' : ''}{tx.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                </p>
+                <span className={cn(
+                  "inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider mt-1",
+                  tx.status === 'completed' ? "bg-green-500/10 text-green-500" : "bg-yellow-500/10 text-yellow-500"
+                )}>
+                  {tx.status}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* Pagination */}
-        <div className="p-6 border-t border-brand-border flex items-center justify-between">
-          <p className="text-sm text-brand-muted">Showing <span className="font-bold text-brand-text">1-10</span> of <span className="font-bold text-brand-text">154</span> transactions</p>
-          <div className="flex items-center gap-2">
-            <button className="p-2 border border-brand-border rounded-lg text-brand-muted disabled:opacity-30" disabled>
+        <div className="p-4 sm:p-6 border-t border-brand-border flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs sm:text-sm text-brand-muted order-2 sm:order-1 text-center sm:text-left">
+            Showing <span className="font-bold text-brand-text">1-10</span> of <span className="font-bold text-brand-text">154</span> transactions
+          </p>
+          <div className="flex items-center gap-2 order-1 sm:order-2 w-full sm:w-auto justify-between sm:justify-start">
+            <button className="p-2 border border-brand-border rounded-lg text-brand-muted disabled:opacity-30 flex-1 sm:flex-none flex justify-center" disabled>
               <ChevronLeft size={18} />
             </button>
-            <div className="flex items-center gap-1">
+            <div className="hidden sm:flex items-center gap-1">
               {[1, 2, 3, '...', 16].map((p, i) => (
                 <button 
                   key={i}
@@ -443,7 +489,7 @@ const TransactionsPage: React.FC = () => {
                 </button>
               ))}
             </div>
-            <button className="p-2 border border-brand-border rounded-lg text-brand-muted hover:bg-brand-text/5 hover:text-brand-text">
+            <button className="p-2 border border-brand-border rounded-lg text-brand-muted hover:bg-brand-text/5 hover:text-brand-text flex-1 sm:flex-none flex justify-center">
               <ChevronRight size={18} />
             </button>
           </div>
