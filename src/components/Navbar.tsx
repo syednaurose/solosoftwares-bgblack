@@ -29,12 +29,12 @@ export default function Navbar({ isDarkMode, setIsDarkMode, activeSection }: Nav
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-brand-border bg-brand-glass backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-3 group">
-          <div className={`flex items-center transition-all duration-500 rounded-xl ${!isDarkMode ? 'bg-black px-4 py-1.5 shadow-lg shadow-black/10 scale-105' : ''}`}>
+          <div className="flex items-center transition-all duration-500">
             {!logoError ? (
               <img 
                 src={soloLogo} 
                 alt="Solo Softwares" 
-                className={`h-20 w-auto object-contain transition-opacity group-hover:opacity-90 ${!isDarkMode ? 'brightness-110' : ''}`}
+                className="h-20 w-auto object-contain transition-opacity group-hover:opacity-90"
                 onError={() => setLogoError(true)}
                 referrerPolicy="no-referrer"
               />
@@ -56,10 +56,31 @@ export default function Navbar({ isDarkMode, setIsDarkMode, activeSection }: Nav
         <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => {
             const isActive = isHomePage && activeSection === link.id || location.pathname === link.href;
+            
+            const handleScroll = (e: React.MouseEvent) => {
+              if (isHomePage && (link.href.startsWith('#') || link.href.startsWith('/#'))) {
+                e.preventDefault();
+                const targetId = link.id;
+                const element = document.getElementById(targetId);
+                if (element) {
+                  const navbarHeight = 90; // offset for fixed navbar
+                  const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+                  const offsetPosition = elementPosition - navbarHeight;
+                  
+                  window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                  });
+                  window.history.pushState(null, '', `#${targetId}`);
+                }
+              }
+            };
+
             return (
               <Link 
                 key={link.id} 
                 to={link.href} 
+                onClick={handleScroll}
                 className={`text-sm font-medium transition-colors ${
                   isActive ? 'text-brand-text underline underline-offset-8 decoration-brand-text/30' : 'text-brand-muted hover:text-brand-text'
                 }`}

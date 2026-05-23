@@ -11,12 +11,12 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-12 md:grid-cols-4 lg:grid-cols-5">
           <div className="col-span-2 lg:col-span-2">
             <div className="flex items-center gap-3 mb-20 group">
-              <div className="flex items-center transition-all duration-500 rounded-xl bg-black px-4 py-1.5 shadow-lg shadow-black/10 scale-105 dark:bg-transparent dark:px-0 dark:py-0 dark:shadow-none dark:scale-100">
+              <div className="flex items-center transition-all duration-500">
                 {!logoError ? (
                   <img 
                     src={soloLogo} 
                     alt="Solo Softwares" 
-                    className="h-20 w-auto object-contain transition-opacity group-hover:opacity-90 dark:brightness-100 brightness-110"
+                    className="h-20 w-auto object-contain transition-opacity group-hover:opacity-90"
                     onError={() => setLogoError(true)}
                     referrerPolicy="no-referrer"
                   />

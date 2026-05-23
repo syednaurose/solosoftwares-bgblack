@@ -45,11 +45,11 @@ export default function LoginPage({ isDarkMode, setIsDarkMode }: LoginPageProps)
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className={`mb-10 flex items-center gap-3 transition-all duration-500 rounded-xl max-w-fit ${!isDarkMode ? 'bg-black px-4 py-1.5 shadow-lg shadow-black/10' : ''}`}>
+            <div className="mb-10 flex items-center gap-3 transition-all duration-500 max-w-fit">
               <img 
                 src={soloLogo} 
                 alt="Solo Softwares Logo" 
-                className={`h-12 w-auto object-contain transition-all ${!isDarkMode ? 'brightness-110' : ''}`}
+                className="h-12 w-auto object-contain transition-all"
                 referrerPolicy="no-referrer"
               />
               <div className="flex flex-col font-display leading-[0.9] pr-3 select-none">
