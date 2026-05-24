@@ -7,6 +7,10 @@ import {
   Cpu, 
   BarChart3, 
   Users2, 
+  UserCheck,
+  HardDrive,
+  Smartphone,
+  RefreshCw,
   Code2, 
   Settings, 
   Check, 
@@ -251,7 +255,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
   const [monthlyIncome, setMonthlyIncome] = useState(7500);
   const [monthlyExpenses, setMonthlyExpenses] = useState(4800);
   const [whatIfScenario, setWhatIfScenario] = useState<'none' | 'envelope' | 'hustle' | 'fee'>('none');
-  const [activeSegment4Tab, setActiveSegment4Tab] = useState<'features' | 'impact' | 'tech'>('features');
+  const [activeSegment4Tab, setActiveSegment4Tab] = useState<'new-features' | 'features' | 'impact' | 'tech'>('new-features');
   const [activeSurfaceIndex, setActiveSurfaceIndex] = useState(0);
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
 
@@ -901,15 +905,16 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
           </div>
 
           {/* Tab Selection */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 p-1.5 bg-brand-card/50 border border-brand-border rounded-2xl mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 p-1.5 bg-brand-card/50 border border-brand-border rounded-2xl mb-12">
             {[
+              { id: 'new-features', label: '✨ Newly Implemented', desc: 'Local Profiles, Native SQLite, and private device-linking backup' },
               { id: 'features', label: '✅ Implemented Features', desc: 'Core tracking, planning & intelligence modules ready for production' },
               { id: 'impact', label: '🚀 Life-Changing Impact', desc: 'How structured ledger intelligence alters personal & family dynamics' },
               { id: 'tech', label: '🛠️ Architecture & Gaps', desc: 'The technical foundation and our honest documented scope limits' }
             ].map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveSegment4Tab(tab.id as 'features' | 'impact' | 'tech')}
+                onClick={() => setActiveSegment4Tab(tab.id as any)}
                 className={`flex flex-col items-start gap-1 p-4 rounded-xl text-left transition-all ${
                   activeSegment4Tab === tab.id 
                     ? 'bg-brand-card border border-brand-border text-brand-text shadow-md scale-[1.01]' 
@@ -932,6 +937,92 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
               transition={{ duration: 0.4 }}
               className="min-h-[500px]"
             >
+              {activeSegment4Tab === 'new-features' && (
+                <div className="space-y-8 animate-fade-in">
+                  {/* Executive Summary Mini Overview for New Features */}
+                  <div className="p-6 rounded-2xl bg-brand-card border border-brand-border text-left relative overflow-hidden">
+                    <div className="absolute top-0 right-0 h-32 w-32 bg-emerald-500/10 rounded-full blur-2xl" />
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-md shrink-0 w-fit">New release: v0.2.0</span>
+                      <h3 className="text-base font-bold text-brand-text">Major Native Storage & Privacy Milestone</h3>
+                    </div>
+                    <p className="text-sm text-brand-muted font-light leading-relaxed max-w-4xl">
+                      We have dramatically hardened SoloAccount's core foundation with <strong className="text-brand-text font-semibold">Native Android SQLite storage</strong>, instant account-less <strong className="text-brand-text font-semibold">Local Profiles</strong>, and a robust <strong className="text-brand-text font-semibold">encrypted recovery protocol</strong>. Your financial security, velocity, and data durability are guaranteed with absolute hardware-level sovereignty.
+                    </p>
+                  </div>
+
+                  {/* Grid of 5 New Features */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+                    {[
+                      {
+                        icon: <UserCheck className="h-5 w-5 text-emerald-500" />,
+                        tag: "Guest Mode",
+                        title: "Local Profiles",
+                        desc: "Start managing finances instantly with no signups, no email demands, and zero tracker links. Unlimited, fully isolated guest views kept wholly on your device memory.",
+                        badge: "Web + Android",
+                        items: ["Zero setup barrier", "Scoped account databases", "Dynamic profile switching"]
+                      },
+                      {
+                        icon: <Database className="h-5 w-5 text-emerald-500" />,
+                        tag: "Reliable DB",
+                        title: "Native SQLite on Android",
+                        desc: "Replaces standard WebView localStorage with a high-fidelity native SQLite database engine. Your financial logs survive aggressive system cleans, resets, and hot updates.",
+                        badge: "Android Exclusive",
+                        items: ["Direct SQLite storage", "Immutable asset logs", "Sub-millisecond query speed"]
+                      },
+                      {
+                        icon: <Lock className="h-5 w-5 text-emerald-500" />,
+                        tag: "Encrypted Links",
+                        title: "Device Linking & Recovery",
+                        desc: "Move entire profile files to a secondary smartphone in seconds. Supports fully private AES-GCM local recovery codes or quick, short 8-char encrypted cloud relays.",
+                        badge: "Sovereign Backup",
+                        items: ["150K PBKDF2 iterations", "Pure client-side encryption", "Single-use secure code"]
+                      },
+                      {
+                        icon: <RefreshCw className="h-5 w-5 text-emerald-500" />,
+                        tag: "Zero-Loss Path",
+                        title: "Background Local-to-SQL Migration",
+                        desc: "Seamlessly translates vintage localStorage key-value sequences into native SQLite tables in the background during your first upgrade launch. Safe, quiet, and automatic.",
+                        badge: "Android Auto-Upgrade",
+                        items: ["One-shot automatic detection", "Idempotent database mapping", "Zero transaction downtime"]
+                      },
+                      {
+                        icon: <Terminal className="h-5 w-5 text-emerald-500" />,
+                        tag: "Diag Console",
+                        title: "Storage Debug Panel",
+                        desc: "Interactive developer-oriented dashboard integrated into Settings. Inspect active SQLite file paths, trigger manual re-migration procedures, and pull schemas via ADB.",
+                        badge: "Power-User Tool",
+                        items: ["Absolute storage visibility", "ADB pull diagnostic path", "Idempotent reset buttons"]
+                      }
+                    ].map((feat, i) => (
+                      <div key={i} className="p-6 rounded-2xl bg-brand-card/70 border border-brand-border hover:border-brand-text/20 transition-all flex flex-col justify-between space-y-4">
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 shrink-0">
+                                {feat.icon}
+                              </div>
+                              <span className="text-[10px] font-mono font-bold tracking-wider text-brand-muted uppercase">{feat.tag}</span>
+                            </div>
+                            <span className="text-[10px] bg-emerald-500/10 text-emerald-500 font-mono font-bold px-2 py-0.5 rounded-full">{feat.badge}</span>
+                          </div>
+                          <h4 className="text-base font-bold text-brand-text">{feat.title}</h4>
+                          <p className="text-xs text-brand-muted leading-relaxed font-light">{feat.desc}</p>
+                        </div>
+                        <div className="pt-3 border-t border-brand-border/40 space-y-1">
+                          {feat.items.map((item, idx) => (
+                            <div key={idx} className="flex items-center gap-1.5 text-[11px] text-brand-muted font-light">
+                              <Check className="h-3 w-3 text-emerald-500 shrink-0" />
+                              <span>{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {activeSegment4Tab === 'features' && (
                 <div className="space-y-8">
                   {/* Executive Summary Mini Overview */}
