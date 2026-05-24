@@ -35,6 +35,11 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import appLogin from '../assets/app_login.png';
 import dashboard from '../assets/dashboard.png';
+import soloaccountLogo from '../assets/soloaccount-mark.svg';
+import surf1 from '../assets/soloaccount_Surface_1.png';
+import surf2 from '../assets/soloaccount_Surface_2.png';
+import surf3 from '../assets/soloaccount_Surface_3.png';
+import surf4 from '../assets/soloaccount_Surface_4.png';
 
 interface HomePageProps {
   isDarkMode: boolean;
@@ -155,6 +160,70 @@ const talentProfiles: SystemModuleSpec[] = [
     complianceVetting: 'Secured via standard corporate OAuth boundaries, JWT verification keys, and IP white-listing policies.',
     productionOutcome: 'Successfully bridge and ingest transactional summaries from older mainframes with zero data loss.',
     deploymentStatus: 'Ready for enterprise ERP configuration'
+  },
+  {
+    id: 'system-design',
+    roleType: 'System Design',
+    moduleName: 'Enterprise Architecture & Blueprint Core',
+    avatarAccent: 'from-rose-500 to-pink-800',
+    iconName: 'layers',
+    tagline: 'Federated microservice decoupling, modular layout graphs, and decoupled sync boundaries.',
+    version: 'v2.0.4',
+    metricValue: '100% Solid',
+    metricLabel: 'Topology Fault Tolerance',
+    keyCapabilities: ['Multi-channel failover routing', 'Domain-driven service segregation', 'Enterprise schema harmonization', 'Latency optimization patterns'],
+    architectureStack: ['C4 Architecture Model', 'Architectural Layout Compilers', 'OpenAPI Specs', 'Swagger Hub Systems'],
+    complianceVetting: 'Validated fully against distributed fallback patterns and high-availability disaster protocols.',
+    productionOutcome: 'Ensures structured separation of modular frameworks, mitigating architectural debt cascades.',
+    deploymentStatus: 'Enterprise architecture diagrams certified'
+  },
+  {
+    id: 'qa-analyst',
+    roleType: 'QA Analyst',
+    moduleName: 'Automated Continuous Assertion Engine',
+    avatarAccent: 'from-emerald-400 to-teal-600',
+    iconName: 'check-circle',
+    tagline: 'Fully automated testing frameworks running comprehensive simulation runs over local states.',
+    version: 'v1.7.0',
+    metricValue: '99.98%',
+    metricLabel: 'Automated Test Coverage',
+    keyCapabilities: ['Cross-browser layout assertion', 'Chaotic failure stress injection', 'Responsive element audit', 'Asynchronous data race audit'],
+    architectureStack: ['Playwright Test Suites', 'Jest Runner Modules', 'K6 Load Injectors', 'Lighthouse Perf Auditors'],
+    complianceVetting: 'Continuous regression evaluation securing zero compliance holes and perfect interface reliability.',
+    productionOutcome: 'Eliminates layout visual regressions and unhandled promise failures across the entire core suite.',
+    deploymentStatus: 'Daily regression pipelines fully green'
+  },
+  {
+    id: 'release-automation',
+    roleType: 'Release Automation',
+    moduleName: 'Zero-Downtime Blue-Green GitOps Flow',
+    avatarAccent: 'from-amber-400 to-orange-600',
+    iconName: 'terminal',
+    tagline: 'Automated container packaging, secure cryptographic binary signing, and deployment streams.',
+    version: 'v3.1.2-Stable',
+    metricValue: '< 4 Mins',
+    metricLabel: 'Release Ingestion SLA',
+    keyCapabilities: ['Declarative GitOps workflows', 'Automated canary rollbacks', 'Secure cryptographic audits', 'Container layer caching'],
+    architectureStack: ['GitHub Action Runbooks', 'ArgoCD Sync Operators', 'Docker Container Registers', 'HashiCorp Vault Secrets'],
+    complianceVetting: 'Meets SLSA Level 3 security frameworks with automated supply-chain source signing pipelines.',
+    productionOutcome: 'Handles dozens of safe, automated zero-downtime hotfixes and system rollouts every single week.',
+    deploymentStatus: 'Automated GitOps deploy pipeline active'
+  },
+  {
+    id: 'supports',
+    roleType: 'Supports',
+    moduleName: '24/7 Global Live-Site Reliability Desk',
+    avatarAccent: 'from-sky-500 to-indigo-700',
+    iconName: 'settings',
+    tagline: 'Proactive metrics evaluation and instant incident triage following precise SLA targets.',
+    version: 'v5.0-LTS',
+    metricValue: '< 15 Mins',
+    metricLabel: 'Average Resolution Speed',
+    keyCapabilities: ['Intelligent error alerting', 'Disaster recovery execution', 'Database runtime optimizations', 'Active tenant assistance'],
+    architectureStack: ['Grafana Analytics Core', 'Sentry Incident Hubs', 'PagerDuty Alerts Engine', 'Sovereign Workspace Keys'],
+    complianceVetting: 'Adheres to stringent ISO 27001 data handling, logging, and access control policies.',
+    productionOutcome: 'Maintains live tracking transparency and delivers immediate answers regarding active application state.',
+    deploymentStatus: 'Active global site reliability support active'
   }
 ];
 
@@ -166,6 +235,10 @@ const getIconComponent = (iconName: string) => {
     case 'database': return <Database className="h-7 w-7 text-white" />;
     case 'layout': return <Layout className="h-7 w-7 text-white" />;
     case 'file-json': return <FileJson className="h-7 w-7 text-white" />;
+    case 'layers': return <Layers className="h-7 w-7 text-white" />;
+    case 'check-circle': return <CheckCircle2 className="h-7 w-7 text-white" />;
+    case 'terminal': return <Terminal className="h-7 w-7 text-white" />;
+    case 'settings': return <Settings className="h-7 w-7 text-white" />;
     default: return <Cpu className="h-7 w-7 text-white" />;
   }
 };
@@ -174,9 +247,21 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
   const [activeSection, setActiveSection] = useState('hero');
   const [selectedRoleIndex, setSelectedRoleIndex] = useState(0);
   
-  // Custom states for ROI Estimator
-  const [entitiesCount, setEntitiesCount] = useState(15);
-  const [transactionVolume, setTransactionVolume] = useState(120000);
+  // Custom states for Wealth & Scenario Planning Simulator (Income vs Expenses)
+  const [monthlyIncome, setMonthlyIncome] = useState(7500);
+  const [monthlyExpenses, setMonthlyExpenses] = useState(4800);
+  const [whatIfScenario, setWhatIfScenario] = useState<'none' | 'envelope' | 'hustle' | 'fee'>('none');
+  const [activeSegment4Tab, setActiveSegment4Tab] = useState<'features' | 'impact' | 'tech'>('features');
+  const [activeSurfaceIndex, setActiveSurfaceIndex] = useState(0);
+  const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
+
+  useEffect(() => {
+    if (isAutoplayPaused) return;
+    const timer = setInterval(() => {
+      setActiveSurfaceIndex((prev) => (prev + 1) % 4);
+    }, 5500); // Rotate every 5.5 seconds for optimal reading speed
+    return () => clearInterval(timer);
+  }, [isAutoplayPaused]);
 
   useEffect(() => {
     const sections = ['features', 'testimonials', 'pricing', 'blog', 'faq', 'contact'];
@@ -225,10 +310,28 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
 
   const selectedProfile = talentProfiles[selectedRoleIndex];
 
-  // ROI calculations
-  const weeklyHoursSaved = entitiesCount * 12;
-  const compliantMarkets = Math.min(180, Math.round(entitiesCount * 4.5 + 10));
-  const estimatedSavings = Math.round((entitiesCount * 12 * 85) + (transactionVolume * 0.035));
+  // Derived analytical calculations based on income vs expenses & What-if actions
+  const adjustedIncome = whatIfScenario === 'hustle' ? monthlyIncome + 1200 : monthlyIncome;
+  const adjustedExpenses = whatIfScenario === 'envelope' ? Math.round(monthlyExpenses * 0.85) : monthlyExpenses;
+  
+  const monthlySurplus = Math.max(0, adjustedIncome - adjustedExpenses);
+  const savingsRate = adjustedIncome > 0 ? Math.round((monthlySurplus / adjustedIncome) * 100) : 0;
+  
+  // Financial Health Score (0-100) based on savings rate and emergency buffer
+  const financialHealthScore = Math.max(10, Math.min(100, Math.round(
+    30 + 
+    (savingsRate * 1.1) + 
+    (monthlySurplus > 2000 ? 15 : monthlySurplus > 1000 ? 8 : 0) +
+    (adjustedExpenses < adjustedIncome * 0.5 ? 10 : 0)
+  )));
+
+  // 10-Year projection with 8.0% compound annual return (or 9.2% if optimizing portfolio fees)
+  const annualReturnRate = whatIfScenario === 'fee' ? 0.092 : 0.080;
+  const monthlyReturnRate = annualReturnRate / 12;
+  const projectionMonths = 120;
+  const projectedTenYearWealth = monthlySurplus > 0 
+    ? Math.round(monthlySurplus * ((Math.pow(1 + monthlyReturnRate, projectionMonths) - 1) / monthlyReturnRate))
+    : 0;
 
   const features = [
     {
@@ -266,21 +369,21 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
   const testimonials = [
     {
       quote: "Solo Softwares transformed our multi-entity reporting from weeks to seconds. Their engineering solutions represent outstanding digital systems design.",
-      author: "Sarah Chen",
-      role: "CFO at Nexus Global",
-      avatar: "SC"
+      author: "Ismail Naurose",
+      role: "QA at SOLO SOFTWARES",
+      avatar: "IS"
     },
     {
-      quote: "The deep anomaly detection saved us from a major balance sheet discrepancy. Our audit process is now proactive, fast, and entirely friction-free.",
-      author: "Marcus Thorne",
-      role: "Head of Finance at Voltz",
-      avatar: "MT"
+      quote: "You must gain control over your money, or the lack of it will forever control you.  Money is only a tool. It will take you wherever you wish, but it will not replace you as the driver.",
+      author: "Anif Mohamed",
+      role: "Medical Student at NUB, Egypt",
+      avatar: "AN"
     },
     {
       quote: "An engineered accounting tool that actually speaks developers' language. The modular system integrated with our container setup in under a day.",
-      author: "Elena Rodriguez",
-      role: "CTO at Innovate Labs",
-      avatar: "ER"
+      author: "Abdul Aleem",
+      role: "Student at AAIIS | Riyadh, Saudi Arabia",
+      avatar: "AA"
     }
   ];
 
@@ -467,7 +570,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
               </h1>
 
               <p className="text-lg md:text-xl text-brand-muted max-w-2xl leading-relaxed font-light">
-                Solo Softwares designs, develops, and deploys high-integrity software components, AI agent pipelines, and the proprietary <span className="font-semibold text-brand-text">SoloAccount | Personal Finance Manager</span> ledger engine for ambitious global enterprises.
+                Solo Softwares designs, develops, and deploys high-integrity software components, AI agent pipelines, and the proprietary <span className="font-semibold text-brand-text">The Intelligent Core | The Infinite Capability</span> and build in engine for ambitious global enterprises.
               </p>
 
               {/* Dynamic Interactive Role Tabs */}
@@ -496,9 +599,15 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
                   href="https://soloaccount.solosoftwares.com/" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-center gap-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-sm font-bold transition-all hover:shadow-[0_8px_30px_rgb(16,185,129,0.2)]"
+                  className="group flex items-center justify-center gap-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white pl-5 pr-8 py-4 text-sm font-bold transition-all hover:shadow-[0_8px_30px_rgb(16,185,129,0.2)]"
                 >
-                  Enter SoloAccount Portal
+                  <img 
+                    src={soloaccountLogo} 
+                    alt="" 
+                    className="h-6 w-6 object-contain rounded-md border border-white/25 bg-white/10 p-0.5"
+                    referrerPolicy="no-referrer"
+                  />
+                  <span>Enter SoloAccount Portal</span>
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
                 <a 
@@ -622,85 +731,119 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
         </div>
       </section>
 
-      {/* 📊 Segment 3: COGNITIVE INTERACTIVE ROI ESTIMATOR CARD */}
-      <section className="py-24 bg-brand-bg/50 border-b border-brand-border">
+      {/* 📊 Segment 3: COGNITIVE INTERACTIVE WEALTH & SCENARIO ESTIMATOR CARD */}
+      <section id="estimator" className="py-24 bg-brand-bg/50 border-b border-brand-border">
         <div className="mx-auto max-w-7xl px-6">
           <div className="max-w-3xl mx-auto text-center mb-16 space-y-4">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">Calculate Your Compliance Savings</h2>
-            <p className="text-brand-muted">Adjust variables below to calculate estimated ledger management overhead savings using Solo Softwares' autonomous closing networks.</p>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">Interactive Wealth & Scenario Simulator</h2>
+            <p className="text-brand-muted">Adjust variables below to calculate your estimated savings velocity, health scores, and 10-year compounded investment projection under optional What-If choices.</p>
           </div>
 
           <div className="bg-brand-card border border-brand-border rounded-[2rem] p-6 md:p-10 max-w-5xl mx-auto shadow-xl grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             
             {/* Range Controls */}
-            <div className="space-y-8">
+            <div className="space-y-6 text-left">
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-bold text-brand-text">Active Subsidiaries & Entities</span>
-                  <span className="text-sm font-mono font-bold bg-brand-text/10 px-3 py-1 rounded-lg text-brand-text">{entitiesCount} Subsidiaries</span>
+                  <span className="text-sm font-bold text-brand-text">Monthly Net Income</span>
+                  <span className="text-sm font-mono font-bold bg-brand-text/10 px-3 py-1 rounded-lg text-brand-text">${monthlyIncome.toLocaleString()} / mo</span>
                 </div>
                 <input 
                   type="range" 
-                  min="1" 
-                  max="100" 
-                  value={entitiesCount} 
-                  onChange={(e) => setEntitiesCount(parseInt(e.target.value))}
+                  min="1500" 
+                  max="30000" 
+                  step="250"
+                  value={monthlyIncome} 
+                  onChange={(e) => setMonthlyIncome(parseInt(e.target.value))}
                   className="w-full accent-emerald-500 cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] text-brand-muted font-mono">
-                  <span>1 Entity</span>
-                  <span>50 Entities</span>
-                  <span>100 Entities</span>
+                  <span>$1.5K</span>
+                  <span>$15K</span>
+                  <span>$30K</span>
                 </div>
               </div>
 
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-bold text-brand-text">Monthly Transaction Outflows</span>
-                  <span className="text-sm font-mono font-bold bg-brand-text/10 px-3 py-1 rounded-lg text-brand-text">{transactionVolume.toLocaleString()} tx/mo</span>
+                  <span className="text-sm font-bold text-brand-text">Identified Monthly Expenses</span>
+                  <span className="text-sm font-mono font-bold bg-brand-text/10 px-3 py-1 rounded-lg text-brand-text">${monthlyExpenses.toLocaleString()} / mo</span>
                 </div>
                 <input 
                   type="range" 
-                  min="5000" 
-                  max="1000000" 
-                  step="5000"
-                  value={transactionVolume} 
-                  onChange={(e) => setTransactionVolume(parseInt(e.target.value))}
+                  min="1000" 
+                  max="25000" 
+                  step="250"
+                  value={monthlyExpenses} 
+                  onChange={(e) => setMonthlyExpenses(parseInt(e.target.value))}
                   className="w-full accent-emerald-500 cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] text-brand-muted font-mono">
-                  <span>5K Transactions</span>
-                  <span>500K Transactions</span>
-                  <span>1M Transactions</span>
+                  <span>$1K</span>
+                  <span>$13K</span>
+                  <span>$25K</span>
+                </div>
+              </div>
+
+              {/* What-If Action Dropdown Selector */}
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold uppercase tracking-wider text-brand-muted block">Model a Planning Scenario (What-If):</label>
+                <div className="relative">
+                  <select
+                    value={whatIfScenario}
+                    onChange={(e) => setWhatIfScenario(e.target.value as any)}
+                    className="w-full appearance-none bg-brand-bg border border-brand-border rounded-xl px-4 py-3 text-sm font-medium text-brand-text focus:outline-none focus:ring-1 focus:ring-emerald-500/50 pr-10"
+                  >
+                    <option value="none">No Scenario — Traditional Budget (Baseline)</option>
+                    <option value="envelope">Apply 15% Smart Envelope Cuts (Spend-Less Bounds)</option>
+                    <option value="hustle">Add Freelance Side Hustle (+$1,200/mo net)</option>
+                    <option value="fee">Optimize Fees (Migrate to low-fee ETFs, save 1.2% CAGR)</option>
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-brand-muted">
+                    <ChevronDown className="h-4 w-4" />
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Simulated Live Outputs */}
-            <div className="bg-brand-bg/50 border border-brand-border rounded-2xl p-6 md:p-8 space-y-6 relative overflow-hidden">
-              <div className="absolute top-0 right-0 h-24 w-24 bg-emerald-500/5 rounded-full blur-2xl" />
+            {/* Simulated Live Projections */}
+            <div className="bg-brand-bg/50 border border-brand-border rounded-2xl p-6 md:p-8 space-y-6 relative overflow-hidden text-left">
+              <div className="absolute top-0 right-0 h-24 w-24 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
               
               <div className="space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-muted block">Estimated Overhead Capital Saved:</span>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-muted block">PROJECTED 10-YEAR COMPOUND WEALTH (at {whatIfScenario === 'fee' ? '9.2%' : '8.0%'} ROI):</span>
                 <p className="text-4xl sm:text-5xl font-display font-black text-emerald-500 tracking-tight">
-                  ${estimatedSavings.toLocaleString()}<span className="text-sm text-brand-muted font-normal font-sans"> / year</span>
+                  ${projectedTenYearWealth.toLocaleString()}<span className="text-sm text-brand-muted font-normal font-sans"> / 10 years</span>
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-4 pt-4 border-t border-brand-border">
                 <div className="space-y-1">
-                  <span className="text-[10px] font-bold uppercase text-brand-muted block">Manual closes reduced:</span>
-                  <p className="text-lg font-bold text-brand-text">{weeklyHoursSaved} hours / month</p>
+                  <span className="text-[10px] font-bold uppercase text-brand-muted block">Estimated Health Score:</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg font-bold text-brand-text">{financialHealthScore} / 100</span>
+                    <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-mono font-bold ${
+                      financialHealthScore >= 75 ? 'bg-emerald-500/10 text-emerald-500' :
+                      financialHealthScore >= 50 ? 'bg-blue-500/10 text-blue-500' :
+                      'bg-red-500/10 text-red-500'
+                    }`}>
+                      {financialHealthScore >= 75 ? 'Excellent' : financialHealthScore >= 50 ? 'Good' : 'Needs Care'}
+                    </span>
+                  </div>
                 </div>
                 <div className="space-y-1">
-                  <span className="text-[10px] font-bold uppercase text-brand-muted block">Global Tax Readiness:</span>
-                  <p className="text-lg font-bold text-brand-text">{compliantMarkets} Markets Available</p>
+                  <span className="text-[10px] font-bold uppercase text-brand-muted block">Direct Savings Rate:</span>
+                  <p className="text-lg font-bold text-brand-text">{savingsRate}% <span className="text-xs text-brand-muted font-normal font-sans">(Surplus: ${monthlySurplus.toLocaleString()}/mo)</span></p>
                 </div>
               </div>
 
-              <div className="pt-2">
-                <p className="text-xs text-brand-muted italic leading-relaxed">
-                  "Calculated based on average regional compliance wages, digital system audit times, and automated VAT transaction logic rules integrated by Solo Softwares globally."
+              {/* Insights based on parameters */}
+              <div className="pt-2 p-3 bg-brand-card/50 border border-brand-border/60 rounded-xl">
+                <p className="text-xs text-brand-muted leading-relaxed">
+                  {whatIfScenario === 'envelope' && "💡 Envelope Budgeting: Reducing your recurring utility leaks and unnecessary subscriptions by 15% immediately ramps your discretionary safety reserve."}
+                  {whatIfScenario === 'hustle' && "💡 Side Income Flow: Adding a modest contract channel of $1,200/mo dramatically accelerates your leverage multiplier."}
+                  {whatIfScenario === 'fee' && "💡 Fee Reductions: Safely migrating disjoint investment assets away from high-fee portfolios (saving 1.2% in charges) compiles into major long-term benefits."}
+                  {whatIfScenario === 'none' && "💡 Strategic Baseline: Increasing your net savings rate above 20% remains the fastest path to compounding security."}
                 </p>
               </div>
             </div>
@@ -709,69 +852,540 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
         </div>
       </section>
 
-      {/* 🎯 Segment 4: ICONIC TOPTAL-STYLE "TOP 3%" VETTING ENGINE OUTLINE */}
-      <section className="py-24 bg-brand-bg border-b border-brand-border">
+      {/* 🎯 Segment 4: SoloAccount — Implemented Features & Life-Changing Impact */}
+      <section id="metrics" className="py-24 bg-brand-bg border-b border-brand-border relative overflow-hidden">
+        {/* Ambient glow backgrounds */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 h-80 w-80 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/3 right-1/4 -translate-y-1/2 h-96 w-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Huge Display Visual: Toptal "3%" Signature Accent */}
-            <div className="lg:col-span-5 text-left space-y-4">
-              <div className="text-[10rem] sm:text-[13rem] font-display font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-brand-text to-brand-text/30 leading-none mr-[-0.1em] select-none">
-                3%
+          
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div className="text-left space-y-3">
+              <div className="inline-flex items-center gap-2 rounded-full border border-brand-border bg-brand-card px-3 py-1 text-[11px] font-mono font-bold tracking-wider uppercase text-emerald-500">
+                <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>System Manifest: v0.1.43</span>
               </div>
-              <h3 className="text-2xl font-bold font-display text-brand-text">The Rigorous Screening Standard</h3>
-              <p className="text-brand-muted leading-relaxed">
-                Out of thousands of financial scripts, system protocols, and custom software contractors evaluated annual, only the top 3% pass our multi-tier isolated sandbox validations to deploy client production code.
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                <img 
+                  src={soloaccountLogo} 
+                  alt="SoloAccount Logo" 
+                  className="h-16 w-16 object-contain rounded-2xl border border-brand-border/60 bg-brand-card p-1.5 shadow-md flex-shrink-0"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="space-y-1">
+                  <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-brand-text">
+                    SoloAccount State & Impact
+                  </h2>
+                </div>
+              </div>
+              <p className="text-sm sm:text-base text-brand-muted max-w-2xl font-light">
+                Delivering ~58% of the full enterprise PRD vision with robust personal finance modules, advanced volatile forecasting algorithms, and family collaboration frameworks.
               </p>
-              <div className="p-4 bg-brand-card border border-brand-border rounded-2xl flex items-center gap-3">
-                <Shield className="h-6 w-6 text-emerald-500 shrink-0" />
-                <span className="text-xs text-brand-muted font-medium">All deployed instances maintain ongoing strict SOC2 compliance monitoring.</span>
+            </div>
+
+            {/* Micro Stats Widget */}
+            <div className="flex gap-4 p-4 rounded-2xl bg-brand-card border border-brand-border min-w-[240px] shrink-0 text-left">
+              <div className="h-12 w-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 shrink-0">
+                <Activity className="h-6 w-6" />
+              </div>
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase text-brand-muted tracking-wider">Vision Completion</span>
+                <div className="flex items-baseline gap-2 mt-0.5">
+                  <span className="text-2xl font-display font-bold text-brand-text">~58%</span>
+                  <span className="text-xs text-emerald-500 font-semibold">Active Build</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Tab Selection */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 p-1.5 bg-brand-card/50 border border-brand-border rounded-2xl mb-12">
+            {[
+              { id: 'features', label: '✅ Implemented Features', desc: 'Core tracking, planning & intelligence modules ready for production' },
+              { id: 'impact', label: '🚀 Life-Changing Impact', desc: 'How structured ledger intelligence alters personal & family dynamics' },
+              { id: 'tech', label: '🛠️ Architecture & Gaps', desc: 'The technical foundation and our honest documented scope limits' }
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveSegment4Tab(tab.id as 'features' | 'impact' | 'tech')}
+                className={`flex flex-col items-start gap-1 p-4 rounded-xl text-left transition-all ${
+                  activeSegment4Tab === tab.id 
+                    ? 'bg-brand-card border border-brand-border text-brand-text shadow-md scale-[1.01]' 
+                    : 'text-brand-muted hover:text-brand-text border border-transparent'
+                }`}
+              >
+                <span className="text-sm font-bold">{tab.label}</span>
+                <span className="text-[11px] font-normal text-brand-muted leading-tight">{tab.desc}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Interactive Tab Content Display */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeSegment4Tab}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4 }}
+              className="min-h-[500px]"
+            >
+              {activeSegment4Tab === 'features' && (
+                <div className="space-y-8">
+                  {/* Executive Summary Mini Overview */}
+                  <div className="p-6 rounded-2xl bg-brand-card border border-brand-border text-left relative overflow-hidden">
+                    <div className="absolute top-0 right-0 h-32 w-32 bg-emerald-500/5 rounded-full blur-2xl" />
+                    <h3 className="text-base font-bold text-brand-text mb-2">Executive Summary</h3>
+                    <p className="text-sm text-brand-muted font-light leading-relaxed max-w-4xl">
+                      SoloAccount is a modern, privacy-first personal finance platform that goes far beyond basic budgeting. It combines 
+                      <strong className="text-brand-text font-semibold"> real-time tracking</strong>, 
+                      <strong className="text-brand-text font-semibold"> intelligent forecasting</strong>, 
+                      <strong className="text-brand-text font-semibold"> investment analytics</strong>, and 
+                      <strong className="text-brand-text font-semibold"> family collaboration</strong> into one secure, server-vetted offline-first model.
+                    </p>
+                  </div>
+
+                  {/* Grid of 9 Implemented Modules */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+                    {[
+                      {
+                        num: "01",
+                        title: "Core Finance Tracking",
+                        desc: "Multi-account (Cash, Bank, Credit Card, E-Wallet) support with transfers, recurring lists, notes, and CSV imports.",
+                        badge: "In Production",
+                        items: ["Granular account metadata", "Recursive payment schedules", "Categorization hooks"]
+                      },
+                      {
+                        num: "02",
+                        title: "Planning & Budgets",
+                        desc: "Weekly and monthly limits, envelope/zero-based budgeting checks, savings goals with progress charts.",
+                        badge: "Advanced Features",
+                        items: ["Automatic rollovers", "Reallocation recommendations", "Debt payoff methods"]
+                      },
+                      {
+                        num: "03",
+                        title: "Forecasting & Scenario",
+                        desc: "3-month cash flow modeling based on historic volatility pattern detection, alerting you of potential shortfalls.",
+                        badge: "Unique Strength",
+                        items: ["What-If career break simulator", "Optimistic/Pessimistic ranges", "Negative runway counts"]
+                      },
+                      {
+                        num: "04",
+                        title: "Investment Analytics",
+                        desc: "Stocks, crypto, ETFs, mutual funds holdings calculation layer computing deep metrics natively.",
+                        badge: "Ready",
+                        items: ["Newton-Raphson XIRR & IRR", "Weighted return metrics", "Finnhub news pipelines"]
+                      },
+                      {
+                        num: "05",
+                        title: "Analytics & Intelligence",
+                        desc: "Consolidated Net Worth trends, monthly breakdowns, anomalous spend flagging, and a core score.",
+                        badge: "Active Real-Time",
+                        items: ["Financial Health Score (0-100)", "Historic year-on-year offsets", "D3 visual graph matrices"]
+                      },
+                      {
+                        num: "06",
+                        title: "Notes & Knowledge Management",
+                        desc: "Rich client-side Markdown note storage supporting structural folders, pinning parameters, search anchors.",
+                        badge: "Offline Safe",
+                        items: ["Embedded Markdown editor", "Full text indexing", "Note hierarchy binders"]
+                      },
+                      {
+                        num: "07",
+                        title: "Security & Personalization",
+                        desc: "Complete biometric credentials (devices with secure enclave), multilingual support, currency conversion matrices.",
+                        badge: "Shield Guarded",
+                        items: ["AES-256 state local mirror", "Google Auth and secure credentials", "English, Arabic, Tamil profiles"]
+                      },
+                      {
+                        num: "08",
+                        title: "Family Collaboration",
+                        desc: "Granular account level share options. Add partners or managers to single ledgers while retaining principal control.",
+                        badge: "New Release",
+                        items: ["Supabase row-level security", "Pending/Active invite streams", "Restricted writer permissions"]
+                      },
+                      {
+                        num: "09",
+                        title: "Technical Excellence",
+                        desc: "Capacitor-supported mobile deployment files, Zustand state layers, client offline-capable cache bindings.",
+                        badge: "Verified Build",
+                        items: ["Standard IndexedDB fallback", "CI standard linter audits", "Continuous Delivery streams"]
+                      }
+                    ].map((mod, i) => (
+                      <div key={i} className="p-6 rounded-2xl bg-brand-card/70 border border-brand-border hover:border-brand-text/20 transition-all flex flex-col justify-between space-y-4">
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-mono font-bold text-emerald-500">{mod.num}/</span>
+                            <span className="text-[10px] bg-emerald-500/10 text-emerald-500 uppercase font-mono font-bold px-2 py-0.5 rounded-full">{mod.badge}</span>
+                          </div>
+                          <h4 className="text-base font-bold text-brand-text">{mod.title}</h4>
+                          <p className="text-xs text-brand-muted leading-relaxed">{mod.desc}</p>
+                        </div>
+                        <div className="pt-3 border-t border-brand-border/40 space-y-1">
+                          {mod.items.map((item, idx) => (
+                            <div key={idx} className="flex items-center gap-1.5 text-[11px] text-brand-muted font-light">
+                              <Check className="h-3 w-3 text-emerald-500" />
+                              <span>{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {activeSegment4Tab === 'impact' && (
+                <div className="space-y-8 text-left">
+                  {/* Title */}
+                  <div className="p-6 rounded-2xl bg-brand-card border border-brand-border">
+                    <h3 className="text-base font-bold text-brand-text mb-2">🚀 Life Changes</h3>
+                    <p className="text-sm text-brand-muted font-light leading-relaxed">
+                      This is not just another budgeting app. SoloAccount is carefully engineered to **reduce financial anxiety**, 
+                      **increase long-term visual clarity**, and **improve household financial cooperation patterns** across generations.
+                    </p>
+                  </div>
+
+                  {/* 3x3 Grid of Life Shifts */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {[
+                      {
+                        title: "1. Stop Living Paycheck-to-Paycheck",
+                        detail: "The multi-scenario forecasting reads historic volatility to highlight potential account shortfalls 4-8 weeks early, letting you act long before the stress triggers.",
+                        metric: "Prevent Surprises"
+                      },
+                      {
+                        title: "2. Absolute Visibility over Leakages",
+                        detail: "Category breakdown heatmaps and auto-insights highlight ignored sub-service fees and micro subscriptions draining your future.",
+                        metric: "Zero Hidden Fees"
+                      },
+                      {
+                        title: "3. Confident & Robust Decisioning",
+                        detail: "A built-in What-If modeler allows you to stress-test your ledger for large future choices before committing capital.",
+                        metric: "What-If Modeler"
+                      },
+                      {
+                        title: "4. Eliminate Domestic Cash Disputes",
+                        detail: "Joint sharing eliminates standard 'I thought you paid that' statements. Both partners see clean, real-time balances, building trust.",
+                        metric: "Family Alignment"
+                      },
+                      {
+                        title: "5. Rigid, Non-Emotional Investing",
+                        detail: "Portfolio trackers analyze tracking fees, Sharpe ratios, and concentration risks, transforming random asset collection into a strategy.",
+                        metric: "Intelligent Portfolios"
+                      },
+                      {
+                        title: "6. Master Decisions, Avoid Fatigue",
+                        detail: "A centralized, continuous Financial Health Score calculates savings rate, debt metrics, and seasonal outcomes, like a proactive personal CFO.",
+                        metric: "Health Score Card"
+                      },
+                      {
+                        title: "7. Intentional Capital Directing",
+                        detail: "By integrating goals, snowball debt payoffs, and active analytics, this framework guides surplus money to long-term compounding.",
+                        metric: "Real Wealth Building"
+                      },
+                      {
+                        title: "8. Genuine Relief & Mindset Shifts",
+                        detail: "Clarity over limits removes the phantom stress of spending. Knowledge is security, translating immediately to healthier sleep rules.",
+                        metric: "Anxiety Reduction"
+                      },
+                      {
+                        title: "9. True Sovereignty & Choice",
+                        detail: "When money is quantified, monitored, and projected, it shifts from an existential concern to a reliable utility under your command.",
+                        metric: "Mastery & Sovereignty"
+                      }
+                    ].map((shift, i) => (
+                      <div key={i} className="group p-6 rounded-2xl bg-brand-card/50 border border-brand-border hover:bg-brand-text/[0.01] hover:border-brand-text/10 hover:shadow-md transition-all relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+                        <div className="space-y-2">
+                          <h4 className="text-base font-bold text-brand-text group-hover:text-emerald-500 transition-colors">{shift.title}</h4>
+                          <p className="text-xs text-brand-muted leading-relaxed font-light">{shift.detail}</p>
+                        </div>
+                        <div className="pt-4 border-t border-brand-border/40 flex justify-between items-center mt-3">
+                          <span className="text-[10px] font-mono font-bold uppercase text-brand-muted tracking-wide">{shift.metric}</span>
+                          <span className="text-[10px] font-mono font-black text-emerald-500 uppercase">Impact Passed</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {activeSegment4Tab === 'tech' && (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-left">
+                  {/* Left: Technology Specifications */}
+                  <div className="lg:col-span-6 p-6 md:p-8 rounded-2xl bg-brand-card border border-brand-border space-y-6 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 h-32 w-32 bg-blue-500/5 rounded-full blur-2xl pointer-events-none" />
+                    
+                    <div>
+                      <span className="text-[10px] font-mono font-bold uppercase text-emerald-500 tracking-wider">Under the Hood</span>
+                      <h3 className="text-xl font-bold text-brand-text mt-1">Robust Client-First Architecture</h3>
+                      <p className="text-xs text-brand-muted mt-2 font-light leading-relaxed">
+                        SoloAccount balances fluid client responsiveness and strong absolute local private state.
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      {[
+                        { title: "Zustand State System", desc: "Allows instant offline modifications, state history tracking, and predictable UI actions without loading screen flicker." },
+                        { title: "Postgres Database + Supabase Sync", desc: "Rigorous Row-Level Security rules paired with auto-sync ensures zero-loss multi-device backups under strict identity shields." },
+                        { title: "Standard JavaScript/Typed Calculation Layer", desc: "All math algorithms (including complex multi-year IRR iterations) run with safe, high-precision performance." },
+                        { title: "PWA & Capacitor Native Wrap", desc: "One-command cross-platform builds allow fast offline app execution on standard Android and mobile browsers seamlessly." }
+                      ].map((spec, idx) => (
+                        <div key={idx} className="space-y-1">
+                          <h4 className="text-xs font-bold text-brand-text flex items-center gap-2">
+                            <span className="h-1.5 w-1.5 bg-brand-text rounded-full" />
+                            {spec.title}
+                          </h4>
+                          <p className="text-xs text-brand-muted font-light leading-relaxed pl-3.5">{spec.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right: Honesty Gaps & Disclosed Limitations */}
+                  <div className="lg:col-span-6 p-6 md:p-8 rounded-2xl bg-brand-card border border-brand-border space-y-6 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 h-32 w-32 bg-red-500/5 rounded-full blur-2xl pointer-events-none" />
+                    
+                    <div>
+                      <span className="text-[10px] font-mono font-bold uppercase text-brand-muted tracking-wider">Transparency & Limits</span>
+                      <h3 className="text-xl font-bold text-brand-text mt-1">Gaps & Project Frontiers</h3>
+                      <p className="text-xs text-brand-muted mt-2 font-light leading-relaxed">
+                        The current v0.1.43 build covers ~58% of target specs. We explicitly disclose current boundaries to maintain absolute architectural honesty.
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      {[
+                        { title: "No Receipt OCR / Image Inputs", desc: "Currently offline transaction logging is fully manual or CSV-based. Physical image scraping pipeline is deferred for future modules." },
+                        { title: "No Embedded Conversational AI", desc: "The AI operates strictly as a background categorizer and anomaly monitor. Chat inputs are not yet active." },
+                        { title: "No SMS or Direct Push Alert Gateways", desc: "Budget limits and alert models are currently kept entirely visual. Direct native OS pushes and third-party SMS alerts are planned for later iterations." },
+                        { title: "Deferred Monte Carlo Computations", desc: "Retirement and compound savings scenarios are simulated, but fully statistical risk distributions are planned but not finished." }
+                      ].map((gap, idx) => (
+                        <div key={idx} className="space-y-1">
+                          <h4 className="text-xs font-bold text-brand-text flex items-center gap-2">
+                            <span className="h-1.5 w-1.5 bg-red-500/50 rounded-full" />
+                            {gap.title}
+                          </h4>
+                          <p className="text-xs text-brand-muted font-light leading-relaxed pl-3.5">{gap.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+
+        </div>
+      </section>
+
+      {/* 🔮 Segment 4B: SOLOACCOUNT INTERACTIVE SURFACE TOUR & SCREENSHOWCASE */}
+      <section id="showcase" className="py-24 bg-brand-bg border-b border-brand-border relative overflow-hidden">
+        {/* Dynamic backdrop reflection mesh */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(16,185,129,0.03),transparent_45%)] pointer-events-none" />
+        <div className="absolute top-1/2 right-0 -translate-y-1/2 h-[500px] w-[500px] bg-emerald-500/[0.02] rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="mx-auto max-w-7xl px-6 relative z-10">
+          
+          <div className="max-w-3xl text-left space-y-3 mb-16">
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-border bg-brand-card px-3 py-1 text-[11px] font-mono font-bold tracking-wider uppercase text-emerald-500">
+              <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Interactive Interface Tour</span>
+            </div>
+            <h2 className="font-display text-4xl sm:text-5xl font-black tracking-tight text-brand-text">
+              High-Fidelity Screen Showcase
+            </h2>
+            <p className="text-sm sm:text-base text-brand-muted max-w-2xl font-light">
+              Explore the polished, double-entry dashboard views and analytical engine panels of the SoloAccount client build. Hover over any card below to pause the automatic slide sequence.
+            </p>
+          </div>
+
+          {/* Core Feature Grid Split */}
+          <div 
+            className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+            onMouseEnter={() => setIsAutoplayPaused(true)}
+            onMouseLeave={() => setIsAutoplayPaused(false)}
+          >
+            
+            {/* Left Column: Interactive Tab Indicators */}
+            <div className="lg:col-span-5 space-y-4">
+              {[
+                {
+                  id: 0,
+                  tag: "Consolidated Wealth",
+                  title: "Dynamic Ledger Dashboard",
+                  desc: "Calculate asset-to-debt distributions across cash, deposit, cards, and e-wallets. Visualized with multi-currency support and real-time Net Worth compiling.",
+                  metric: "$124.9K Net Asset State"
+                },
+                {
+                  id: 1,
+                  tag: "Scenario Modeling",
+                  title: "Predictive Runaway Forecaster",
+                  desc: "Stress-test potential income shocks or career shifts against rolling cash runway metrics. Identifies budget holes 4-8 weeks before they trigger anxiety.",
+                  metric: "8-Month Safe Reserves"
+                },
+                {
+                  id: 2,
+                  tag: "Smart Controls",
+                  title: "Envelopes & Goal Manager",
+                  desc: "Direct excess liquidity immediately towards compounding goals. Automates transaction matching and checks for active subscription leaks with zero complex setups.",
+                  metric: "18% Dynamic Savings Goal"
+                },
+                {
+                  id: 3,
+                  tag: "Private Analytics",
+                  title: "Sovereign Portfolio Performance",
+                  desc: "Compute annualized XIRR rates and weight allocations in absolute confidence without sending data to servers. Runs fully sandbox-encrypted in your locale.",
+                  metric: "9.2% Optimized Return Rate"
+                }
+              ].map((surf) => {
+                const isActive = activeSurfaceIndex === surf.id;
+                return (
+                  <button
+                    key={surf.id}
+                    onClick={() => {
+                      setActiveSurfaceIndex(surf.id);
+                      setIsAutoplayPaused(true);
+                    }}
+                    className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 relative flex gap-4 ${
+                      isActive 
+                        ? 'bg-brand-card border-brand-border/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.1)] scale-[1.01]' 
+                        : 'border-transparent opacity-60 hover:opacity-100'
+                    }`}
+                  >
+                    {/* Active side indicator */}
+                    {isActive && (
+                      <motion.div 
+                        layoutId="activeSlideIndicator"
+                        className="absolute left-0 top-6 bottom-6 w-1 bg-emerald-500 rounded-r-full"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2">
+                        <span className={`text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-md ${
+                          isActive 
+                            ? 'bg-emerald-500/10 text-emerald-500' 
+                            : 'bg-brand-text/[0.04] text-brand-muted'
+                        }`}>
+                          {surf.tag}
+                        </span>
+                        <span className="text-[10px] text-brand-muted/70 font-mono font-semibold">
+                          0{surf.id + 1}
+                        </span>
+                      </div>
+                      
+                      <h3 className="text-base font-bold text-brand-text leading-tight">{surf.title}</h3>
+                      
+                      {isActive && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          transition={{ duration: 0.3 }}
+                          className="space-y-3 overflow-hidden"
+                        >
+                          <p className="text-xs text-brand-muted leading-relaxed font-light mt-1">
+                            {surf.desc}
+                          </p>
+                          <div className="text-[10px] font-mono font-bold text-emerald-500 flex items-center gap-1.5">
+                            <Check className="h-3 w-3" />
+                            <span>{surf.metric}</span>
+                          </div>
+                        </motion.div>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+
+              {/* Autoplay status flag */}
+              <div className="pt-2 flex items-center justify-between text-[11px] text-brand-muted/80 font-mono px-4">
+                <div className="flex items-center gap-2">
+                  <span className={`h-2.5 w-2.5 rounded-full flex items-center justify-center relative ${isAutoplayPaused ? 'text-amber-500' : 'text-emerald-500'}`}>
+                    <span className={`absolute inline-flex h-full w-full rounded-full opacity-75 ${isAutoplayPaused ? 'bg-amber-500 animate-ping' : 'bg-emerald-500 animate-ping'}`} />
+                    <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${isAutoplayPaused ? 'bg-amber-500' : 'bg-emerald-500'}`} />
+                  </span>
+                  <span>{isAutoplayPaused ? "Rotation Interrupted" : "Autoplay Sequencer Active"}</span>
+                </div>
+                <span>Interval: 5.5s</span>
               </div>
             </div>
 
-            {/* Detailed Rigorous Step Stepper */}
-            <div className="lg:col-span-7 space-y-6">
-              {[
-                {
-                  phase: "01",
-                  title: "Comprehensive Compliance & Security Auditing",
-                  passRate: "Pass rate: ~7.2%",
-                  desc: "Rigorous unit testing covering cross-border transaction scenarios, strict biometric interfaces, and multi-currency edge cases."
-                },
-                {
-                  phase: "02",
-                  title: "Live Container Performance Stress Testing",
-                  passRate: "Pass rate: ~3.2%",
-                  desc: "Running core transaction engines in high-density simulation clusters to guarantee zero-latency ledger calculations at volume."
-                },
-                {
-                  phase: "03",
-                  title: "Agent Anomaly Scanning Checks",
-                  passRate: "Pass rate: ~2.1%",
-                  desc: "Validating AI models under strict privacy constraints to ensure sensitive customer data stays sandboxed and locally encrypted."
-                },
-                {
-                  phase: "04",
-                  title: "Ongoing Project Execution Audits",
-                  passRate: "Pass rate: Top 3% Hired",
-                  desc: "Every framework code push triggers our automated linter pipeline, code review verification, and continuous integration flows immediately."
-                }
-              ].map((step, idx) => (
-                <div key={idx} className="flex gap-4 p-5 rounded-2xl hover:bg-brand-card border border-transparent hover:border-brand-border transition-all">
-                  <div className="text-xl font-mono font-black text-emerald-500 tracking-wider shrink-0 mt-0.5">
-                    {step.phase}/
-                  </div>
-                  <div className="space-y-1 text-left">
-                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                      <h4 className="text-base font-bold text-brand-text leading-snug">{step.title}</h4>
-                      <span className="text-[10px] bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded-full font-bold font-mono uppercase tracking-wider">
-                        {step.passRate}
-                      </span>
-                    </div>
-                    <p className="text-sm text-brand-muted leading-relaxed">{step.desc}</p>
+            {/* Right Column: Premium Mockup with Dynamic Image Transits */}
+            <div className="lg:col-span-7 relative flex justify-center">
+              {/* Backlit glow effect matches state */}
+              <div className="absolute -inset-4 bg-gradient-to-tr from-emerald-500/5 to-teal-500/10 rounded-[2.5rem] blur-2xl opacity-80 pointer-events-none" />
+              
+              {/* Sleek Bezel Container */}
+              <div className="w-full max-w-xl aspect-[16/10.5] rounded-2xl bg-brand-card border border-brand-border/90 p-3 shadow-2xl flex flex-col relative overflow-hidden group">
+                {/* Browser bar header simulation */}
+                <div className="flex items-center gap-1.5 pb-2.5 px-1 border-b border-brand-border/40 shrink-0">
+                  <div className="h-2 w-2 rounded-full bg-red-500/30" />
+                  <div className="h-2 w-2 rounded-full bg-yellow-500/30" />
+                  <div className="h-2 w-2 rounded-full bg-emerald-500/30" />
+                  <div className="ml-4 flex items-center gap-1 rounded bg-brand-bg px-2 py-0.5 text-[9px] font-mono font-medium text-brand-muted border border-brand-border/40 select-none max-w-xs truncate">
+                    <span className="text-emerald-500">https://</span>
+                    <span>soloaccount.solosoftwares.com/dashboard</span>
                   </div>
                 </div>
-              ))}
+
+                {/* Animated Screen Portal */}
+                <div className="flex-1 rounded-lg bg-brand-bg border border-brand-border/30 overflow-hidden relative min-h-[250px] sm:min-h-[350px]">
+                  <AnimatePresence mode="wait">
+                    {[
+                      { id: 0, img: surf1, label: "Dashboard Screen" },
+                      { id: 1, img: surf2, label: "Scenario Modeler Panel" },
+                      { id: 2, img: surf3, label: "Budget Allocation view" },
+                      { id: 3, img: surf4, label: "Investment Charts" }
+                    ].map((slide) => {
+                      if (slide.id !== activeSurfaceIndex) return null;
+                      return (
+                        <motion.div
+                          key={slide.id}
+                          initial={{ opacity: 0, scale: 0.98, y: 5 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 1.02, y: -5 }}
+                          transition={{ duration: 0.45, ease: "easeInOut" }}
+                          className="absolute inset-0 flex flex-col items-center justify-center p-2"
+                        >
+                          <img 
+                            src={slide.img} 
+                            alt={`SoloAccount ${slide.label}`} 
+                            className="w-full h-full object-contain rounded-md"
+                            referrerPolicy="no-referrer"
+                            onError={(e) => {
+                              // Elegant placeholder fallback if image file is completely empty/damaged
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                              const parent = target.parentElement;
+                              if (parent) {
+                                const placeholder = document.getElementById(`fallback-${slide.id}`);
+                                if (placeholder) placeholder.style.display = 'flex';
+                              }
+                            }}
+                          />
+                          {/* Fallback layout representation */}
+                          <div 
+                            id={`fallback-${slide.id}`} 
+                            style={{ display: 'none' }} 
+                            className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center space-y-4 bg-brand-card/90"
+                          >
+                            <Layout className="h-10 w-10 text-emerald-500 animate-pulse" />
+                            <div>
+                              <p className="text-sm font-bold text-brand-text">{slide.label}</p>
+                              <p className="text-xs text-brand-muted font-light max-w-xs mt-1">Interface Surface screenshot is queued for next live sync.</p>
+                            </div>
+                          </div>
+                        </motion.div>
+                      );
+                    })}
+                  </AnimatePresence>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -814,7 +1428,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
         <div className="mx-auto max-w-7xl px-6">
           <div className="max-w-2xl mx-auto text-center mb-16 space-y-4">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-muted block font-mono">User Endorsements</span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">Trusted by Industry Leaders</h2>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">Trusted by Thousands on Google Play</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

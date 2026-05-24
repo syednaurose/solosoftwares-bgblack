@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="SoloAccount">
+  <rect x="1" y="1" width="30" height="30" rx="8" fill="#07132D"/>
+  <path d="M21 4.5 H12.5 C8.8 4.5 6.2 7 6.2 10.4 C6.2 13.8 8.8 16.2 12.5 16.2 H18 C21.4 16.2 23.8 18.5 23.8 21.8 C23.8 25.2 21.4 27.5 18 27.5 H8.5" fill="none" stroke="#F8FAFC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M17.2 21 V9.2 C17.2 6.2 19.1 4.5 21.8 4.5 C24.4 4.5 26.2 6.2 26.2 9.2 V19.8" fill="none" stroke="#18C58F" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M17.2 16 H26.2" stroke="#18C58F" stroke-width="2.8" stroke-linecap="round"/>
+  <circle cx="24.6" cy="3.3" r="1.45" fill="#18C58F"/>
+</svg>
