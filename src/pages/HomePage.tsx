@@ -4,6 +4,7 @@ import {
   ArrowRight, 
   ChevronRight, 
   Globe, 
+  Play,
   Cpu, 
   BarChart3, 
   Users2, 
@@ -774,7 +775,86 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
             </div>
 
             {/* Right side: High-fidelity, live changing profile preview in Toptal style */}
-            <div className="lg:col-span-5 relative">
+            <div className="lg:col-span-5 relative flex flex-col pt-6 lg:pt-0">
+              {/* SoloAccount Feedback / Platform Station */}
+              <div className="mb-4 bg-brand-card border border-[#10b981]/15 rounded-2xl p-4 flex items-center justify-between shadow-md">
+                <div className="text-left space-y-0.5">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                    <h4 className="text-xs font-black text-brand-text tracking-tight uppercase font-mono">
+                      SoloAccount
+                    </h4>
+                    <span className="text-[10px] text-brand-muted/70">-</span>
+                    <span className="text-xs text-brand-muted font-normal">Personal Finance Manager</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <span className="text-[10px] font-mono font-extrabold text-[#10b981] bg-[#10b981]/10 px-2 py-0.5 rounded-md leading-none">
+                      Release for Feedback Loop
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  {/* Web Platform Portal */}
+                  <a 
+                    href="https://soloaccount.solosoftwares.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    title="SoloAccount Web Portal"
+                    className="h-10 w-10 flex items-center justify-center rounded-xl bg-brand-bg border border-brand-border hover:border-emerald-500/40 hover:bg-emerald-500/5 transition-all duration-300 group shadow-sm hover:scale-105"
+                  >
+                    {/* High-fidelity browser globe SVG */}
+                    <svg className="h-5 w-5 text-brand-text group-hover:text-emerald-500 transition-colors" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" strokeWidth="1.5" />
+                      <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" strokeWidth="1.5" />
+                    </svg>
+                  </a>
+
+                  {/* Android Platform (Play Store) */}
+                  <a 
+                    href="https://play.google.com/store/apps/details?id=com.soloaccount.app" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    title="Get on Google Play"
+                    className="h-10 w-10 flex items-center justify-center rounded-xl bg-brand-bg border border-brand-border hover:border-emerald-500/40 hover:bg-emerald-500/5 transition-all duration-300 group shadow-sm hover:scale-105"
+                  >
+                    {/* Extremely realistic high-fidelity Google Play Store tri-color vector */}
+                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3.25 2.1C3.09 2.26 3 2.52 3 2.84V21.16C3 21.48 3.09 21.74 3.25 21.9L3.35 22L13.35 12L13.35 11.82L3.35 1.82L3.25 2.1Z" fill="#00E5FF" />
+                      <path d="M16.65 8.7L13.35 11.82V12L16.65 15.12L16.73 15.02L20.67 12.76C21.79 12.12 21.79 11.08 20.67 10.44L16.73 8.18M16.65 8.7L13.35 11.82L3.35 1.82M16.65 8.7L20.67 10.44" fill="#FF3D00" />
+                      <path d="M3.25 21.9L13.35 11.82M3.25 21.9L16.73 15.02L20.67 12.76M16.73 15.02" fill="#FFEA00" />
+                      <path d="M16.65 15.12L13.35 12L3.35 22" fill="#00E676" />
+                      
+                      {/* Interactive shine gradient path overlays */}
+                      <path d="M3.25 2.1C3.09 2.26 3 2.52 3 2.84V21.16C3 21.48 3.09 21.74 3.25 21.9L13.35 11.82L3.25 2.1Z" fill="url(#playGradLeft)" />
+                      <path d="M20.67 10.44L16.65 8.7L13.35 11.82L20.67 10.44Z" fill="url(#playGradTop)" />
+                      <path d="M20.67 12.76L13.35 11.82L16.65 15.12L20.67 12.76Z" fill="url(#playGradRight)" />
+                      <path d="M13.35 11.82L3.25 21.9C3.09 21.74 3 21.48 3 21.16V2.84" fill="url(#playGradBottom)" />
+
+                      <defs>
+                        <linearGradient id="playGradLeft" x1="3" y1="12" x2="13.35" y2="12" gradientUnits="userSpaceOnUse">
+                          <stop offset="0%" stopColor="#00C0FF" stopOpacity="0.8"/>
+                          <stop offset="100%" stopColor="#00E5FF" stopOpacity="0.3"/>
+                        </linearGradient>
+                        <linearGradient id="playGradTop" x1="17" y1="9" x2="17" y2="12" gradientUnits="userSpaceOnUse">
+                          <stop offset="0%" stopColor="#FF3D00" stopOpacity="0.9"/>
+                          <stop offset="100%" stopColor="#FF6D00" stopOpacity="0.4"/>
+                        </linearGradient>
+                        <linearGradient id="playGradRight" x1="17" y1="12" x2="17" y2="15" gradientUnits="userSpaceOnUse">
+                          <stop offset="0%" stopColor="#FFD600" stopOpacity="0.9"/>
+                          <stop offset="100%" stopColor="#FFEA00" stopOpacity="0.4"/>
+                        </linearGradient>
+                        <linearGradient id="playGradBottom" x1="8.3" y1="16.9" x2="13.35" y2="11.82" gradientUnits="userSpaceOnUse">
+                          <stop offset="0%" stopColor="#00E676" stopOpacity="0.9"/>
+                          <stop offset="100%" stopColor="#00B248" stopOpacity="0.4"/>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
               <div className="absolute -inset-2 bg-gradient-to-tr from-brand-text/5 to-transparent rounded-[2.5rem] blur-xl pointer-events-none" />
               
               <AnimatePresence mode="wait">
