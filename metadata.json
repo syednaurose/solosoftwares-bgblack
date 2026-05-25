@@ -2,5 +2,5 @@
   "name": "Solo Softwares",
   "description": "High-end software solutions for the modern enterprise, featuring SoloAccount.",
   "requestFramePermissions": [],
-  "majorCapabilities": []
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

@@ -68,6 +68,7 @@ interface SystemModuleSpec {
   complianceVetting: string;
   productionOutcome: string;
   deploymentStatus: string;
+  productivityStatus: string;
 }
 
 const techStack = [
@@ -96,163 +97,173 @@ const ecosystemStack = [
 const talentProfiles: SystemModuleSpec[] = [
   {
     id: 'ai-core',
-    roleType: 'Developers (AI)',
-    moduleName: 'Autonomous Agentic Core',
+    roleType: 'Communication',
+    moduleName: 'Interactive Client-Engineering Sync',
     avatarAccent: 'from-emerald-500 to-teal-700',
     iconName: 'brain',
-    tagline: 'Self-correcting ledger auditing & transaction categorization models.',
+    tagline: 'Translating finance operational workflows into software schemas.',
     version: 'v3.2.1-Active',
-    metricValue: '99.94%',
-    metricLabel: 'Auto-Closing Accuracy',
-    keyCapabilities: ['Multi-agent debate consensus', 'Strict schema boundary verification', 'Automated anomaly highlighting', 'Vector token parsing'],
-    architectureStack: ['Gemini 1.5 Pro', 'TypeScript Core SDK', 'PyTorch Tensor Flow', 'Chroma DB Embeddings'],
-    complianceVetting: 'Sandboxed inside SOC2 Type II isolated secure virtual runtimes with TLS 1.3 encryption.',
-    productionOutcome: 'Reduced end-of-month manual transaction audits down to minutes while flagging 1,420 reconciliation gaps.',
-    deploymentStatus: 'Continuous Delivery / Verified Build Active'
+    metricValue: '100%',
+    metricLabel: 'Requirements Alignment',
+    keyCapabilities: ['Requirement Clarification', 'Stakeholder Feedback Loop', 'Weekly Milestone Demos', 'Interactive Briefings'],
+    architectureStack: ['Slack Integrations', 'Jira API Suite', 'Figma Shared Canvases', 'Clarity Docs'],
+    complianceVetting: 'All customer conversations aligned to ISO 9001 quality guidelines.',
+    productionOutcome: 'Minimized development waste, ensuring client needs are satisfied before coding starts.',
+    deploymentStatus: 'Sprint Goals Aligned',
+    productivityStatus: 'Cohesive'
   },
   {
     id: 'cloud-arch',
-    roleType: 'Cloud Architects',
-    moduleName: 'Zero-Idle FinOps Autoscaler',
+    roleType: 'Requirement Gathering',
+    moduleName: 'Unified System Specification Core',
     avatarAccent: 'from-blue-600 to-indigo-800',
     iconName: 'server',
-    tagline: 'High-density microservice orchestrator optimized for peerless unit costing.',
+    tagline: 'Assessing compliance constraints, currency rate models, and tax rules.',
     version: 'v1.9.4-LTS',
-    metricValue: '94% Lower',
-    metricLabel: 'Idle Compute Expenses',
-    keyCapabilities: ['Horizontal Pod Autoscaling (HPA)', 'Vite SSR static rendering bounds', 'Pre-warmed cold start pooling', 'Failover ledger mirror state'],
-    architectureStack: ['Kubernetes Engine', 'Terraform Cloud IaC', 'Docker Sandbox', 'AWS Core APIs'],
-    complianceVetting: 'Subject to continuous runtime penetration tests and isolated Docker daemon audits.',
-    productionOutcome: 'Ensures transaction pipelines can scale to 12,500 active req/sec with negligible latency overhead.',
-    deploymentStatus: 'Kubernetes / Cloud Run Native Deploy ready'
+    metricValue: '100%',
+    metricLabel: 'Requirements Coverage',
+    keyCapabilities: ['Multi-currency ISO specs', 'PWA storage limit criteria', 'GDPR transaction schemas', 'Cross-border Tax Rules'],
+    architectureStack: ['Confluence Specs', 'Markdown Schemas', 'Swagger Spec Templates', 'Mock APIs'],
+    complianceVetting: 'Data protection policies compiled to satisfy HIPAA and regional GDPR laws.',
+    productionOutcome: 'Clear scope constraints avoiding feature creep throughout the build cycle.',
+    deploymentStatus: 'Specs Signed Off',
+    productivityStatus: 'Optimized & Checked'
   },
   {
     id: 'finance-systems',
-    roleType: 'Finance Systems',
-    moduleName: 'Double-Entry Compliance Engine',
+    roleType: 'Feasibility Study',
+    moduleName: 'Local-First Hardware Audit',
     avatarAccent: 'from-amber-500 to-orange-700',
     iconName: 'workflow',
-    tagline: 'Fully localized tax calculators updating values dynamically across borders.',
+    tagline: 'Validating client-side IndexedDB limits and service worker scopes.',
     version: 'v4.0.2',
-    metricValue: '150+',
-    metricLabel: 'Tax Jurisdictions Supported',
-    keyCapabilities: ['Real-time VAT/GST rules', 'Hourly live rate ingest pipelines', 'Double-entry integrity check', 'Immutable ledger indexing'],
-    architectureStack: ['Go Microservices', 'ISO 20022 Schema Validator', 'Redis cached tax database', 'gRPC streams'],
-    complianceVetting: 'Certified fully compliant with GAAP and IFRS ledger tracking standards globally.',
-    productionOutcome: 'Aggregates and consolidates multi-entity operations spanning 40+ countries in less than 2 minutes.',
-    deploymentStatus: 'Fully certified financial ledger build'
+    metricValue: '100%',
+    metricLabel: 'Feasibility Integrity Score',
+    keyCapabilities: ['Offline storage benchmark', 'Biometric credential test', 'Performance render check', 'RAM consumption limits'],
+    architectureStack: ['IndexedDB Drivers', 'WebAuthn APIs', 'Lighthouse Metrics', 'Google Chrome Profiler'],
+    complianceVetting: 'PWA security bounds certified for offline device capabilities.',
+    productionOutcome: 'Proven 60fps rendering even on low-tier mobile client nodes.',
+    deploymentStatus: 'Verification Passed',
+    productivityStatus: 'Verified Stable'
   },
   {
     id: 'storage-data',
-    roleType: 'Storage Data',
-    moduleName: 'ACID Distributed Storage',
+    roleType: 'System Analysis',
+    moduleName: 'Sovereign Ledger Modeling',
     avatarAccent: 'from-orange-500 to-red-600',
     iconName: 'database',
-    tagline: 'Raft-stabilized low-latency persistence representing ultimate data truth.',
+    tagline: 'Defining structural double-entry transaction boundaries and security rings.',
     version: 'v5.1.0-Release',
-    metricValue: '99.999%',
-    metricLabel: 'Storage Access SLA',
-    keyCapabilities: ['Raft consensus protocol sync', 'Write-ahead transaction logging', 'Double-hash encryption at rest', 'Device IndexedDB sync support'],
-    architectureStack: ['PostgreSQL Core Engine', 'ScyllaDB cluster partitions', 'Redis Cache layers', 'Consensus Ledgers'],
-    complianceVetting: 'Strict AES-256 local isolation with optional client-side cryptographic key management systems.',
-    productionOutcome: 'Flawlessly writes and confirms state across thousands of nodes, maintaining persistent offline-first cache safety.',
-    deploymentStatus: 'High Availability Distributed Stack Active'
+    metricValue: '99.98%',
+    metricLabel: 'Analytical Schema Accuracy',
+    keyCapabilities: ['Data structure isolation', 'Reconciliation flow logic', 'Transaction throughput check', 'Index optimization'],
+    architectureStack: ['UML Class Models', 'Schema Compilers', 'Logical DB Parsers', 'DBML Diagrams'],
+    complianceVetting: 'Double-entry books balance checked model for mathematical precision.',
+    productionOutcome: 'Fully decoupled transaction modules eliminating memory leak potential.',
+    deploymentStatus: 'Architecture Approved',
+    productivityStatus: 'Validated Structural'
   },
   {
     id: 'web-dev',
-    roleType: 'Web Developments',
+    roleType: 'Software Design',
     moduleName: 'High-Density Interface Canvas',
     avatarAccent: 'from-purple-500 to-pink-700',
     iconName: 'layout',
-    tagline: 'Responsive typography, bento-grid modules, and rich D3 analytical charts.',
+    tagline: 'Structuring typography, fluid responsive cards, and dynamic theme nodes.',
     version: 'v2.2.0',
-    metricValue: '0ms CLS',
-    metricLabel: 'Cumulative Layout Shift',
-    keyCapabilities: ['Real-time interactive D3 widgets', 'Seamless sub-page gestures', 'Command palette routing system', 'Fluid smooth state interpolation'],
-    architectureStack: ['React 18 / Vite 5', 'Tailwind CSS v4', 'Framer Motion', 'D3.js Visualization'],
-    complianceVetting: 'Strict compliance maintained against modern WCAG 2.1 AA and screen-reader standards.',
-    productionOutcome: 'Users enjoy rich transaction drilldowns, custom ledger filters, and live insights with ZERO visual clutter.',
-    deploymentStatus: 'Client-facing modern SPA bundle optimized'
+    metricValue: '-60%',
+    metricLabel: 'User Experience Friction',
+    keyCapabilities: ['Component pattern libraries', 'RTL Arabic visual frameworks', 'Dynamic dark theme tokens', 'D3 visualization charting'],
+    architectureStack: ['React 18 / Vite 5', 'Tailwind CSS v4', 'Framer Motion Core', 'Bento design grids'],
+    complianceVetting: 'Certified accessible against strict WCAG 2.1 AA screen visibility ratios.',
+    productionOutcome: 'A visually cohesive, fluid experience with ZERO layout shifts.',
+    deploymentStatus: 'UX Blueprint Validated',
+    productivityStatus: 'Friction Reduced'
   },
   {
     id: 'erp-solutions',
-    roleType: 'ERP Solutions',
-    moduleName: 'Enterprise ERP Integrator',
+    roleType: 'Coding',
+    moduleName: 'Sovereign Code Generation Engine',
     avatarAccent: 'from-cyan-500 to-blue-700',
     iconName: 'file-json',
-    tagline: 'Double-entry journal sync bridges targeting disjoint legacy systems.',
+    tagline: 'Clean, modular, and typed components with persistent local state caches.',
     version: 'v1.12.0',
-    metricValue: '10x Faster',
-    metricLabel: 'ERP Data Ingest Speeds',
-    keyCapabilities: ['SAP S/4HANA double-entry adapter', 'Oracle NetSuite web hook listener', 'Fail-safe event queues', 'Data schema normalizers'],
-    architectureStack: ['Spring Boot Service', 'SOAP-to-JSON Adapters', 'Kafka Event Queues', 'RESTful API Bridges'],
-    complianceVetting: 'Secured via standard corporate OAuth boundaries, JWT verification keys, and IP white-listing policies.',
-    productionOutcome: 'Successfully bridge and ingest transactional summaries from older mainframes with zero data loss.',
-    deploymentStatus: 'Ready for enterprise ERP configuration'
+    metricValue: '3.2x',
+    metricLabel: 'Developer Coding Velocity',
+    keyCapabilities: ['Custom hook optimization', 'D3 visualization charts', 'Secure storage layers', 'Strict ES6 syntax'],
+    architectureStack: ['React 18 / Vite 5', 'TypeScript Core', 'Zustand Storage Hooks', 'Tailwind Modules'],
+    complianceVetting: 'Strict static analysis with zero lint warnings or unhandled exceptions.',
+    productionOutcome: 'Lightweight static bundle size (<180kb gzipped) for rapid mobile loading speeds.',
+    deploymentStatus: 'Build Fully Certified',
+    productivityStatus: 'Optimal Progress'
   },
   {
     id: 'system-design',
-    roleType: 'System Design',
-    moduleName: 'Enterprise Architecture & Blueprint Core',
+    roleType: 'Testing',
+    moduleName: 'Continuous Assertion Framework',
     avatarAccent: 'from-rose-500 to-pink-800',
     iconName: 'layers',
-    tagline: 'Federated microservice decoupling, modular layout graphs, and decoupled sync boundaries.',
+    tagline: 'Automated end-to-end integration runs checking client data integrity.',
     version: 'v2.0.4',
-    metricValue: '100% Solid',
-    metricLabel: 'Topology Fault Tolerance',
-    keyCapabilities: ['Multi-channel failover routing', 'Domain-driven service segregation', 'Enterprise schema harmonization', 'Latency optimization patterns'],
-    architectureStack: ['C4 Architecture Model', 'Architectural Layout Compilers', 'OpenAPI Specs', 'Swagger Hub Systems'],
-    complianceVetting: 'Validated fully against distributed fallback patterns and high-availability disaster protocols.',
-    productionOutcome: 'Ensures structured separation of modular frameworks, mitigating architectural debt cascades.',
-    deploymentStatus: 'Enterprise architecture diagrams certified'
+    metricValue: '100%',
+    metricLabel: 'Automated Test Coverage',
+    keyCapabilities: ['Playwright automated flows', 'Chaos state stress injection', 'Responsive element audit', 'State recovery verification'],
+    architectureStack: ['Playwright runner', 'Jest assertion suite', 'K6 load generators', 'Cypress UI modules'],
+    complianceVetting: 'Continuous daily regressions executed to prevent privacy security leaks.',
+    productionOutcome: 'Keeps 100% coverage on core budgeting, cash flows, and debt payoff calculations.',
+    deploymentStatus: 'Daily Test Suite Green',
+    productivityStatus: '0 Regressions Detected'
   },
   {
     id: 'qa-analyst',
-    roleType: 'QA Analyst',
-    moduleName: 'Automated Continuous Assertion Engine',
+    roleType: 'Integration',
+    moduleName: 'Secure Cloud & API Bridge',
     avatarAccent: 'from-emerald-400 to-teal-600',
     iconName: 'check-circle',
-    tagline: 'Fully automated testing frameworks running comprehensive simulation runs over local states.',
+    tagline: 'Interfacing client nodes with premium external currency exchange networks.',
     version: 'v1.7.0',
-    metricValue: '99.98%',
-    metricLabel: 'Automated Test Coverage',
-    keyCapabilities: ['Cross-browser layout assertion', 'Chaotic failure stress injection', 'Responsive element audit', 'Asynchronous data race audit'],
-    architectureStack: ['Playwright Test Suites', 'Jest Runner Modules', 'K6 Load Injectors', 'Lighthouse Perf Auditors'],
-    complianceVetting: 'Continuous regression evaluation securing zero compliance holes and perfect interface reliability.',
-    productionOutcome: 'Eliminates layout visual regressions and unhandled promise failures across the entire core suite.',
-    deploymentStatus: 'Daily regression pipelines fully green'
+    metricValue: '< 350ms',
+    metricLabel: 'API Response Latency',
+    keyCapabilities: ['Open Exchange API integration', 'OAuth client portal links', 'Firebase cloud backup sync', 'Real-time WebSocket eventing'],
+    architectureStack: ['REST/gRPC adapters', 'Secure proxy API routes', 'Auth0 SDK connectors', 'Secure webhooks'],
+    complianceVetting: 'All outgoing integration connections protected inside TLS 1.3 tunnels.',
+    productionOutcome: 'Synchronizes multi-currency rates automatically upon active network connection.',
+    deploymentStatus: 'API Bindings Continuous',
+    productivityStatus: 'Fast Ingestion'
   },
   {
     id: 'release-automation',
-    roleType: 'Release Automation',
-    moduleName: 'Zero-Downtime Blue-Green GitOps Flow',
+    roleType: 'Implementation',
+    moduleName: 'Zero-Downtime Container Fleet',
     avatarAccent: 'from-amber-400 to-orange-600',
     iconName: 'terminal',
-    tagline: 'Automated container packaging, secure cryptographic binary signing, and deployment streams.',
+    tagline: 'Delivering secure static bundles directly to modern distributed server structures.',
     version: 'v3.1.2-Stable',
-    metricValue: '< 4 Mins',
-    metricLabel: 'Release Ingestion SLA',
-    keyCapabilities: ['Declarative GitOps workflows', 'Automated canary rollbacks', 'Secure cryptographic audits', 'Container layer caching'],
-    architectureStack: ['GitHub Action Runbooks', 'ArgoCD Sync Operators', 'Docker Container Registers', 'HashiCorp Vault Secrets'],
-    complianceVetting: 'Meets SLSA Level 3 security frameworks with automated supply-chain source signing pipelines.',
-    productionOutcome: 'Handles dozens of safe, automated zero-downtime hotfixes and system rollouts every single week.',
-    deploymentStatus: 'Automated GitOps deploy pipeline active'
+    metricValue: '0.0s',
+    metricLabel: 'Deployment Delay Overhead',
+    keyCapabilities: ['PWA asset precaching', 'Blue-Green deployment states', 'SHA-256 cryptographic hashes', 'GitOps declarative workflow'],
+    architectureStack: ['GitHub Action workbooks', 'Cloud Run gateway', 'Service Workers', 'Docker Images'],
+    complianceVetting: 'Fully verified supply chain passing SLSA Level 3 certification parameters.',
+    productionOutcome: 'Deploy updates in seconds without interrupting active database sessions.',
+    deploymentStatus: 'Cloud Ingress Active',
+    productivityStatus: 'Instant Rollout'
   },
   {
     id: 'supports',
-    roleType: 'Supports',
-    moduleName: '24/7 Global Live-Site Reliability Desk',
+    roleType: 'Operation and Maintenance',
+    moduleName: 'Reliability & Diagnostics Desk',
     avatarAccent: 'from-sky-500 to-indigo-700',
     iconName: 'settings',
-    tagline: 'Proactive metrics evaluation and instant incident triage following precise SLA targets.',
+    tagline: 'Troubleshooting memory hygiene and system reliability on live sites.',
     version: 'v5.0-LTS',
-    metricValue: '< 15 Mins',
-    metricLabel: 'Average Resolution Speed',
-    keyCapabilities: ['Intelligent error alerting', 'Disaster recovery execution', 'Database runtime optimizations', 'Active tenant assistance'],
-    architectureStack: ['Grafana Analytics Core', 'Sentry Incident Hubs', 'PagerDuty Alerts Engine', 'Sovereign Workspace Keys'],
-    complianceVetting: 'Adheres to stringent ISO 27001 data handling, logging, and access control policies.',
-    productionOutcome: 'Maintains live tracking transparency and delivers immediate answers regarding active application state.',
-    deploymentStatus: 'Active global site reliability support active'
+    metricValue: '99.99%',
+    metricLabel: 'SLA Response Guarantee',
+    keyCapabilities: ['Local database cleanup runs', 'Anonymous performance logs', 'Regular security patches', 'GC Memory Collection'],
+    architectureStack: ['Sentry logger metrics', 'Lighthouse diagnostics', 'Web vitals trackers', 'IndexedDB cleaning tasks'],
+    complianceVetting: 'Sovereign local-first storage respects global user self-deletion rights.',
+    productionOutcome: 'Maximum system uptime with proactive cache garbage collection routines.',
+    deploymentStatus: 'SLA Support Enabled',
+    productivityStatus: 'Active Maintenance'
   }
 ];
 
@@ -272,17 +283,222 @@ const getIconComponent = (iconName: string) => {
   }
 };
 
+const CURRENCIES = {
+  USD: {
+    symbol: '$',
+    name: 'US Dollar',
+    region: 'North America (USD)',
+    rate: 1,
+    minIncome: 1500,
+    maxIncome: 30000,
+    minExpense: 1000,
+    maxExpense: 25000,
+    stepIncome: 250,
+    stepExpense: 250,
+    defaultIncome: 7500,
+    defaultExpense: 4800,
+    minLabel: '$1.5K',
+    midLabel: '$15K',
+    maxLabel: '$30K',
+    minExpLabel: '$1K',
+    midExpLabel: '$13K',
+    maxExpLabel: '$25K',
+    hustleBonus: 1200,
+    surplusLevelText: 2000,
+    surplusLowText: 1000
+  },
+  EUR: {
+    symbol: '€',
+    name: 'Euro',
+    region: 'Europe (EUR)',
+    rate: 0.92,
+    minIncome: 1500,
+    maxIncome: 30000,
+    minExpense: 1000,
+    maxExpense: 25000,
+    stepIncome: 250,
+    stepExpense: 250,
+    defaultIncome: 7000,
+    defaultExpense: 4500,
+    minLabel: '€1.5K',
+    midLabel: '€15K',
+    maxLabel: '€30K',
+    minExpLabel: '€1K',
+    midExpLabel: '€13K',
+    maxExpLabel: '€25K',
+    hustleBonus: 1100,
+    surplusLevelText: 1800,
+    surplusLowText: 900
+  },
+  GBP: {
+    symbol: '£',
+    name: 'British Pound',
+    region: 'United Kingdom (GBP)',
+    rate: 0.79,
+    minIncome: 1200,
+    maxIncome: 25000,
+    minExpense: 800,
+    maxExpense: 20000,
+    stepIncome: 200,
+    stepExpense: 200,
+    defaultIncome: 5800,
+    defaultExpense: 3600,
+    minLabel: '£1.2K',
+    midLabel: '£13K',
+    maxLabel: '£25K',
+    minExpLabel: '£800',
+    midExpLabel: '£10K',
+    maxExpLabel: '£20K',
+    hustleBonus: 1000,
+    surplusLevelText: 1500,
+    surplusLowText: 750
+  },
+  INR: {
+    symbol: '₹',
+    name: 'Indian Rupee',
+    region: 'India (INR)',
+    rate: 83,
+    minIncome: 50000,
+    maxIncome: 1500000,
+    minExpense: 30000,
+    maxExpense: 1000000,
+    stepIncome: 10000,
+    stepExpense: 10000,
+    defaultIncome: 250000,
+    defaultExpense: 150000,
+    minLabel: '₹50K',
+    midLabel: '₹750K',
+    maxLabel: '₹1.5M',
+    minExpLabel: '₹30K',
+    midExpLabel: '₹500K',
+    maxExpLabel: '₹1M',
+    hustleBonus: 50000,
+    surplusLevelText: 100000,
+    surplusLowText: 50000
+  },
+  SAR: {
+    symbol: 'SR ',
+    name: 'Saudi Riyal',
+    region: 'Saudi Arabia & Gulf (SAR)',
+    rate: 3.75,
+    minIncome: 5000,
+    maxIncome: 100000,
+    minExpense: 3000,
+    maxExpense: 80000,
+    stepIncome: 1000,
+    stepExpense: 1000,
+    defaultIncome: 25000,
+    defaultExpense: 16000,
+    minLabel: 'SR5K',
+    midLabel: 'SR50K',
+    maxLabel: 'SR100K',
+    minExpLabel: 'SR3K',
+    midExpLabel: 'SR40K',
+    maxExpLabel: 'SR80K',
+    hustleBonus: 4500,
+    surplusLevelText: 7500,
+    surplusLowText: 3700
+  },
+  JPY: {
+    symbol: '¥',
+    name: 'Japanese Yen',
+    region: 'Japan (JPY)',
+    rate: 156,
+    minIncome: 150000,
+    maxIncome: 3000000,
+    minExpense: 100000,
+    maxExpense: 2500000,
+    stepIncome: 25000,
+    stepExpense: 25000,
+    defaultIncome: 750000,
+    defaultExpense: 480000,
+    minLabel: '¥150K',
+    midLabel: '¥1.5M',
+    maxLabel: '¥3M',
+    minExpLabel: '¥100K',
+    midExpLabel: '¥1.3M',
+    maxExpLabel: '¥2.5M',
+    hustleBonus: 180000,
+    surplusLevelText: 300000,
+    surplusLowText: 150000
+  }
+};
+
+function detectRegionCurrency(): keyof typeof CURRENCIES {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (!tz) return 'USD';
+    const tzLower = tz.toLowerCase();
+    if (tzLower.includes('london') || tzLower.includes('belfast') || tzLower.includes('dublin')) {
+      return 'GBP';
+    } else if (
+      tzLower.includes('europe') || 
+      tzLower.includes('madrid') || 
+      tzLower.includes('paris') || 
+      tzLower.includes('berlin') || 
+      tzLower.includes('rome') || 
+      tzLower.includes('vienna') || 
+      tzLower.includes('amsterdam') || 
+      tzLower.includes('brussels')
+    ) {
+      return 'EUR';
+    } else if (
+      tzLower.includes('india') || 
+      tzLower.includes('kolkata') || 
+      tzLower.includes('calcutta') || 
+      tzLower.includes('bombay') || 
+      tzLower.includes('new_delhi')
+    ) {
+      return 'INR';
+    } else if (tzLower.includes('tokyo') || tzLower.includes('osaka') || tzLower.includes('japan')) {
+      return 'JPY';
+    } else if (
+      tzLower.includes('riyadh') || 
+      tzLower.includes('dubai') || 
+      tzLower.includes('jeddah') || 
+      tzLower.includes('saudi') || 
+      tzLower.includes('emirates') || 
+      tzLower.includes('kuwait') || 
+      tzLower.includes('qatar') || 
+      tzLower.includes('manama') || 
+      tzLower.includes('muscat')
+    ) {
+      return 'SAR';
+    }
+  } catch (err) {
+    // Fail silently, default to USD
+  }
+  return 'USD';
+}
+
 export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }: HomePageProps) {
   const [activeSection, setActiveSection] = useState('hero');
   const [selectedRoleIndex, setSelectedRoleIndex] = useState(0);
   
-  // Custom states for Wealth & Scenario Planning Simulator (Income vs Expenses)
-  const [monthlyIncome, setMonthlyIncome] = useState(7500);
-  const [monthlyExpenses, setMonthlyExpenses] = useState(4800);
+  // Custom states for Wealth & Scenario Planning Simulator (Income vs Expenses) with Dynamic Region Currencies
+  const [currencyCode, setCurrencyCode] = useState<keyof typeof CURRENCIES>(() => detectRegionCurrency());
+  
+  const [monthlyIncome, setMonthlyIncome] = useState<number>(() => {
+    const code = detectRegionCurrency();
+    return CURRENCIES[code]?.defaultIncome || 7500;
+  });
+  
+  const [monthlyExpenses, setMonthlyExpenses] = useState<number>(() => {
+    const code = detectRegionCurrency();
+    return CURRENCIES[code]?.defaultExpense || 4800;
+  });
+
   const [whatIfScenario, setWhatIfScenario] = useState<'none' | 'envelope' | 'hustle' | 'fee'>('none');
   const [activeSegment4Tab, setActiveSegment4Tab] = useState<'new-features' | 'features' | 'impact' | 'tech'>('new-features');
   const [activeSurfaceIndex, setActiveSurfaceIndex] = useState(0);
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
+
+  const handleCurrencyChange = (newCode: keyof typeof CURRENCIES) => {
+    setCurrencyCode(newCode);
+    const curr = CURRENCIES[newCode];
+    setMonthlyIncome(curr.defaultIncome);
+    setMonthlyExpenses(curr.defaultExpense);
+  };
 
   useEffect(() => {
     if (isAutoplayPaused) return;
@@ -338,9 +554,10 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
   }, []);
 
   const selectedProfile = talentProfiles[selectedRoleIndex];
+  const currentCurrency = CURRENCIES[currencyCode] || CURRENCIES.USD;
 
   // Derived analytical calculations based on income vs expenses & What-if actions
-  const adjustedIncome = whatIfScenario === 'hustle' ? monthlyIncome + 1200 : monthlyIncome;
+  const adjustedIncome = whatIfScenario === 'hustle' ? monthlyIncome + currentCurrency.hustleBonus : monthlyIncome;
   const adjustedExpenses = whatIfScenario === 'envelope' ? Math.round(monthlyExpenses * 0.85) : monthlyExpenses;
   
   const monthlySurplus = Math.max(0, adjustedIncome - adjustedExpenses);
@@ -350,7 +567,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
   const financialHealthScore = Math.max(10, Math.min(100, Math.round(
     30 + 
     (savingsRate * 1.1) + 
-    (monthlySurplus > 2000 ? 15 : monthlySurplus > 1000 ? 8 : 0) +
+    (monthlySurplus > currentCurrency.surplusLevelText ? 15 : monthlySurplus > currentCurrency.surplusLowText ? 8 : 0) +
     (adjustedExpenses < adjustedIncome * 0.5 ? 10 : 0)
   )));
 
@@ -589,11 +806,12 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
                         <p className="text-xs text-brand-muted font-light leading-relaxed">{selectedProfile.tagline}</p>
                         
                         {/* Status badge row instead of rating */}
-                        <div className="flex items-center gap-2 pt-1 text-[10px] font-mono text-emerald-500 font-bold">
-                          <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 pt-1 text-[10px] font-mono font-bold text-emerald-500">
+                          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
                           <span>Active Module</span>
                           <span className="text-brand-border/60">|</span>
-                          <span className="text-brand-muted font-normal">Vetted Architecture</span>
+                          <span className="text-brand-muted font-normal">Productivity Status: </span>
+                          <span className="text-indigo-500 uppercase font-extrabold">{selectedProfile.productivityStatus}</span>
                         </div>
                       </div>
                     </div>
@@ -730,45 +948,72 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
             
             {/* Range Controls */}
             <div className="space-y-6 text-left">
+              {/* Region Currency Selector */}
+              <div className="space-y-2 pb-4 border-b border-brand-border/40">
+                <div className="flex justify-between items-center">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-brand-muted flex items-center gap-1.5 font-mono">
+                    <Globe className="h-3.5 w-3.5 text-emerald-500 animate-pulse" />
+                    <span>Geographic Region Currency</span>
+                  </label>
+                  <span className="text-[9px] font-mono bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded-full uppercase font-bold">Auto-detected Locale</span>
+                </div>
+                <div className="relative">
+                  <select
+                    value={currencyCode}
+                    onChange={(e) => handleCurrencyChange(e.target.value as keyof typeof CURRENCIES)}
+                    className="w-full appearance-none bg-brand-bg border border-brand-border rounded-xl px-4 py-3 text-xs font-bold text-brand-text focus:outline-none focus:ring-1 focus:ring-emerald-500/50 pr-10 cursor-pointer"
+                  >
+                    {Object.entries(CURRENCIES).map(([code, c]) => (
+                      <option key={code} value={code}>
+                        {c.region} — {c.symbol} ({c.name})
+                      </option>
+                    ))}
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-brand-muted">
+                    <ChevronDown className="h-4 w-4" />
+                  </div>
+                </div>
+              </div>
+
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-bold text-brand-text">Monthly Net Income</span>
-                  <span className="text-sm font-mono font-bold bg-brand-text/10 px-3 py-1 rounded-lg text-brand-text">${monthlyIncome.toLocaleString()} / mo</span>
+                  <span className="text-sm font-mono font-bold bg-brand-text/10 px-3 py-1 rounded-lg text-brand-text">{currentCurrency.symbol}{monthlyIncome.toLocaleString()} / mo</span>
                 </div>
                 <input 
                   type="range" 
-                  min="1500" 
-                  max="30000" 
-                  step="250"
+                  min={currentCurrency.minIncome} 
+                  max={currentCurrency.maxIncome} 
+                  step={currentCurrency.stepIncome}
                   value={monthlyIncome} 
                   onChange={(e) => setMonthlyIncome(parseInt(e.target.value))}
                   className="w-full accent-emerald-500 cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] text-brand-muted font-mono">
-                  <span>$1.5K</span>
-                  <span>$15K</span>
-                  <span>$30K</span>
+                  <span>{currentCurrency.minLabel}</span>
+                  <span>{currentCurrency.midLabel}</span>
+                  <span>{currentCurrency.maxLabel}</span>
                 </div>
               </div>
 
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-bold text-brand-text">Identified Monthly Expenses</span>
-                  <span className="text-sm font-mono font-bold bg-brand-text/10 px-3 py-1 rounded-lg text-brand-text">${monthlyExpenses.toLocaleString()} / mo</span>
+                  <span className="text-sm font-mono font-bold bg-brand-text/10 px-3 py-1 rounded-lg text-brand-text">{currentCurrency.symbol}{monthlyExpenses.toLocaleString()} / mo</span>
                 </div>
                 <input 
                   type="range" 
-                  min="1000" 
-                  max="25000" 
-                  step="250"
+                  min={currentCurrency.minExpense} 
+                  max={currentCurrency.maxExpense} 
+                  step={currentCurrency.stepExpense}
                   value={monthlyExpenses} 
                   onChange={(e) => setMonthlyExpenses(parseInt(e.target.value))}
                   className="w-full accent-emerald-500 cursor-pointer"
                 />
                 <div className="flex justify-between text-[10px] text-brand-muted font-mono">
-                  <span>$1K</span>
-                  <span>$13K</span>
-                  <span>$25K</span>
+                  <span>{currentCurrency.minExpLabel}</span>
+                  <span>{currentCurrency.midExpLabel}</span>
+                  <span>{currentCurrency.maxExpLabel}</span>
                 </div>
               </div>
 
@@ -783,7 +1028,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
                   >
                     <option value="none">No Scenario — Traditional Budget (Baseline)</option>
                     <option value="envelope">Apply 15% Smart Envelope Cuts (Spend-Less Bounds)</option>
-                    <option value="hustle">Add Freelance Side Hustle (+$1,200/mo net)</option>
+                    <option value="hustle">Add Freelance Side Hustle (+{currentCurrency.symbol}{currentCurrency.hustleBonus.toLocaleString()}/mo net)</option>
                     <option value="fee">Optimize Fees (Migrate to low-fee ETFs, save 1.2% CAGR)</option>
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-brand-muted">
@@ -800,7 +1045,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
               <div className="space-y-1">
                 <span className="text-[10px] font-bold uppercase tracking-widest text-brand-muted block">PROJECTED 10-YEAR COMPOUND WEALTH (at {whatIfScenario === 'fee' ? '9.2%' : '8.0%'} ROI):</span>
                 <p className="text-4xl sm:text-5xl font-display font-black text-emerald-500 tracking-tight">
-                  ${projectedTenYearWealth.toLocaleString()}<span className="text-sm text-brand-muted font-normal font-sans"> / 10 years</span>
+                  {currentCurrency.symbol}{projectedTenYearWealth.toLocaleString()}<span className="text-sm text-brand-muted font-normal font-sans"> / 10 years</span>
                 </p>
               </div>
 
@@ -820,7 +1065,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
                 </div>
                 <div className="space-y-1">
                   <span className="text-[10px] font-bold uppercase text-brand-muted block">Direct Savings Rate:</span>
-                  <p className="text-lg font-bold text-brand-text">{savingsRate}% <span className="text-xs text-brand-muted font-normal font-sans">(Surplus: ${monthlySurplus.toLocaleString()}/mo)</span></p>
+                  <p className="text-lg font-bold text-brand-text">{savingsRate}% <span className="text-xs text-brand-muted font-normal font-sans">(Surplus: {currentCurrency.symbol}{monthlySurplus.toLocaleString()}/mo)</span></p>
                 </div>
               </div>
 
@@ -828,7 +1073,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
               <div className="pt-2 p-3 bg-brand-card/50 border border-brand-border/60 rounded-xl">
                 <p className="text-xs text-brand-muted leading-relaxed">
                   {whatIfScenario === 'envelope' && "💡 Envelope Budgeting: Reducing your recurring utility leaks and unnecessary subscriptions by 15% immediately ramps your discretionary safety reserve."}
-                  {whatIfScenario === 'hustle' && "💡 Side Income Flow: Adding a modest contract channel of $1,200/mo dramatically accelerates your leverage multiplier."}
+                  {whatIfScenario === 'hustle' && `💡 Side Income Flow: Adding a modest contract channel of ${currentCurrency.symbol}${currentCurrency.hustleBonus.toLocaleString()}/mo dramatically accelerates your leverage multiplier.`}
                   {whatIfScenario === 'fee' && "💡 Fee Reductions: Safely migrating disjoint investment assets away from high-fee portfolios (saving 1.2% in charges) compiles into major long-term benefits."}
                   {whatIfScenario === 'none' && "💡 Strategic Baseline: Increasing your net savings rate above 20% remains the fastest path to compounding security."}
                 </p>
