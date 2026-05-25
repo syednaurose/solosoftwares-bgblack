@@ -51,20 +51,20 @@ export default function PrivacyPage({ isDarkMode, setIsDarkMode, theme, setTheme
 
 • **Local Data Deletion:** You have complete, instant authority to permanently scrub all your data from the device. Simply navigate to Settings > Data Management and click "Reset Application Data" to erase all IndexedDB tables. This is irreversible.
 • **Account / Cloud Data Deletion:** If you have registered an account or set up cloud sync, you can request absolute purging of all backup files by initiating a support ticket.
-• **Purge Requests:** Direct requests for server-side contact record removal can be emailed to syednaurose@gmail.com and will be processed immediately within 24–48 hours.`
+• **Purge Requests:** Direct requests for server-side contact record removal can be emailed to info@solosoftwares.com and will be processed immediately within 24–48 hours.`
     },
     {
       icon: <FileText className="h-6 w-6 text-brand-text" />,
       title: "5. Children's Privacy (COPPA Compliance)",
-      content: `SoloAccount is not directed to, and does not knowingly collect personally identifiable information from, children under the age of 13. In the event that we discover a child under 13 has provided us with personal information (such as via email support), we immediately delete this from our servers. If you are a parent or guardian and are aware that your child has provided us with personal data, please contact syednaurose@gmail.com.`
+      content: `SoloAccount is not directed to, and does not knowingly collect personally identifiable information from, children under the age of 13. In the event that we discover a child under 13 has provided us with personal information (such as via email support), we immediately delete this from our servers. If you are a parent or guardian and are aware that your child has provided us with personal data, please contact info@solosoftwares.com.`
     },
     {
       icon: <Globe className="h-6 w-6 text-brand-text" />,
       title: "6. Developer Identity, Contact & Compliance Oversight",
       content: `This application and its privacy provisions are proudly supervised by our primary compliance officer and developer:
-
+ 
 • **Developer / Compliance Officer:** M.S. Syed Masood
-• **Developer Email:** syednaurose@gmail.com
+• **Developer Email:** info@solosoftwares.com
 • **Corporate Headquarters / Jurisdiction:** Kadayanallur, Tamil Nadu, India
 • **Direct Support Line / WhatsApp:** +91 9994120250`
     }
@@ -147,11 +147,11 @@ export default function PrivacyPage({ isDarkMode, setIsDarkMode, theme, setTheme
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-between border-t border-brand-bg/10 pt-6">
               <span className="text-xs font-mono font-bold tracking-wider opacity-60">REF ID: SEC-PWA-2026-SA</span>
               <a 
-                href="mailto:syednaurose@gmail.com"
+                href="mailto:info@solosoftwares.com"
                 className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest bg-brand-bg text-brand-text px-5 py-2.5 rounded-full hover:scale-105 transition-transform"
               >
                 <Mail className="h-3.5 w-3.5" />
-                Contact Syed Naurose
+                Contact Syed Masood
               </a>
             </div>
             <div className="absolute -bottom-12 -right-12 h-40 w-40 bg-brand-bg/10 rounded-full blur-2xl" />

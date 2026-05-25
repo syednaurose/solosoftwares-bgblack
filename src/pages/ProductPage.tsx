@@ -659,10 +659,10 @@ export default function ProductPage({ isDarkMode, setIsDarkMode, theme, setTheme
                             <div className="space-y-1">
                               <span className="text-[10px] font-mono uppercase tracking-wider text-brand-muted block">Direct Email</span>
                               <a 
-                                href="mailto:syednaurose@gmail.com" 
+                                href="mailto:info@solosoftwares.com" 
                                 className="text-xs text-brand-text hover:underline truncate block"
                               >
-                                syednaurose@gmail.com
+                                info@solosoftwares.com
                               </a>
                             </div>
                           </div>

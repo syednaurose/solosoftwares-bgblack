@@ -583,8 +583,8 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
   const features = [
     {
       icon: <Globe className="h-6 w-6" />,
-      title: "Global Tax Engine",
-      description: "Automated VAT, GST, and local tax compliance across 150+ jurisdictions with real-time rate updates."
+      title: "Multi-Currency Ledger",
+      description: "Automated native rate conversion and balance tracking across global jurisdictions with real-time historical rate matching."
     },
     {
       icon: <Cpu className="h-6 w-6" />,
@@ -645,7 +645,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
       name: "Professional",
       price: "$0",
       description: "Scale your global operations.",
-      features: ["Unlimited entities", "Global tax engine", "Neural analytics", "Priority email support"],
+      features: ["Unlimited entities", "Multi-currency ledger", "Neural analytics", "Priority email support"],
       popular: true
     },
     {
@@ -671,8 +671,8 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
       category: "Cloud Architects"
     },
     {
-      title: "Real-time Multi-Jurisdictional Tax & Ledger Consolidation",
-      excerpt: "Unifying multi-entity cross-border accounts with automated hourly VAT, GST updates, and SOC2 secure isolation frameworks.",
+      title: "Real-time Multi-Jurisdictional Ledger Consolidation",
+      excerpt: "Unifying multi-entity cross-border accounts with automated hourly database updates and SOC2 secure isolation frameworks.",
       date: "May 18, 2026",
       category: "Finance Systems"
     },
@@ -777,7 +777,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
             {/* Right side: High-fidelity, live changing profile preview in Toptal style */}
             <div className="lg:col-span-5 relative flex flex-col pt-6 lg:pt-0">
               {/* SoloAccount Feedback / Platform Station */}
-              <div className="mb-4 bg-brand-card border border-[#10b981]/15 rounded-2xl p-4 flex items-center justify-between shadow-md">
+              <div className="mb-4 flex items-center justify-between py-2 px-1">
                 <div className="text-left space-y-0.5">
                   <div className="flex items-center gap-1.5 flex-wrap">
                     <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />

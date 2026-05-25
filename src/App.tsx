@@ -5,6 +5,15 @@ import ProductPage from './pages/ProductPage';
 import LoginPage from './pages/LoginPage';
 import PrivacyPage from './pages/PrivacyPage';
 import FAQPage from './pages/FAQPage';
+import TermsPage from './pages/TermsPage';
+import CookiePolicyPage from './pages/CookiePolicyPage';
+import SecurityPage from './pages/SecurityPage';
+import AiAnalyticsPage from './pages/AiAnalyticsPage';
+import ApiDocsPage from './pages/ApiDocsPage';
+import CareersPage from './pages/CareersPage';
+import PressPage from './pages/PressPage';
+import ContactPage from './pages/ContactPage';
+import AboutPage from './pages/AboutPage';
 import DashboardLayout from './components/dashboard/DashboardLayout';
 import DashboardHome from './pages/dashboard/DashboardHome';
 import TransactionsPage from './pages/dashboard/TransactionsPage';
@@ -46,6 +55,15 @@ export default function App() {
       <Route path="/login" element={<LoginPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
       <Route path="/privacy" element={<PrivacyPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
       <Route path="/faq" element={<FAQPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
+      <Route path="/terms" element={<TermsPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
+      <Route path="/cookie-policy" element={<CookiePolicyPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
+      <Route path="/security" element={<SecurityPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
+      <Route path="/ai-analytics" element={<AiAnalyticsPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
+      <Route path="/api-docs" element={<ApiDocsPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
+      <Route path="/careers" element={<CareersPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
+      <Route path="/press" element={<PressPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
+      <Route path="/contact" element={<ContactPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
+      <Route path="/about" element={<AboutPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
 
       {/* Dashboard Application */}
       <Route path="/dashboard" element={<ProtectedRoute><DashboardHome /></ProtectedRoute>} />
