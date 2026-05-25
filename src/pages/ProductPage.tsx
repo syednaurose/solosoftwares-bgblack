@@ -287,7 +287,7 @@ export default function ProductPage({ isDarkMode, setIsDarkMode, theme, setTheme
                     <span className="text-[10px] font-mono uppercase tracking-widest text-brand-muted">Active Build</span>
                     <span className="text-[10px] bg-emerald-500/10 text-emerald-500 font-mono font-bold px-2 py-0.5 rounded-full">v{APP_VERSION}</span>
                   </div>
-                  <div className="flex items-center gap-2 mb-4">
+                  <Link to="/" className="flex items-center gap-2 mb-4 hover:opacity-85 cursor-pointer">
                     <img 
                       src={soloLogo} 
                       alt="Solo Softwares Logo" 
@@ -298,7 +298,7 @@ export default function ProductPage({ isDarkMode, setIsDarkMode, theme, setTheme
                       <span className="text-xs font-black tracking-widest text-brand-text">SOLO</span>
                       <span className="text-[6px] font-extrabold tracking-[0.2em] text-brand-muted">SOFTWARES</span>
                     </div>
-                  </div>
+                  </Link>
                 </div>
                 <div className="text-[11px] border-t border-brand-border/40 pt-3 text-brand-muted font-light flex items-center justify-between">
                   <span>License: Sovereign Enterprise</span>

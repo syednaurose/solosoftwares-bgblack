@@ -37,14 +37,27 @@ export default function Navbar({ isDarkMode, setIsDarkMode, activeSection, theme
     { label: 'Testimonials', href: isHomePage ? '#testimonials' : '/#testimonials', id: 'testimonials' },
     { label: 'Pricing', href: isHomePage ? '#pricing' : '/#pricing', id: 'pricing' },
     { label: 'Blog', href: isHomePage ? '#blog' : '/#blog', id: 'blog' },
-    { label: 'FAQ', href: isHomePage ? '#faq' : '/#faq', id: 'faq' },
+    { label: 'FAQ', href: '/faq', id: 'faq' },
     { label: 'Contact', href: isHomePage ? '#contact' : '/#contact', id: 'contact' },
   ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-brand-border bg-brand-glass backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link to="/" className="flex items-center gap-3 group">
+        <Link 
+          to="/" 
+          onClick={(e) => {
+            if (isHomePage) {
+              e.preventDefault();
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              });
+              window.history.pushState(null, '', '/');
+            }
+          }}
+          className="flex items-center gap-3 group cursor-pointer animate-fade-in"
+        >
           <div className="flex items-center transition-all duration-500">
             {!logoError ? (
               <img 
@@ -166,7 +179,7 @@ export default function Navbar({ isDarkMode, setIsDarkMode, activeSection, theme
               {isDarkMode ? <Sun className="h-5 w-5 text-brand-muted" /> : <Moon className="h-5 w-5 text-brand-muted" />}
             </button>
           )}
-          <Link to="/login" className="text-sm font-medium text-brand-muted transition-colors hover:text-brand-text">Login</Link>
+          <a href="https://soloaccount.solosoftwares.com/" className="text-sm font-medium text-brand-muted transition-colors hover:text-brand-text">Login</a>
           <a 
             href="https://soloaccount.solosoftwares.com/" 
             target="_blank"

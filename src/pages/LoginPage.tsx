@@ -22,10 +22,10 @@ export default function LoginPage({ isDarkMode, setIsDarkMode, theme, setTheme }
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API delay
+    // Redirect to remote SoloAccount software
     setTimeout(() => {
-      navigate('/dashboard');
-    }, 1000);
+      window.location.href = 'https://soloaccount.solosoftwares.com/';
+    }, 800);
   };
 
   return (
@@ -47,7 +47,10 @@ export default function LoginPage({ isDarkMode, setIsDarkMode, theme, setTheme }
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="mb-10 flex items-center gap-3 transition-all duration-500 max-w-fit">
+            <Link 
+              to="/" 
+              className="mb-10 flex items-center gap-3 transition-all duration-500 max-w-fit hover:opacity-80 cursor-pointer"
+            >
               <img 
                 src={soloLogo} 
                 alt="Solo Softwares Logo" 
@@ -62,7 +65,7 @@ export default function LoginPage({ isDarkMode, setIsDarkMode, theme, setTheme }
                   SOFTWARES
                 </span>
               </div>
-            </div>
+            </Link>
             <h1 className="font-display text-4xl font-bold tracking-tight text-brand-text mb-2">Welcome back</h1>
             <p className="text-brand-muted mb-10">Access your SoloAccount enterprise dashboard</p>
 
@@ -164,13 +167,13 @@ export default function LoginPage({ isDarkMode, setIsDarkMode, theme, setTheme }
               ))}
             </div>
             <p className="text-xl font-medium leading-relaxed text-brand-text mb-6">
-              "SoloAccount has completely transformed how we handle our global reconciliation. The precision and speed are unparalleled."
+              "SoloAccount has completely transformed how we handle our looking our financial flow, at how well a tool tracks your spending, categorizes transactions, and helps you achieve your financial goals"
             </p>
             <div className="flex items-center gap-4">
               <div className="h-12 w-12 rounded-full bg-brand-text/10 border border-brand-text/10" />
               <div>
-                <p className="text-sm font-bold text-brand-text">Sarah Chen</p>
-                <p className="text-xs text-brand-muted">Lead Controller, Neotech Global</p>
+                <p className="text-sm font-bold text-brand-text">Syed Masood</p>
+                <p className="text-xs text-brand-muted">Lead Controller, SOLO SOFTWARES</p>
               </div>
             </div>
           </motion.div>

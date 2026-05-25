@@ -293,7 +293,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
   }, [isAutoplayPaused]);
 
   useEffect(() => {
-    const sections = ['features', 'testimonials', 'pricing', 'blog', 'faq', 'contact'];
+    const sections = ['features', 'testimonials', 'pricing', 'blog', 'contact'];
     const observerOptions = {
       root: null,
       rootMargin: '-20% 0px -70% 0px',
@@ -463,98 +463,6 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
       excerpt: "Applying rigorous typographic pairings, custom Tailwind spacing metrics, and responsive bento-grids to keep dense telemetry and notes visualizable on tablet screens.",
       date: "May 15, 2026",
       category: "SaaS Pioneers"
-    }
-  ];
-
-  const faqCategories = [
-    {
-      title: "🏠 Getting Started & Interface",
-      questions: [
-        {
-          question: "What languages does SoloAccount support, and does it work with right-to-left layout?",
-          answer: "The app fully supports English, Arabic, and Tamil. It includes native RTL (Right-to-Left) optimization for Arabic, along with localized number and currency formatting."
-        },
-        {
-          question: "Can I use SoloAccount on my smartphone like a normal app?",
-          answer: "Yes. SoloAccount is built as a Progressive Web App (PWA). You can install it directly onto your mobile home screen or desktop, and it supports mobile gestures like pull-to-refresh."
-        },
-        {
-          question: "What is the fastest way to navigate the app without clicking through menus?",
-          answer: "You can use the built-in Command Palette (Ctrl + K or Cmd + K) to instantly search, jump between pages, and trigger quick actions."
-        }
-      ]
-    },
-    {
-      title: "🔐 Security & Data Privacy",
-      questions: [
-        {
-          question: "Where is my financial data stored, and can anyone else see it?",
-          answer: "SoloAccount is a privacy-first application. Your data is encrypted and stored locally on your device using IndexedDB. Your sensitive financial information is never uploaded to public servers without your permission."
-        },
-        {
-          question: "Does SoloAccount support biometric login?",
-          answer: "Yes. You can secure your app using your device's native fingerprint scanner or facial recognition (Face ID / Touch ID)."
-        },
-        {
-          question: "Can I use the application when I do not have an internet connection?",
-          answer: "Yes. The app features full offline functionality. You can log transactions, check budgets, and view reports offline. Local data will update currency rates once connection returns."
-        },
-        {
-          question: "How do I back up my data or move it to a new device?",
-          answer: "Go to Settings > Data Management to manually export your data payload. You can import this file on any new device to restore your account history. Optional cloud synchronization via Firebase is also supported."
-        }
-      ]
-    },
-    {
-      title: "💸 Accounts & Transactions",
-      questions: [
-        {
-          question: "What types of accounts can I track inside the app?",
-          answer: "You can create and manage multiple accounts across four distinct categories: Cash, Bank, Credit Card, and E-wallet."
-        },
-        {
-          question: "Can I manage accounts using different world currencies?",
-          answer: "Yes. SoloAccount features multi-currency support. The app captures historical exchange rates using live APIs during transaction entry to ensure your total net worth remains accurate."
-        },
-        {
-          question: "Can I hide a specific savings or business account from my main dashboard metrics?",
-          answer: "Yes. In your Account Settings, toggle \"Exclude from Dashboard Totals\". The account balance will update individually but will not distort your daily spending overview."
-        },
-        {
-          question: "I made a mistake while entering a transaction. Can I reverse it?",
-          answer: "Yes. The application features built-in undo and redo functionality for instant data corrections."
-        }
-      ]
-    },
-    {
-      title: "🤖 AI Features & Forecasting",
-      questions: [
-        {
-          question: "How does the AI integration help me manage my money?",
-          answer: "The embedded AI engine automatically scans transaction descriptions to suggest the correct category, isolates recurring payment anomalies to detect forgotten subscriptions, and provides personalized spending insights on your dashboard."
-        },
-        {
-          question: "What is the Forecasting feature and how does it predict my future cash flow?",
-          answer: "The forecasting tool reads your historical income and spending patterns to create future cash flow projections. You can also use Scenario Planning to see how a major purchase or salary change affects your long-term financial runway."
-        }
-      ]
-    },
-    {
-      title: "📊 Budgets, Goals, & Debt",
-      questions: [
-        {
-          question: "Will SoloAccount alert me if I am spending too much money?",
-          answer: "Yes. You can set customized, category-specific monthly budget limits. The app monitors your real-time spending and sends notification alerts as you approach your limits."
-        },
-        {
-          question: "How does the Debt Management feature calculate what I owe?",
-          answer: "It tracks your active loans or credit cards, creates payment schedules, factors in interest calculations, and visualizes your debt reduction progress over a structured timeline."
-        },
-        {
-          question: "Can I use Markdown syntax in the built-in Notes module?",
-          answer: "Yes. The notes feature natively parses Markdown. You can create rich text lists, tables, and bold headers to brainstorm financial plans or log shopping lists, with global search across all text entries."
-        }
-      ]
     }
   ];
 
@@ -1757,43 +1665,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
         </div>
       </section>
 
-      {/* 🙋‍♀️ Segment 9: REORGANIZED COMMONLY ASKED QUESTIONS ACCORDION */}
-      <section id="faq" className="py-24 bg-brand-bg/50 border-b border-brand-border">
-        <div className="mx-auto max-w-4xl px-6">
-          <div className="mb-20 text-center space-y-4">
-            <span className="text-xs font-bold uppercase tracking-widest text-brand-muted block font-mono">Expert support</span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-brand-text">Common Questions</h2>
-          </div>
 
-          <div className="space-y-16">
-            {faqCategories.map((category, catIndex) => (
-              <div 
-                key={catIndex}
-                className="space-y-6"
-              >
-                <h3 className="text-xs sm:text-sm font-display font-semibold text-brand-muted uppercase tracking-wider border-b border-brand-border pb-3 text-left">
-                  {category.title}
-                </h3>
-                <div className="grid grid-cols-1 gap-4">
-                  {category.questions.map((faq, index) => (
-                    <div
-                      key={index}
-                      className="group rounded-2xl border border-brand-border bg-brand-card p-6 sm:p-8 text-left transition-all duration-300 hover:border-brand-text/10"
-                    >
-                      <h4 className="text-base font-bold text-brand-text mb-3 leading-snug">
-                        {faq.question}
-                      </h4>
-                      <p className="text-xs sm:text-sm leading-relaxed text-brand-muted">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 📞 Segment 10: BOTTOM HIGH-CONVERSION CTA FOOTER ROW */}
       <section id="contact" className="py-24 bg-brand-bg relative overflow-hidden">
@@ -1821,7 +1693,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-card border border-brand-border text-brand-muted shrink-0">
                     <Shield className="h-5 w-5" />
                   </div>
-                  <span className="text-sm font-medium">syednaurose@gmail.com</span>
+                  <span className="text-sm font-medium">support@solosoftwares.com</span>
                 </div>
               </div>
             </div>

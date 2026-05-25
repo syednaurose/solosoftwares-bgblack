@@ -10,7 +10,16 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-2 gap-12 md:grid-cols-4 lg:grid-cols-5">
           <div className="col-span-2 lg:col-span-2">
-            <div className="flex items-center gap-3 mb-20 group">
+            <Link 
+              to="/" 
+              onClick={() => {
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+                });
+              }}
+              className="flex items-center gap-3 mb-20 group cursor-pointer"
+            >
               <div className="flex items-center transition-all duration-500">
                 {!logoError ? (
                   <img 
@@ -34,7 +43,7 @@ export default function Footer() {
                   SOFTWARES
                 </span>
               </div>
-            </div>
+            </Link>
             <p className="max-w-xs text-sm leading-relaxed text-brand-muted">
               Architecting the next generation of financial infrastructure for global enterprises. Precision. Speed. Security.
             </p>
@@ -66,7 +75,7 @@ export default function Footer() {
             <h4 className="mb-6 text-xs font-bold uppercase tracking-widest text-brand-text">Product</h4>
             <ul className="space-y-4">
               <li><a href="https://soloaccount.solosoftwares.com/" target="_blank" rel="noopener noreferrer" className="text-sm text-brand-muted transition-colors hover:text-brand-text">SoloAccount</a></li>
-              <li><Link to="/login" className="text-sm text-brand-muted transition-colors hover:text-brand-text">Portal Login</Link></li>
+              <li><a href="https://soloaccount.solosoftwares.com/" className="text-sm text-brand-muted transition-colors hover:text-brand-text">Portal Login</a></li>
               <li><a href="#" className="text-sm text-brand-muted transition-colors hover:text-brand-text">Global Tax</a></li>
               <li><a href="#" className="text-sm text-brand-muted transition-colors hover:text-brand-text">AI Analytics</a></li>
               <li><a href="#" className="text-sm text-brand-muted transition-colors hover:text-brand-text">API Docs</a></li>
