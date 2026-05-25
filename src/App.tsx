@@ -12,15 +12,21 @@ import NotesPage from './pages/dashboard/NotesPage';
 import BudgetsPage from './pages/dashboard/BudgetsPage';
 
 export default function App() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [theme, setTheme] = useState<'bright' | 'dark' | 'warm' | 'nordic'>('bright');
 
   useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+    // Remove all theme classes first
+    document.documentElement.classList.remove('dark', 'theme-dark', 'theme-warm', 'theme-nordic');
+    
+    // Add active theme class
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark', 'theme-dark');
+    } else if (theme === 'warm') {
+      document.documentElement.classList.add('theme-warm');
+    } else if (theme === 'nordic') {
+      document.documentElement.classList.add('theme-nordic');
     }
-  }, [isDarkMode]);
+  }, [theme]);
 
   // Wrapper components to ensure consistency if needed
   const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -28,13 +34,16 @@ export default function App() {
     return <DashboardLayout>{children}</DashboardLayout>;
   };
 
+  const isDarkMode = theme === 'dark';
+  const toggleDarkMode = (val: boolean) => setTheme(val ? 'dark' : 'bright');
+
   return (
     <Routes>
       {/* Marketing Pages */}
-      <Route path="/" element={<HomePage isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
-      <Route path="/product" element={<ProductPage isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
-      <Route path="/login" element={<LoginPage isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
-      <Route path="/privacy" element={<PrivacyPage isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />} />
+      <Route path="/" element={<HomePage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
+      <Route path="/product" element={<ProductPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
+      <Route path="/login" element={<LoginPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
+      <Route path="/privacy" element={<PrivacyPage isDarkMode={isDarkMode} setIsDarkMode={toggleDarkMode} theme={theme} setTheme={setTheme} />} />
 
       {/* Dashboard Application */}
       <Route path="/dashboard" element={<ProtectedRoute><DashboardHome /></ProtectedRoute>} />

@@ -48,6 +48,8 @@ import surf4 from '../assets/soloaccount_Surface_4.png';
 interface HomePageProps {
   isDarkMode: boolean;
   setIsDarkMode: (val: boolean) => void;
+  theme?: 'bright' | 'dark' | 'warm' | 'nordic';
+  setTheme?: (theme: 'bright' | 'dark' | 'warm' | 'nordic') => void;
 }
 
 // Technical specifications for the interactive active modules
@@ -67,6 +69,29 @@ interface SystemModuleSpec {
   productionOutcome: string;
   deploymentStatus: string;
 }
+
+const techStack = [
+  { name: 'React 18', icon: <Code2 size={16} />, color: 'text-blue-500' },
+  { name: 'TypeScript', icon: <Code2 size={16} />, color: 'text-blue-600' },
+  { name: 'Tailwind + Framer Motion', icon: <Zap size={16} />, color: 'text-purple-500' },
+  { name: 'Zustand', icon: <Database size={16} />, color: 'text-emerald-500' },
+  { name: 'Recharts', icon: <BarChart3 size={16} />, color: 'text-cyan-500' },
+  { name: 'Supabase + SQLite', icon: <Database size={16} />, color: 'text-green-500' },
+  { name: 'Capacitor', icon: <Smartphone size={16} />, color: 'text-orange-500' },
+  { name: 'Vite', icon: <Zap size={16} />, color: 'text-yellow-500' },
+  { name: 'i18next', icon: <Globe size={16} />, color: 'text-sky-500' },
+];
+
+const ecosystemStack = [
+  { name: 'Microsoft SQL Server', icon: <Database size={16} />, color: 'text-red-500' },
+  { name: 'Google Auth', icon: <Lock size={16} />, color: 'text-amber-500' },
+  { name: 'Google Play Store', icon: <Smartphone size={16} />, color: 'text-green-500' },
+  { name: 'Apple Store', icon: <Smartphone size={16} />, color: 'text-slate-400' },
+  { name: 'Delphi', icon: <Code2 size={16} />, color: 'text-rose-500' },
+  { name: 'RAD Server', icon: <Server size={16} />, color: 'text-orange-500' },
+  { name: 'Interbase', icon: <Database size={16} />, color: 'text-blue-400' },
+  { name: 'VSCode', icon: <Terminal size={16} />, color: 'text-indigo-500' },
+];
 
 const talentProfiles: SystemModuleSpec[] = [
   {
@@ -247,7 +272,7 @@ const getIconComponent = (iconName: string) => {
   }
 };
 
-export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
+export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }: HomePageProps) {
   const [activeSection, setActiveSection] = useState('hero');
   const [selectedRoleIndex, setSelectedRoleIndex] = useState(0);
   
@@ -552,7 +577,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
 
   return (
     <div className="min-h-screen bg-brand-bg font-sans selection:bg-brand-text/30 text-brand-text transition-colors duration-300">
-      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} activeSection={activeSection} />
+      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} activeSection={activeSection} theme={theme} setTheme={setTheme} />
 
       {/* 🚀 Segment 1: TOPTAL-INSPIRED PREMIUM HERO WITH INTERACTIVE TALENT DRILL-DOWN */}
       <main className="relative pt-32 pb-24 overflow-hidden border-b border-brand-border">
@@ -566,7 +591,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
             <div className="lg:col-span-7 space-y-8 text-left">
               <div className="inline-flex items-center gap-2 rounded-full border border-brand-border bg-brand-card px-3.5 py-1.5 text-xs font-semibold tracking-wider uppercase text-brand-muted">
                 <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>AI IMPLEMENT 100% APP TARGET</span>
+                <span>Integrate AI assistants across our team</span>
               </div>
 
               <h1 className="font-display text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight text-brand-text leading-[1.05]">
@@ -716,6 +741,56 @@ export default function HomePage({ isDarkMode, setIsDarkMode }: HomePageProps) {
             </div>
 
           </div>
+
+          {/* Tech Stack Full Width Section - "Built & Compiled With" */}
+          <div className="mt-20 pt-12 border-t border-brand-border/60">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start text-left">
+              <div className="lg:col-span-3 space-y-1">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-md">
+                  Core Framework
+                </span>
+                <h4 className="text-base font-bold text-brand-text pt-2">Built & Compiled With</h4>
+                <p className="text-xs text-brand-muted font-light leading-relaxed">The active UI foundation, reactive layout graphs, and client storage state operation suites.</p>
+              </div>
+              <div className="lg:col-span-9">
+                <div className="flex flex-wrap gap-2">
+                  {techStack.map((tech) => (
+                    <div
+                      key={tech.name}
+                      className="flex items-center gap-2 rounded-xl border border-brand-border bg-brand-card/70 px-4 py-2.5 text-xs font-semibold text-brand-text shadow-sm hover:border-brand-text/20 hover:bg-brand-card transition-all duration-300"
+                    >
+                      <span className={tech.color}>{tech.icon}</span>
+                      <span className="font-medium text-brand-text">{tech.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start text-left mt-8 pt-8 border-t border-brand-border/40">
+              <div className="lg:col-span-3 space-y-1">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-blue-500 bg-blue-500/10 px-2.5 py-1 rounded-md">
+                  Ecosystem & Compilers
+                </span>
+                <h4 className="text-base font-bold text-brand-text pt-2">Integrated Foundations</h4>
+                <p className="text-xs text-brand-muted font-light leading-relaxed">Platform compilers, global repositories, secure authentication providers, and developer IDE suites.</p>
+              </div>
+              <div className="lg:col-span-9">
+                <div className="flex flex-wrap gap-2">
+                  {ecosystemStack.map((tech) => (
+                    <div
+                      key={tech.name}
+                      className="flex items-center gap-2 rounded-xl border border-brand-border bg-brand-card/70 px-4 py-2.5 text-xs font-semibold text-brand-text shadow-sm hover:border-brand-text/20 hover:bg-brand-card transition-all duration-300"
+                    >
+                      <span className={tech.color}>{tech.icon}</span>
+                      <span className="font-medium text-brand-text">{tech.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </main>
 

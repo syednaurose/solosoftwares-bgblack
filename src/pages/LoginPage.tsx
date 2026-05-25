@@ -8,9 +8,11 @@ import appLogin from '../assets/app_login.png';
 interface LoginPageProps {
   isDarkMode: boolean;
   setIsDarkMode: (val: boolean) => void;
+  theme?: 'bright' | 'dark' | 'warm' | 'nordic';
+  setTheme?: (theme: 'bright' | 'dark' | 'warm' | 'nordic') => void;
 }
 
-export default function LoginPage({ isDarkMode, setIsDarkMode }: LoginPageProps) {
+export default function LoginPage({ isDarkMode, setIsDarkMode, theme, setTheme }: LoginPageProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);

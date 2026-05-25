@@ -8,9 +8,11 @@ import Footer from '../components/Footer';
 interface PrivacyPageProps {
   isDarkMode: boolean;
   setIsDarkMode: (val: boolean) => void;
+  theme?: 'bright' | 'dark' | 'warm' | 'nordic';
+  setTheme?: (theme: 'bright' | 'dark' | 'warm' | 'nordic') => void;
 }
 
-export default function PrivacyPage({ isDarkMode, setIsDarkMode }: PrivacyPageProps) {
+export default function PrivacyPage({ isDarkMode, setIsDarkMode, theme, setTheme }: PrivacyPageProps) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
@@ -70,7 +72,7 @@ export default function PrivacyPage({ isDarkMode, setIsDarkMode }: PrivacyPagePr
 
   return (
     <div className="min-h-screen bg-brand-bg text-brand-text flex flex-col font-sans">
-      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} theme={theme} setTheme={setTheme} />
       
       {/* Privacy Title Banner */}
       <section className="relative overflow-hidden border-b border-brand-border bg-brand-bg pt-32 pb-16">
