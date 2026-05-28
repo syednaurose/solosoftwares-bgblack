@@ -38,6 +38,18 @@ import {
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import {
+  ResponsiveContainer,
+  ComposedChart,
+  Area,
+  Bar,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend
+} from 'recharts';
 import appLogin from '../assets/app_login.png';
 import dashboard from '../assets/dashboard.png';
 import soloaccountLogo from '../assets/soloaccount-mark.svg';
@@ -490,6 +502,7 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
   });
 
   const [whatIfScenario, setWhatIfScenario] = useState<'none' | 'envelope' | 'hustle' | 'fee'>('none');
+  const [simulatorChartView, setSimulatorChartView] = useState<'flow' | 'wealth'>('flow');
   const [activeSegment4Tab, setActiveSegment4Tab] = useState<'new-features' | 'features' | 'impact' | 'tech'>('new-features');
   const [activeSurfaceIndex, setActiveSurfaceIndex] = useState(0);
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
@@ -579,6 +592,65 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
   const projectedTenYearWealth = monthlySurplus > 0 
     ? Math.round(monthlySurplus * ((Math.pow(1 + monthlyReturnRate, projectionMonths) - 1) / monthlyReturnRate))
     : 0;
+
+  // Generate 6 months data for flow view
+  const flowChartData = Array.from({ length: 6 }, (_, i) => {
+    const monthNames = ['M1', 'M2', 'M3', 'M4', 'M5', 'M6'];
+    const monthNum = i + 1;
+    let cumulativeSavings = 0;
+    for (let m = 1; m <= monthNum; m++) {
+      cumulativeSavings = (cumulativeSavings + monthlySurplus) * (1 + monthlyReturnRate);
+    }
+    return {
+      name: monthNames[i],
+      Income: adjustedIncome,
+      Expenses: adjustedExpenses,
+      Surplus: monthlySurplus,
+      Savings: Math.round(cumulativeSavings),
+    };
+  });
+
+  // Generate 5 key steps (Year 1, 3, 5, 8, 10) for long-term compound wealth visualization
+  const wealthChartData = [1, 3, 5, 8, 10].map((yearNum) => {
+    const months = yearNum * 12;
+    const cumulativeWealth = monthlySurplus > 0
+      ? Math.round(monthlySurplus * ((Math.pow(1 + monthlyReturnRate, months) - 1) / monthlyReturnRate))
+      : 0;
+
+    return {
+      name: `Yr ${yearNum}`,
+      Income: adjustedIncome * months,
+      Expenses: adjustedExpenses * months,
+      Wealth: cumulativeWealth,
+    };
+  });
+
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-brand-card border border-brand-border/80 backdrop-blur-md p-3 rounded-xl shadow-lg text-xs leading-none">
+          <p className="font-bold text-brand-text mb-1.5">{label}</p>
+          <div className="space-y-1">
+            {payload.map((entry: any, index: number) => {
+              const entryColor = entry.color || entry.stroke || (entry.name?.includes('Wealth') || entry.name?.includes('Savings') ? '#10b981' : entry.name?.includes('Outflows') ? '#f43f5e' : '#3b82f6');
+              return (
+                <div key={index} className="flex items-center justify-between gap-6">
+                  <span className="flex items-center gap-1.5 text-brand-muted">
+                    <span className="h-2 w-2 rounded-full" style={{ backgroundColor: entryColor }} />
+                    {entry.name}:
+                  </span>
+                  <span className="font-mono font-bold text-brand-text">
+                    {currentCurrency.symbol}{Math.round(entry.value).toLocaleString()}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+    return null;
+  };
 
   const features = [
     {
@@ -1146,6 +1218,107 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
                 <div className="space-y-1">
                   <span className="text-[10px] font-bold uppercase text-brand-muted block">Direct Savings Rate:</span>
                   <p className="text-lg font-bold text-brand-text">{savingsRate}% <span className="text-xs text-brand-muted font-normal font-sans">(Surplus: {currentCurrency.symbol}{monthlySurplus.toLocaleString()}/mo)</span></p>
+                </div>
+              </div>
+
+              {/* 📊 Graphical Flow & Wealth Compounding Chart */}
+              <div className="pt-4 border-t border-brand-border space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase text-brand-muted tracking-wider">Dynamic Financial Flow:</span>
+                  <div className="flex bg-brand-card rounded-lg p-0.5 border border-brand-border text-[10px] select-none">
+                    <button
+                      onClick={() => setSimulatorChartView('flow')}
+                      className={`px-2.5 py-1 rounded-md font-bold transition-all cursor-pointer ${
+                        simulatorChartView === 'flow'
+                          ? 'bg-brand-text text-brand-bg font-black'
+                          : 'text-brand-muted hover:text-brand-text'
+                      }`}
+                    >
+                      6-Mo Flow
+                    </button>
+                    <button
+                      onClick={() => setSimulatorChartView('wealth')}
+                      className={`px-2.5 py-1 rounded-md font-bold transition-all cursor-pointer ${
+                        simulatorChartView === 'wealth'
+                          ? 'bg-brand-text text-brand-bg font-black'
+                          : 'text-brand-muted hover:text-brand-text'
+                      }`}
+                    >
+                      10-Yr Path
+                    </button>
+                  </div>
+                </div>
+
+                <div className="h-44 w-full text-xs font-mono select-none">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <ComposedChart
+                      data={(simulatorChartView === 'flow' ? flowChartData : wealthChartData) as any[]}
+                      margin={{ top: 10, right: 5, left: -22, bottom: 0 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" stroke="currentColor" className="text-brand-border/30" opacity={0.2} vertical={false} />
+                      <XAxis 
+                        dataKey="name" 
+                        stroke="currentColor" 
+                        className="text-brand-muted" 
+                        fontSize={9} 
+                        tickLine={false} 
+                        axisLine={false}
+                      />
+                      <YAxis 
+                        stroke="currentColor" 
+                        className="text-brand-muted" 
+                        fontSize={9} 
+                        tickLine={false} 
+                        axisLine={false}
+                        tickFormatter={(value) => `${currentCurrency.symbol}${value >= 1000000 ? (value / 1000000).toFixed(1) + 'M' : value >= 1000 ? (value / 1000).toFixed(0) + 'k' : value}`}
+                      />
+                      <Tooltip content={<CustomTooltip />} />
+                      
+                      {/* Area layer representing accumulated savings or total wealth growth */}
+                      <Area 
+                        name={simulatorChartView === 'flow' ? "Savings Acc." : "Total Wealth"}
+                        type="monotone" 
+                        dataKey={simulatorChartView === 'flow' ? "Savings" : "Wealth"} 
+                        fill="rgba(16, 185, 129, 0.15)" 
+                        stroke="#10b981" 
+                        strokeWidth={2.5}
+                      />
+
+                      {/* Bar layer representing inflows (Income) */}
+                      <Bar 
+                        name="Gross Income" 
+                        dataKey="Income" 
+                        barSize={simulatorChartView === 'flow' ? 10 : 14}
+                        fill="#3b82f6" 
+                        radius={[2, 2, 0, 0]}
+                        opacity={0.8}
+                      />
+
+                      {/* Line layer representing outflows (Expenses) */}
+                      <Line 
+                        name="Outflows" 
+                        type="monotone"
+                        dataKey="Expenses" 
+                        stroke="#f43f5e" 
+                        strokeWidth={2}
+                        dot={false}
+                        activeDot={{ r: 4 }}
+                      />
+                    </ComposedChart>
+                  </ResponsiveContainer>
+                </div>
+
+                {/* Legend helper indicator */}
+                <div className="flex items-center justify-around text-[9px] font-mono text-brand-muted bg-brand-card/40 p-2 border border-brand-border/40 rounded-xl">
+                  <span className="flex items-center gap-1.5 font-bold">
+                    <span className="h-2 w-2 bg-blue-500 rounded-full" /> Income
+                  </span>
+                  <span className="flex items-center gap-1.5 font-bold">
+                    <span className="h-2 w-2 bg-rose-500 rounded-full" /> Outflows
+                  </span>
+                  <span className="flex items-center gap-1.5 font-bold">
+                    <span className="h-2 w-2 bg-emerald-500 rounded-full" /> {simulatorChartView === 'flow' ? "6-Mo Cum. Savings" : "10-Yr Comp. Balance"}
+                  </span>
                 </div>
               </div>
 

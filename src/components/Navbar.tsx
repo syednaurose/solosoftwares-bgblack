@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Box, Sun, Moon, Palette, ChevronDown } from 'lucide-react';
+import { Box, Sun, Moon, Palette, ChevronDown, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import soloLogo from '../assets/solo_logo.png';
 
@@ -15,6 +15,7 @@ interface NavbarProps {
 export default function Navbar({ isDarkMode, setIsDarkMode, activeSection, theme, setTheme }: NavbarProps) {
   const [logoError, setLogoError] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
@@ -56,33 +57,33 @@ export default function Navbar({ isDarkMode, setIsDarkMode, activeSection, theme
               window.history.pushState(null, '', '/');
             }
           }}
-          className="flex items-center gap-3 group cursor-pointer animate-fade-in"
+          className="flex items-center gap-2 sm:gap-3 group cursor-pointer animate-fade-in shrink-0 select-none"
         >
-          <div className="flex items-center transition-all duration-500">
+          <div className="flex items-center transition-all duration-500 shrink-0">
             {!logoError ? (
               <img 
                 src={soloLogo} 
                 alt="Solo Softwares" 
-                className="h-20 w-auto object-contain transition-opacity group-hover:opacity-90"
+                className="h-10 sm:h-16 lg:h-20 w-auto object-contain transition-opacity group-hover:opacity-90 shrink-0"
                 onError={() => setLogoError(true)}
                 referrerPolicy="no-referrer"
               />
             ) : (
-              <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-brand-text">
-                <Box className="h-10 w-10 text-brand-bg" />
+              <div className="flex h-10 w-10 sm:h-16 sm:w-16 items-center justify-center rounded-lg bg-brand-text shrink-0">
+                <Box className="h-6 w-6 sm:h-10 sm:w-10 text-brand-bg" />
               </div>
             )}
           </div>
-          <div className="flex flex-col font-display leading-[0.9] group-hover:opacity-90 transition-opacity">
-            <span className="text-2xl font-black tracking-[0.39em] text-brand-text mr-[-0.39em] uppercase">
+          <div className="flex flex-col font-display leading-[0.9] group-hover:opacity-90 transition-opacity shrink-0">
+            <span className="text-base sm:text-2xl font-black tracking-[0.39em] text-brand-text mr-[-0.39em] uppercase">
               SOLO
             </span>
-            <span className="text-[10px] font-bold tracking-[0.41em] text-brand-muted mr-[-0.41em] uppercase mt-1">
+            <span className="text-[7px] sm:text-[10px] font-bold tracking-[0.41em] text-brand-muted mr-[-0.41em] uppercase mt-1">
               SOFTWARES
             </span>
           </div>
         </Link>
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => {
             const isActive = isHomePage && activeSection === link.id || location.pathname === link.href;
             
@@ -119,14 +120,14 @@ export default function Navbar({ isDarkMode, setIsDarkMode, activeSection, theme
             );
           })}
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           {setTheme && theme ? (
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center gap-2 rounded-full border border-brand-border bg-brand-card/70 px-4 py-2.5 text-xs font-semibold text-brand-text shadow-sm hover:bg-brand-card hover:border-brand-text/20 transition-all duration-200 cursor-pointer select-none"
+                className="flex items-center gap-1.5 sm:gap-2 rounded-full border border-brand-border bg-brand-card/70 px-3 py-2 sm:px-4 sm:py-2.5 text-[11px] sm:text-xs font-semibold text-brand-text shadow-sm hover:bg-brand-card hover:border-brand-text/20 transition-all duration-200 cursor-pointer select-none"
               >
-                <Palette className="h-4 w-4 text-emerald-500" />
+                <Palette className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-emerald-500" />
                 <span className="capitalize hidden sm:inline">{theme === 'bright' ? 'Bright Slate' : theme === 'dark' ? 'Midnight' : theme === 'warm' ? 'Warm Cotton' : 'Nordic Cold'}</span>
                 <span className="capitalize sm:hidden">{theme === 'bright' ? 'Bright' : theme === 'dark' ? 'Midnight' : theme === 'warm' ? 'Warm' : 'Nordic'}</span>
                 <ChevronDown className={`h-3 w-3 text-brand-muted transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
@@ -174,22 +175,79 @@ export default function Navbar({ isDarkMode, setIsDarkMode, activeSection, theme
           ) : (
             <button 
               onClick={() => setIsDarkMode?.(!isDarkMode)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-border bg-brand-card transition-colors hover:bg-brand-text/10 cursor-pointer"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-brand-border bg-brand-card transition-colors hover:bg-brand-text/10 cursor-pointer"
             >
-              {isDarkMode ? <Sun className="h-5 w-5 text-brand-muted" /> : <Moon className="h-5 w-5 text-brand-muted" />}
+              {isDarkMode ? <Sun className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-brand-muted" /> : <Moon className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-brand-muted" />}
             </button>
           )}
-          <a href="https://soloaccount.solosoftwares.com/" className="text-sm font-medium text-brand-muted transition-colors hover:text-brand-text">Login</a>
+          
           <a 
             href="https://soloaccount.solosoftwares.com/" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full bg-brand-text px-5 py-2 text-sm font-semibold text-brand-bg transition-transform hover:scale-105 active:scale-95"
+            className="rounded-full bg-brand-text px-4 py-1.5 sm:px-5 sm:py-2 text-xs sm:text-sm font-semibold text-brand-bg transition-transform hover:scale-105 active:scale-95 shadow-sm inline-flex items-center justify-center whitespace-nowrap"
           >
-            Get Started
+            Login
           </a>
+
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-brand-border bg-brand-card transition-colors hover:bg-brand-text/10 cursor-pointer lg:hidden"
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? <X className="h-4 w-4 text-brand-text" /> : <Menu className="h-4 w-4 text-brand-text" />}
+          </button>
         </div>
       </div>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="border-t border-brand-border bg-brand-glass backdrop-blur-2xl lg:hidden overflow-hidden"
+          >
+            <div className="flex flex-col gap-3 px-6 py-5 select-none md:gap-4 md:py-6">
+              {navLinks.map((link) => {
+                const isActive = isHomePage && activeSection === link.id || location.pathname === link.href;
+                
+                const handleScroll = (e: React.MouseEvent) => {
+                  setIsMobileMenuOpen(false);
+                  if (isHomePage && (link.href.startsWith('#') || link.href.startsWith('/#'))) {
+                    e.preventDefault();
+                    const targetId = link.id;
+                    const element = document.getElementById(targetId);
+                    if (element) {
+                      const navbarHeight = 80;
+                      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+                      const offsetPosition = elementPosition - navbarHeight;
+                      
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                      });
+                      window.history.pushState(null, '', `#${targetId}`);
+                    }
+                  }
+                };
+
+                return (
+                  <Link 
+                    key={link.id} 
+                    to={link.href} 
+                    onClick={handleScroll}
+                    className={`text-sm md:text-base font-medium transition-colors py-1.5 md:py-2 ${
+                      isActive ? 'text-brand-text font-bold' : 'text-brand-muted hover:text-brand-text'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
