@@ -36,9 +36,23 @@ import {
   Heart,
   Layers,
   Terminal,
-  Settings
+  Settings,
+  MessageSquare,
+  Play,
+  Send,
+  EyeOff,
+  Crop,
+  Mic,
+  Bomb,
+  Trash2,
+  Key,
+  User,
+  ShieldAlert,
+  PhoneCall,
+  ShieldCheck,
+  ChevronDown
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -49,6 +63,8 @@ import inputFile3 from '../assets/input_file_3.png';
 import inputFile4 from '../assets/input_file_4.png';
 import inputFile5 from '../assets/input_file_5.png';
 import soloLogo from '../assets/solo_logo.png';
+import soloaccountLogo from '../assets/soloaccount-mark.svg';
+import solochatLogo from '../assets/solochat-mark.svg';
 
 interface ProductPageProps {
   isDarkMode: boolean;
@@ -243,9 +259,89 @@ const highlights = [
 ];
 
 export default function ProductPage({ isDarkMode, setIsDarkMode, theme, setTheme }: ProductPageProps) {
+  const location = useLocation();
+  const [selectedProduct, setSelectedProduct] = useState<'soloaccount' | 'solochat'>(() => {
+    const params = new URLSearchParams(location.search);
+    return params.get('tab') === 'solochat' ? 'solochat' : 'soloaccount';
+  });
+
+  // SoloAccount States
   const [activeTab, setActiveTab] = useState<'tour' | 'matrix' | 'highlights' | 'company'>('tour');
   const [currentScreen, setCurrentScreen] = useState(0);
   const [viewMode, setViewMode] = useState<'laptop' | 'tablet' | 'mobile'>('laptop');
+
+  // SoloChat States
+  const [chatActiveTab, setChatActiveTab] = useState<'tour' | 'bento' | 'security' | 'interactive'>('tour');
+  const [chatMockTab, setChatMockTab] = useState<'lobby' | 'safe' | 'voip'>('lobby');
+  const [simulatedTheme, setSimulatedTheme] = useState<'emerald' | 'blue' | 'purple' | 'amber' | 'rose'>('emerald');
+  const [userTypedMsg, setUserTypedMsg] = useState('');
+  const [isRecordingVoice, setIsRecordingVoice] = useState(false);
+  const [voiceRecordDuration, setVoiceRecordDuration] = useState(0);
+  const [recordedVoiceUrl, setRecordedVoiceUrl] = useState<string | null>(null);
+  
+  // Simulated Location State
+  const [mockLocation, setMockLocation] = useState({ lat: '24.7136° N', lng: '46.6753° E', name: 'Riyadh Safehouse' });
+
+  // Media editor state
+  const [activeWatermark, setActiveWatermark] = useState<'none' | 'confidential' | 'p2p' | 'secure'>('none');
+
+  // Simulated logs
+  const [simulatedLogs, setSimulatedLogs] = useState<Array<{ id: number; sender: string; type: 'success' | 'shred' | 'normal'; message: string; timestamp: string }>>([
+    { id: 1, sender: 'Peer Node 01', type: 'normal', message: 'Welcome to the sandbox deck! Click one of the controller buttons below to emit system handshake events.', timestamp: '12:00' }
+  ]);
+
+  // Mock messages stream
+  const [mockMessages, setMockMessages] = useState<Array<{ sender: string; text: string; isOwn: boolean; time: string }>>([
+    { sender: 'Peer Node', text: 'Hi there, did you verify the peer-to-peer double ratchet handshake keys? Everything looks green.', isOwn: false, time: '12:05' },
+    { sender: 'You', text: 'Handshake secure. Zero-knowledge shred active. 100% of temporary sandbox metadata cleared after shred sequence.', isOwn: true, time: '12:06' }
+  ]);
+
+  const handleSendMockMsg = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!userTypedMsg.trim()) return;
+    const msgTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const newMsg = { sender: 'You', text: userTypedMsg.trim(), isOwn: true, time: msgTime };
+    const inputVal = userTypedMsg;
+    setMockMessages(prev => [...prev, newMsg]);
+    setUserTypedMsg('');
+
+    setTimeout(() => {
+      let replyText = "Tunnel initialized. AES-256 state matching is fully active on this channel.";
+      if (inputVal.toLowerCase().includes('hello') || inputVal.toLowerCase().includes('hi')) {
+        replyText = "Hello! Secure P2P communication channel is active. Direct handshake verified.";
+      } else if (inputVal.toLowerCase().includes('shred') || inputVal.toLowerCase().includes('clear')) {
+        replyText = "Operational command acknowledged. Execute capsule shredding from the Interactive Demo control board.";
+      } else if (inputVal.toLowerCase().includes('key') || inputVal.toLowerCase().includes('public')) {
+        replyText = "Handshake keys: DH-Secp256k1 Ephemeral Node verified. Forward Secrecy secured.";
+      } else if (inputVal.toLowerCase().includes('location') || inputVal.toLowerCase().includes('coordinates')) {
+        replyText = `Understood. Locking secure coordinates to active ping: ${mockLocation.lat}, ${mockLocation.lng}`;
+      }
+      setMockMessages(prev => [...prev, { sender: 'Peer Node', text: replyText, isOwn: false, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
+    }, 1200);
+  };
+
+  const triggerSimulatedHandshake = () => {
+    const freshLog = {
+      id: Date.now(),
+      sender: 'System Core',
+      type: 'success' as const,
+      message: 'Peer handshaking success! Encryption symmetric keys derived cleanly: Node DHE-Public Key Registered.',
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+    setSimulatedLogs(prev => [...prev, freshLog]);
+  };
+
+  const triggerSimulatedShred = () => {
+    const shredLog = {
+      id: Date.now(),
+      sender: 'Secure Shredder',
+      type: 'shred' as const,
+      message: 'Sovereign Capsule Shredded: Local caches, media payloads, and chat logs destroyed with triple-pass zeroes.',
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+    setSimulatedLogs([shredLog]);
+    setMockMessages([]);
+  };
 
   const nextScreen = () => setCurrentScreen((prev) => (prev + 1) % screens.length);
   const prevScreen = () => setCurrentScreen((prev) => (prev - 1 + screens.length) % screens.length);
@@ -261,20 +357,67 @@ export default function ProductPage({ isDarkMode, setIsDarkMode, theme, setTheme
             Back to Home
           </Link>
 
+          {/* Product Toggle Selector with High-Fidelity Specs */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 border-b border-brand-border/40 pb-8">
+            <div className="text-left space-y-1">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-emerald-500 bg-emerald-500/10 px-2.5 py-1 rounded-md">
+                Sovereign Product Suite
+              </span>
+              <h2 className="text-3xl font-display font-black tracking-tight text-brand-text">Software Specification Audit</h2>
+              <p className="text-xs text-brand-muted font-light leading-relaxed">Toggle between Solo Softwares enterprise products to audit their features, capabilities, and system specifications.</p>
+            </div>
+
+            <div className="flex bg-brand-card/45 border border-brand-border rounded-2xl p-1.5 min-w-[320px] shadow-sm select-none">
+              <button
+                onClick={() => setSelectedProduct('soloaccount')}
+                className={`flex-1 py-3 px-4 rounded-xl text-xs font-bold font-display tracking-widest transition-all cursor-pointer ${
+                  selectedProduct === 'soloaccount'
+                    ? 'bg-brand-text text-brand-bg font-black shadow-md scale-[1.01]'
+                    : 'text-brand-muted hover:text-brand-text'
+                }`}
+              >
+                SOLOACCOUNT
+              </button>
+              <button
+                onClick={() => setSelectedProduct('solochat')}
+                className={`flex-1 py-3 px-4 rounded-xl text-xs font-bold font-display tracking-widest transition-all cursor-pointer ${
+                  selectedProduct === 'solochat'
+                    ? 'bg-brand-text text-brand-bg font-black shadow-md scale-[1.01]'
+                    : 'text-brand-muted hover:text-brand-text'
+                }`}
+              >
+                SOLOCHAT
+              </button>
+            </div>
+          </div>
+
+          {selectedProduct === 'soloaccount' ? (
+            <>
+
           {/* Epic Hero Header & Overview */}
           <header className="mb-12 border-b border-brand-border/40 pb-12 relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(16,185,129,0.02),transparent_40%)] pointer-events-none" />
             
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-              <div className="space-y-4 max-w-3xl">
-                <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-border bg-brand-card px-3 py-1 text-[11px] font-mono font-bold tracking-wider uppercase text-emerald-500">
-                  <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>Interactive Engine Product Spec</span>
+              <div className="space-y-4 max-w-3xl border-none p-0 bg-transparent">
+                <div className="flex items-center gap-4">
+                  <img 
+                    src={soloaccountLogo} 
+                    alt="SoloAccount Logo" 
+                    className="h-16 w-16 object-contain rounded-2xl border border-brand-border/60 bg-brand-card p-1.5 shadow-md flex-shrink-0"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="space-y-1">
+                    <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-border bg-brand-card px-3 py-1 text-[11px] font-mono font-bold tracking-wider uppercase text-emerald-500">
+                      <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      <span>Interactive Engine Product Spec</span>
+                    </div>
+                    <h1 className="font-display text-3xl font-bold tracking-tight text-brand-text sm:text-5xl leading-none pt-1">
+                      SoloAccount
+                    </h1>
+                  </div>
                 </div>
-                <h1 className="font-display text-4xl font-bold tracking-tight text-brand-text sm:text-6xl">
-                  SoloAccount <span className="text-brand-muted">Personal Finance Manager.</span>
-                </h1>
-                <p className="text-base sm:text-lg text-brand-muted leading-relaxed font-light">
+                <p className="text-base sm:text-lg text-brand-muted leading-relaxed font-light pt-2">
                   A comprehensive online / offline - first personal finance platform designed with architectural honesty, featuring advanced AI assistance, scenario modeling, secure transaction reconciliation, and a fully private system framework.
                   SoloAccount is a modern, privacy-first personal finance management application that goes far beyond basic budgeting. It combines real-time tracking, intelligent forecasting, investment analysis, debt optimization, family collaboration, and AI-powered insights into one cohesive experience.
                 </p>
@@ -768,25 +911,659 @@ export default function ProductPage({ isDarkMode, setIsDarkMode, theme, setTheme
 
             </motion.div>
           </AnimatePresence>
+            </>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-16 text-left"
+            >
+              {/* 🌟 Epic Hero Header & Overview for SoloChat */}
+              <header className="mb-12 border-b border-brand-border/40 pb-12 relative overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(16,185,129,0.02),transparent_40%)] pointer-events-none" />
+                
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                  <div className="space-y-4 max-w-3xl border-none p-0 bg-transparent">
+                    <div className="flex items-center gap-4">
+                      <img 
+                        src={solochatLogo} 
+                        alt="SoloChat Logo" 
+                        className="h-16 w-16 object-contain rounded-2xl border border-brand-border/60 bg-brand-card p-1.5 shadow-md flex-shrink-0"
+                        referrerPolicy="no-referrer"
+                      />
+                      <div className="space-y-1">
+                        <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-border bg-brand-card px-3 py-1 text-[11px] font-mono font-bold tracking-wider uppercase text-emerald-500">
+                          <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          <span>Sovereign Zero-Knowledge Messengers</span>
+                        </div>
+                        <h1 className="font-display text-4xl font-bold tracking-tight text-brand-text leading-none pt-1">
+                          SoloChat
+                        </h1>
+                      </div>
+                    </div>
+                    <p className="text-base sm:text-lg text-brand-muted leading-relaxed font-light pt-2">
+                      A peer-to-peer double ratchet encrypted messenger system engineered with absolute privacy. Featuring invisible ink chat, local secure audio-grade voice notes, real-time cryptography auditing logs, and robust metadata-scrubbing.
+                    </p>
+                  </div>
+
+                  {/* Version & Stack Info Box */}
+                  <div className="flex flex-col p-6 rounded-2xl bg-brand-card border border-brand-border relative min-w-[260px] md:self-stretch justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[10px] font-mono text-emerald-500 uppercase font-black">Release Tag</span>
+                        <span className="inline-flex items-center rounded-full bg-emerald-500/15 px-2 py-0.5 text-[9px] font-mono font-bold text-emerald-500 uppercase">
+                          PROD v1.0.8
+                        </span>
+                      </div>
+                      <p className="text-xs text-brand-muted font-light">Full-scale zero-knowledge peer protocol. 100% telemetry locked.</p>
+                    </div>
+                    
+                    <div className="border-t border-brand-border/60 pt-4 mt-4 space-y-1.5">
+                      <div className="flex items-center justify-between text-[11px] font-mono text-brand-muted">
+                        <span>HANDSHAKE PROTOCOL</span>
+                        <span className="text-brand-text font-bold">X3DH Ed25519</span>
+                      </div>
+                      <div className="flex items-center justify-between text-[11px] font-mono text-brand-muted">
+                        <span>CIPHER SUITE</span>
+                        <span className="text-brand-text font-bold">AES-256-GCM / SHA3</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </header>
+
+              {/* 📋 SoloChat Navigation Spec Tabs */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 border-b border-brand-border/40 pb-6">
+                {[
+                  { id: 'tour', label: 'Interactive Interface', desc: 'Secure Sandbox' },
+                  { id: 'bento', label: 'Core Capabilities', desc: 'Sovereign Features' },
+                  { id: 'security', label: 'Cryptography Matrix', desc: 'Zero Storage Log' },
+                  { id: 'interactive', label: 'Sandbox System Deck', desc: 'Live Controller' }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setChatActiveTab(tab.id as any)}
+                    className={`flex flex-col items-start gap-1 p-4 rounded-xl text-left transition-all cursor-pointer ${
+                      chatActiveTab === tab.id 
+                        ? 'bg-brand-card border border-brand-border/80 text-brand-text shadow-md scale-[1.01]' 
+                        : 'border-transparent text-brand-muted hover:text-brand-text'
+                    }`}
+                  >
+                    <span className="text-sm font-bold block">{tab.label}</span>
+                    <span className="text-[10px] opacity-75 font-light">{tab.desc}</span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Chat tab panel container */}
+              <div className="min-h-[500px] mt-8">
+                
+                {/* TAB 1: INTERACTIVE SECURE INTERFACE (MOCKUP ACCENTS) */}
+                {chatActiveTab === 'tour' && (
+                  <div className="space-y-12">
+                    <div className="max-w-2xl text-left space-y-2">
+                      <h3 className="text-2xl font-bold font-display text-brand-text">
+                        Sovereign Encapsulated Client
+                      </h3>
+                      <p className="text-sm text-brand-muted font-light leading-relaxed">
+                        Audit SoloChat's peer-to-peer user experience. Switch module panels or enter live texts below to observe safe message buffering and zero-knowledge encapsulation.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                      {/* Left: Interactive Controls */}
+                      <div className="lg:col-span-4 space-y-6">
+                        <div className="p-6 rounded-2xl bg-brand-card border border-brand-border space-y-4">
+                          <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-500 font-bold">
+                            Module Channel Selectors
+                          </h4>
+                          <div className="space-y-2">
+                            {[
+                              { id: 'lobby', label: 'Genesis Lobby', desc: 'Encrypted peer thread' },
+                              { id: 'safe', label: 'Private Safe', desc: 'Scrubbed file logs' },
+                              { id: 'voip', label: 'Secure VoIP Calls', desc: 'Direct OPUS-48kHz node' }
+                            ].map((tab) => (
+                              <button
+                                key={tab.id}
+                                onClick={() => setChatMockTab(tab.id as any)}
+                                className={`w-full flex items-center justify-between p-3 rounded-xl border text-left transition-all cursor-pointer ${
+                                  chatMockTab === tab.id
+                                    ? 'bg-brand-text text-brand-bg border-transparent font-bold'
+                                    : 'border-brand-border hover:bg-brand-card text-brand-text'
+                                }`}
+                              >
+                                <div>
+                                  <span className="text-xs block font-bold">{tab.label}</span>
+                                  <span className={`text-[9px] block font-light ${chatMockTab === tab.id ? 'text-brand-bg/85' : 'text-brand-muted'}`}>{tab.desc}</span>
+                                </div>
+                                <ArrowRight className="h-3 w-3 opacity-60" />
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Interactive Visual Theme Picker */}
+                        <div className="p-6 rounded-2xl bg-brand-card border border-brand-border space-y-4">
+                          <h4 className="text-xs font-mono uppercase tracking-wider text-emerald-500 font-bold">
+                            Simulator HUD Theme
+                          </h4>
+                          <p className="text-[11px] text-brand-muted font-light">Change the mock interface theme preset instantaneously.</p>
+                          <div className="grid grid-cols-5 gap-2">
+                            {[
+                              { id: 'emerald', color: 'bg-emerald-500' },
+                              { id: 'blue', color: 'bg-blue-500' },
+                              { id: 'purple', color: 'bg-purple-500' },
+                              { id: 'rose', color: 'bg-rose-500' },
+                              { id: 'amber', color: 'bg-amber-500' }
+                            ].map((themeOpt) => (
+                              <button
+                                key={themeOpt.id}
+                                onClick={() => setSimulatedTheme(themeOpt.id as any)}
+                                className={`h-8 rounded-lg border flex items-center justify-center cursor-pointer transition-all ${
+                                  simulatedTheme === themeOpt.id
+                                    ? 'border-brand-text scale-[1.12] ring-2 ring-emerald-500/20'
+                                    : 'border-brand-border hover:scale-105'
+                                }`}
+                              >
+                                <span className={`h-4.5 w-4.5 rounded-full ${themeOpt.color}`} />
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Right: Mockup Outer Canvas */}
+                      <div className="lg:col-span-8 flex justify-center">
+                        <div className="w-full max-w-[540px] rounded-[2.5rem] bg-slate-950 border-[6px] border-slate-800 p-3 shadow-2xl relative overflow-hidden text-left text-neutral-300">
+                          {/* Top notch phone indicator */}
+                          <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-slate-800 h-5 w-28 rounded-b-xl z-20 flex items-center justify-center gap-1.5 px-3">
+                            <span className="h-1.5 w-1.5 rounded-full bg-slate-900" />
+                            <span className="h-1 w-3 rounded-full bg-slate-900" />
+                          </div>
+
+                          <div className="h-[480px] w-full rounded-[2rem] bg-zinc-900 border border-white/5 relative flex flex-col justify-between overflow-hidden">
+                            {/* App top bar */}
+                            <div className="bg-zinc-950/80 backdrop-blur-md border-b border-white/5 px-4 pt-6 pb-3 flex items-center justify-between z-10">
+                              <div className="flex items-center gap-2">
+                                <div className={`h-2 w-2 rounded-full animate-ping ${
+                                  simulatedTheme === 'emerald' ? 'bg-emerald-500' :
+                                  simulatedTheme === 'blue' ? 'bg-blue-500' :
+                                  simulatedTheme === 'purple' ? 'bg-purple-500' :
+                                  simulatedTheme === 'rose' ? 'bg-rose-500' : 'bg-amber-500'
+                                }`} />
+                                <div>
+                                  <span className="text-[10px] font-mono tracking-wider text-neutral-400 block">SAFENODE SECURE // P2P</span>
+                                  <span className="text-xs font-bold text-white block">Safehouse Sec // Node 04</span>
+                                </div>
+                              </div>
+                              <span className="text-[9px] font-mono bg-white/10 px-2 py-0.5 rounded text-neutral-300 uppercase">
+                                SH2-DH5 Active
+                              </span>
+                            </div>
+
+                            {/* Panel switching rendering */}
+                            <div className="flex-1 p-4 overflow-y-auto space-y-4 max-h-[350px]">
+                              {chatMockTab === 'lobby' && (
+                                <>
+                                  <div className="mx-auto text-center max-w-[280px] p-2 bg-zinc-950/40 border border-white/5 rounded-lg text-[9px] text-zinc-500 font-mono">
+                                    AES-256 Symmetric handover verified. Temporary database logs automatically shredded under active session locks.
+                                  </div>
+
+                                  {mockMessages.map((msg, i) => (
+                                    <div
+                                      key={i}
+                                      className={`flex flex-col max-w-[85%] ${msg.isOwn ? 'ml-auto items-end' : 'mr-auto items-start'}`}
+                                    >
+                                      <div className={`p-3 rounded-2xl text-xs leading-relaxed ${
+                                        msg.isOwn
+                                          ? `text-white rounded-tr-none ${
+                                              simulatedTheme === 'emerald' ? 'bg-emerald-600' :
+                                              simulatedTheme === 'blue' ? 'bg-blue-600' :
+                                              simulatedTheme === 'purple' ? 'bg-purple-600' :
+                                              simulatedTheme === 'rose' ? 'bg-rose-600' : 'bg-amber-600'
+                                            }`
+                                          : 'bg-zinc-850 text-neutral-200 border border-white/5 rounded-tl-none'
+                                      }`}>
+                                        <p>{msg.text}</p>
+                                      </div>
+                                      <span className="text-[8px] text-zinc-600 font-mono mt-1">{msg.time}</span>
+                                    </div>
+                                  ))}
+                                </>
+                              )}
+
+                              {chatMockTab === 'safe' && (
+                                <div className="space-y-3">
+                                  <div className="p-3 bg-zinc-950/40 border border-white/5 rounded-xl text-center text-xs text-neutral-400 font-light">
+                                    Files locked inside this capsule are encrypted using distinct ephemeral AES initialization vectors.
+                                  </div>
+
+                                  <div className="space-y-2">
+                                    {[
+                                      { name: 'sovereign_tax_strategy_2026.pdf', size: '2.4 MB', hash: 'e28a..df21' },
+                                      { name: 'handshake_safety_keys.gpg', size: '12 KB', hash: '8f0a..bb39' },
+                                    ].map((file, idx) => (
+                                      <div key={idx} className="p-3 rounded-xl bg-zinc-850 border border-white/5 flex items-center justify-between">
+                                        <div className="flex gap-2.5 items-center">
+                                          <FileText className="h-5 w-5 text-neutral-400" />
+                                          <div className="text-left">
+                                            <span className="text-xs text-white block truncate max-w-[200px]">{file.name}</span>
+                                            <span className="text-[9px] text-zinc-500 block font-mono">{file.size} • SHA256: {file.hash}</span>
+                                          </div>
+                                        </div>
+                                        <button
+                                          onClick={() => alert(`Operational command: shred file "${file.name}" initialized`)}
+                                          className="text-[9px] bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 px-2 py-0.5 rounded transition-all"
+                                        >
+                                          SHRED
+                                        </button>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+
+                              {chatMockTab === 'voip' && (
+                                <div className="flex flex-col items-center justify-center h-full space-y-6 pt-6">
+                                  <div className="relative">
+                                    <div className="absolute inset-x-[-12px] inset-y-[-12px] bg-emerald-500/10 rounded-full animate-ping pointer-events-none" />
+                                    <div className="h-16 w-16 bg-neutral-800 rounded-full flex items-center justify-center border border-white/10">
+                                      <PhoneCall className="h-6 w-6 text-emerald-400" />
+                                    </div>
+                                  </div>
+
+                                  <div className="text-center space-y-1">
+                                    <span className="text-sm font-bold text-white block">Peer node call: Active</span>
+                                    <span className="text-[10px] text-zinc-500 font-mono block">CRYPTO METRICS // 48kHz OPUS STEREO</span>
+                                  </div>
+
+                                  {/* Encrypted voice visualizer */}
+                                  <div className="flex items-center gap-1.5 h-12">
+                                    {[20, 48, 12, 64, 38, 54, 76, 24, 60, 42, 18, 56, 32].map((h, i) => (
+                                      <span
+                                        key={i}
+                                        className={`w-1 rounded-full transition-all duration-300 ${
+                                          simulatedTheme === 'emerald' ? 'bg-emerald-500' :
+                                          simulatedTheme === 'blue' ? 'bg-blue-500' :
+                                          simulatedTheme === 'purple' ? 'bg-purple-500' :
+                                          simulatedTheme === 'rose' ? 'bg-rose-500' : 'bg-amber-500'
+                                        }`}
+                                        style={{ height: `${Math.sin(i + Date.now()/250) * 15 + 25}px` }}
+                                      />
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Chat bottom entry frame */}
+                            <form onSubmit={handleSendMockMsg} className="p-3 bg-zinc-950 border-t border-white/5 flex gap-2 items-center z-10">
+                              <input
+                                type="text"
+                                placeholder={chatMockTab === 'lobby' ? "Type encrypted message..." : "Channel interaction disabled"}
+                                disabled={chatMockTab !== 'lobby'}
+                                value={userTypedMsg}
+                                onChange={(e) => setUserTypedMsg(e.target.value)}
+                                className="flex-1 bg-zinc-900 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white/30 transition-all"
+                              />
+                              <button
+                                type="submit"
+                                disabled={chatMockTab !== 'lobby'}
+                                className={`h-8 w-8 rounded-xl flex items-center justify-center text-white cursor-pointer ${
+                                  chatMockTab === 'lobby' 
+                                    ? (simulatedTheme === 'emerald' ? 'bg-emerald-600 hover:bg-emerald-700' :
+                                       simulatedTheme === 'blue' ? 'bg-blue-600 hover:bg-blue-700' :
+                                       simulatedTheme === 'purple' ? 'bg-purple-600 hover:bg-purple-700' :
+                                       simulatedTheme === 'rose' ? 'bg-rose-600 hover:bg-rose-700' : 'bg-amber-600 hover:bg-amber-700')
+                                    : 'bg-zinc-800 opacity-40 cursor-not-allowed'
+                                }`}
+                              >
+                                <Send className="h-3.5 w-3.5" />
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* TAB 2: CORE CAPABILITIES BENTO GRID */}
+                {chatActiveTab === 'bento' && (
+                  <div className="space-y-12">
+                    <div className="max-w-2xl text-left space-y-2">
+                      <h3 className="text-2xl font-bold font-display text-brand-text">
+                        Core Built-In Specifications
+                      </h3>
+                      <p className="text-sm text-brand-muted font-light leading-relaxed">
+                        These structural features constitute SoloChat's sovereign privacy perimeter, preventing zero-day logging and commercial parameter harvesting.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      
+                      {/* 1. Invisible Ink Chat */}
+                      <div className="p-6 rounded-2xl bg-brand-card border border-brand-border space-y-4 hover:border-brand-text/10 transition-all">
+                        <div className="h-10 w-10 rounded-xl bg-orange-500/15 flex items-center justify-center text-orange-500">
+                          <EyeOff className="h-5 w-5" />
+                        </div>
+                        <h4 className="text-base font-bold text-brand-text">Invisible Ink Chat</h4>
+                        <p className="text-xs text-brand-muted font-light leading-relaxed">
+                          Prevent visual shoulder surfing. Text and media messages reside as highly blurred blocks. Tap or hover below to temporarily reveal:
+                        </p>
+                        <div className="p-3 rounded-lg bg-brand-bg border border-brand-border/60 text-center">
+                          <span className="text-xs font-mono font-medium text-emerald-500 select-none blur-sm hover:blur-none active:blur-none transition-all duration-350 cursor-pointer block">
+                            🔒 SSH_KEY_PASSPHRASE=7df9_x87
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* 2. Media Editor & Draw Markup */}
+                      <div className="p-6 rounded-2xl bg-brand-card border border-brand-border space-y-4 hover:border-brand-text/10 transition-all">
+                        <div className="h-10 w-10 rounded-xl bg-blue-500/15 flex items-center justify-center text-blue-500">
+                          <Crop className="h-5 w-5" />
+                        </div>
+                        <h4 className="text-base font-bold text-brand-text">Media Sandbox Markup</h4>
+                        <p className="text-xs text-brand-muted font-light leading-relaxed">
+                          Strip EXIF capture coordinates, drawing markups, or lock secure visual watermarks before dispatching files. Hovering adds indicators:
+                        </p>
+                        <div className="flex gap-2 justify-center select-none">
+                          {['CONFIDENTIAL', 'SHRED'].map((mark) => (
+                            <span
+                              key={mark}
+                              onClick={() => alert(`Watermark active: ${mark}`)}
+                              className="text-[9px] font-mono font-bold bg-neutral-900 border border-white/10 text-white rounded px-2 py-1 cursor-pointer hover:bg-neutral-800 transition-all"
+                            >
+                              🏷️ {mark}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* 3. Interactive Location Pins */}
+                      <div className="p-6 rounded-2xl bg-brand-card border border-brand-border space-y-4 hover:border-brand-text/10 transition-all">
+                        <div className="h-10 w-10 rounded-xl bg-emerald-500/15 flex items-center justify-center text-emerald-500">
+                          <MapPin className="h-5 w-5" />
+                        </div>
+                        <h4 className="text-base font-bold text-brand-text">P2P Location Sharing</h4>
+                        <p className="text-xs text-brand-muted font-light leading-relaxed">
+                          Share custom micro-coordinates without relying on static Google API lookups. Click to update current secure ping node location:
+                        </p>
+                        <div className="p-2.5 rounded-lg bg-brand-bg border border-brand-border/60 flex items-center justify-between">
+                          <div className="text-[11px] font-mono">
+                            <span className="block text-brand-text">{mockLocation.name}</span>
+                            <span className="block text-brand-muted text-[10px]">{mockLocation.lat} • {mockLocation.lng}</span>
+                          </div>
+                          <button
+                            onClick={() => setMockLocation({ lat: '51.5074° N', lng: '0.1278° W', name: 'London Node B' })}
+                            className="bg-brand-text text-brand-bg text-[9px] font-bold py-1 px-2.5 rounded hover:opacity-90 transition-all"
+                          >
+                            CYCLE PING
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* 4. Voice Recorder Integrations */}
+                      <div className="p-6 rounded-2xl bg-brand-card border border-brand-border space-y-4 hover:border-brand-text/10 transition-all">
+                        <div className="h-10 w-10 rounded-xl bg-indigo-500/15 flex items-center justify-center text-indigo-500">
+                          <Mic className="h-5 w-5" />
+                        </div>
+                        <h4 className="text-base font-bold text-brand-text">Sovereign Voice Notes</h4>
+                        <p className="text-xs text-brand-muted font-light leading-relaxed">
+                          Record, verify, and stream raw audio. Captured data resides inside ephemeral memory before being shredded from disk. Test voice recorder:
+                        </p>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => {
+                              setIsRecordingVoice(!isRecordingVoice);
+                              if(!isRecordingVoice) {
+                                setVoiceRecordDuration(0);
+                                const interval = setInterval(() => {
+                                  setVoiceRecordDuration(prev => prev + 1);
+                                }, 1000);
+                                (window as any)._voiceInterval = interval;
+                              } else {
+                                clearInterval((window as any)._voiceInterval);
+                                setRecordedVoiceUrl("Encrypted OPUS stream derived successfully!");
+                              }
+                            }}
+                            className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2 bg-brand-text text-brand-bg text-xs font-bold rounded-lg cursor-pointer transition-all ${
+                              isRecordingVoice ? 'animate-pulse bg-red-600 text-white' : ''
+                            }`}
+                          >
+                            <Mic className="h-3 w-3" />
+                            <span>{isRecordingVoice ? `Recording ${voiceRecordDuration}s` : 'Start Voice Record'}</span>
+                          </button>
+                          <button
+                            disabled={!recordedVoiceUrl}
+                            onClick={() => alert(`OPUS Wave: ${recordedVoiceUrl}`)}
+                            className="text-xs border border-brand-border px-2.5 rounded-lg disabled:opacity-40"
+                          >
+                            Play Note
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* 5. Zero Server Logging */}
+                      <div className="p-6 rounded-2xl bg-brand-card border border-brand-border space-y-4 hover:border-brand-text/10 transition-all">
+                        <div className="h-10 w-10 rounded-xl bg-violet-500/15 flex items-center justify-center text-violet-500">
+                          <Bomb className="h-5 w-5" />
+                        </div>
+                        <h4 className="text-base font-bold text-brand-text">Ephemeral Safes</h4>
+                        <p className="text-xs text-brand-muted font-light leading-relaxed">
+                          Zero backup caches residing in remote cloud frameworks. Local caches undergo deep overwrite shredding upon closing safe capsules or safe links.
+                        </p>
+                      </div>
+
+                      {/* 6. Handshake Safety Numbers */}
+                      <div className="p-6 rounded-2xl bg-brand-card border border-brand-border space-y-4 hover:border-brand-text/10 transition-all">
+                        <div className="h-10 w-10 rounded-xl bg-rose-500/15 flex items-center justify-center text-rose-500">
+                          <Key className="h-5 w-5" />
+                        </div>
+                        <h4 className="text-base font-bold text-brand-text">Safety Handshakes</h4>
+                        <p className="text-xs text-brand-muted font-light leading-relaxed">
+                          Examine public key identity hashes straight inside the channel. Avoid third-party authorization interceptors or corporate cert authority lookups.
+                        </p>
+                      </div>
+
+                    </div>
+                  </div>
+                )}
+
+                {/* TAB 3: CRYPTOGRAPHY MATRIX */}
+                {chatActiveTab === 'security' && (
+                  <div className="space-y-12">
+                    <div className="max-w-2xl text-left space-y-2">
+                      <h3 className="text-2xl font-bold font-display text-brand-text">
+                        Zero-Knowledge Protocol Frameworks
+                      </h3>
+                      <p className="text-sm text-brand-muted font-light leading-relaxed">
+                        SoloChat implements peer identity validation using high-entropy Diffie-Hellman operations on Secp256k1 curves.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                      {/* Left specs list */}
+                      <div className="lg:col-span-5 space-y-6">
+                        {[
+                          { title: 'Forward Secrecy Matrix', desc: 'Compiling unique symmetric keys for individual message dispatches. Compromising a single channel key leaves historic handshakes secure.' },
+                          { title: 'Zero Storage Guarantees', desc: 'No routing parameters are logged to persistent drives. Transmitting clients act as direct cryptographic socket proxies.' },
+                          { title: 'Metadata Cleaning Filters', desc: 'Cleansing visual files in memory. Removing device hardware IDs, geolocation EXIF data tags, and timestamp frames.' }
+                        ].map((p, i) => (
+                          <div key={i} className="p-5 bg-brand-card border border-brand-border rounded-2xl flex items-start gap-4">
+                            <span className="text-xs font-mono font-bold bg-emerald-500/10 text-emerald-500 rounded px-2 py-1 shrink-0 mt-0.5">
+                              0{i+1}
+                            </span>
+                            <div className="space-y-1">
+                              <span className="text-sm font-bold text-brand-text block">{p.title}</span>
+                              <span className="text-xs text-brand-muted font-light leading-relaxed block">{p.desc}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Right raw protocol visualizer code blocks */}
+                      <div className="lg:col-span-7">
+                        <div className="rounded-2xl bg-zinc-950 border border-white/5 p-5 text-left text-neutral-300 font-mono text-[11px] leading-relaxed relative overflow-hidden">
+                          <div className="flex items-center justify-between border-b border-white/5 pb-3 mb-4 select-none">
+                            <span className="text-zinc-500 font-bold">handshake_protocol_handover.ts</span>
+                            <span className="text-emerald-500 text-[10px]">ECC DIRECT // X3DH</span>
+                          </div>
+
+                          <div className="space-y-1 font-mono text-zinc-400">
+                            <p className="text-zinc-500">// Initialize Sovereign Ephemeral Key Handover</p>
+                            <p><span className="text-emerald-400">const</span> clientKeyPair = <span className="text-blue-400">Secp256k1.generateKeyPair</span>();</p>
+                            <p><span className="text-emerald-400">const</span> encryptedHandshakeKey = <span className="text-blue-400">X3DH.deriveSymmetricSecret</span>(clientKeyPair.private, valToken);</p>
+                            <p className="text-zinc-500 mt-2">// AES-256 Symmetric Cipher Generation</p>
+                            <p><span className="text-emerald-400">const</span> cipher = <span className="text-blue-400">crypto.createCipheriv</span>(<span className="text-amber-400">'AES-256-GCM'</span>, encryptedHandshakeKey, initIv);</p>
+                            <p><span className="text-emerald-400">let</span> authTag = cipher.<span className="text-blue-400">getAuthTag</span>();</p>
+                            <p className="text-zinc-500 mt-2">// Force local shredding upon packet resolution</p>
+                            <p>clientKeyPair.<span className="text-red-500">overwritePrivateMemory</span>(); <span className="text-emerald-500">// Zero pass scrubbed</span></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* TAB 4: INTERACTIVE DEMO HANDSHAKE LOG PLAYGROUND */}
+                {chatActiveTab === 'interactive' && (
+                  <div className="space-y-12">
+                    <div className="max-w-2xl text-left space-y-2">
+                      <h3 className="text-2xl font-bold font-display text-brand-text">
+                        System Level Handshake Controller
+                      </h3>
+                      <p className="text-sm text-brand-muted font-light leading-relaxed">
+                        Control SoloChat sandbox parameters from this command deck in real-time. Emit peer handshake negotiations or purge local metadata capsules.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                      {/* Controller board */}
+                      <div className="md:col-span-5 p-6 rounded-2xl bg-brand-card border border-brand-border space-y-4 text-left">
+                        <span className="text-[10px] font-mono uppercase tracking-wider text-brand-muted font-bold block">
+                          Capsule Controller Actions
+                        </span>
+                        
+                        <div className="space-y-3">
+                          <button
+                            onClick={triggerSimulatedHandshake}
+                            className="w-full flex items-center justify-between p-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-transform hover:scale-[1.02] cursor-pointer"
+                          >
+                            <span>Negotiate P2P Handshake</span>
+                            <Zap className="h-4 w-4" />
+                          </button>
+
+                          <button
+                            onClick={triggerSimulatedShred}
+                            className="w-full flex items-center justify-between p-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs transition-transform hover:scale-[1.02] cursor-pointer"
+                          >
+                            <span>Shred Safe Capsule</span>
+                            <Trash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+
+                        <p className="text-[10px] text-brand-muted font-light leading-normal">
+                          *Executing shred forces triple-overwrites on sandbox logs, wiping historic message streams and public key traces from the preview simulator above.
+                        </p>
+                      </div>
+
+                      {/* Log Console Output terminal */}
+                      <div className="md:col-span-7">
+                        <div className="rounded-2xl bg-zinc-950 border border-white/5 p-5 text-left text-neutral-300 font-mono text-[11px] min-h-[180px] flex flex-col justify-between">
+                          <div>
+                            <div className="flex items-center justify-between border-b border-white/5 pb-2 mb-3">
+                              <span className="text-zinc-500 font-bold uppercase tracking-wider text-[9px]">Sovereign Console Logs</span>
+                              <span className="text-emerald-500 text-[9px] hover:animate-pulse">ONLINE PING</span>
+                            </div>
+
+                            <div className="space-y-2 overflow-y-auto max-h-[160px]">
+                              {simulatedLogs.map((log) => (
+                                <div key={log.id} className="space-y-0.5">
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-zinc-600 text-[9px]">{log.timestamp}</span>
+                                    <span className={`text-[9px] px-1 rounded font-bold uppercase ${
+                                      log.type === 'success' ? 'bg-emerald-500/10 text-emerald-400' :
+                                      log.type === 'shred' ? 'bg-red-500/10 text-red-500' : 'bg-white/10 text-neutral-400'
+                                    }`}>
+                                      {log.sender}
+                                    </span>
+                                  </div>
+                                  <p className="text-zinc-300 text-xs leading-relaxed pl-2 border-l border-white/5">{log.message}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          <span className="text-[9px] text-zinc-600 block mt-4 text-right">
+                            Node: SH2-DH5 // Sandbox Sandbox_Logs Active
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+              </div>
+              
+              {/* Security Matrix Overview Card */}
+              <div className="w-full">
+                <div className="p-6 rounded-2xl bg-brand-card border border-brand-border text-left">
+                  <h4 className="text-sm font-bold text-brand-text mb-4 flex items-center gap-2">
+                    <Shield className="h-4 w-4 text-emerald-500" />
+                    <span>Zero-Knowledge Sovereign Messenger Standard Protocols</span>
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="space-y-1.5 p-3 rounded-lg hover:bg-white/[0.01] transition-colors">
+                      <span className="text-[10px] font-mono text-emerald-500 uppercase font-semibold">01 / Double Ratchet Cryptography</span>
+                      <p className="text-xs text-brand-text font-bold">Uncompromising Forward Secrecy</p>
+                      <p className="text-[11px] text-brand-muted font-light leading-relaxed">Message keys are updated constantly. If a key is exposed, only a tiny window of conversation is vulnerable.</p>
+                    </div>
+                    <div className="space-y-1.5 p-3 rounded-lg hover:bg-white/[0.01] transition-colors">
+                      <span className="text-[10px] font-mono text-emerald-500 uppercase font-semibold">02 / Local Hardware Handshakes</span>
+                      <p className="text-xs text-brand-text font-bold">Keys Managed in Hardware Secures</p>
+                      <p className="text-[11px] text-brand-muted font-light leading-relaxed">Asymmetric public handshakes settle straight within the client keychain wrapper securely. Zero logs exposed.</p>
+                    </div>
+                    <div className="space-y-1.5 p-3 rounded-lg hover:bg-white/[0.01] transition-colors">
+                      <span className="text-[10px] font-mono text-emerald-500 uppercase font-semibold">03 / Metadata Cleansing Engine</span>
+                      <p className="text-xs text-brand-text font-bold">Zero Trace Communication Channels</p>
+                      <p className="text-[11px] text-brand-muted font-light leading-relaxed">Automatic purging routines scrub background trace identifiers, media metadata tags, and timestamp indexes immediately.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
 
           {/* Quick Handshake Call to Action Banner */}
           <section className="mt-20 rounded-[3rem] bg-brand-text px-12 py-16 text-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-indigo-500/10 pointer-events-none" />
             <div className="relative z-10 space-y-6">
               <h2 className="font-display text-3xl font-bold tracking-tight text-brand-bg md:text-5xl">
-                Ready to reclaim your financial data sovereignty?
+                {selectedProduct === 'soloaccount' 
+                  ? "Ready to reclaim your financial data sovereignty?" 
+                  : "Ready for absolute chat integrity?"}
               </h2>
               <p className="mx-auto max-w-xl text-sm sm:text-base text-brand-bg/80 leading-relaxed font-light">
-                Join the thousands of developers, architects, and power users tracking their ledger sheets securely with zero internet leaks.
+                {selectedProduct === 'soloaccount'
+                  ? "Join the thousands of developers, architects, and power users tracking their ledger sheets securely with zero internet leaks."
+                  : "Deploy our peer-to-peer messaging networks inside your local team infrastructure with complete cryptographic immunity."}
               </p>
               <div className="pt-4 flex flex-col sm:flex-row justify-center gap-3">
                 <a 
-                  href="https://soloaccount.solosoftwares.com" 
-                  target="_blank" 
-                  rel="noreferrer"
+                  href={selectedProduct === 'soloaccount' ? "https://soloaccount.solosoftwares.com" : "#"}
+                  target={selectedProduct === 'soloaccount' ? "_blank" : undefined}
+                  rel={selectedProduct === 'soloaccount' ? "noreferrer" : undefined}
+                  onClick={(e) => {
+                    if (selectedProduct === 'solochat') {
+                      e.preventDefault();
+                      alert('Sovereign SoloChat client compilation model initialized. Local Node instance live at 127.0.0.1:4040.');
+                    }
+                  }}
                   className="rounded-full bg-brand-bg px-8 py-3.5 text-sm font-bold text-brand-text transition-all hover:bg-neutral-100 hover:scale-[1.03] text-center"
                 >
-                  Launch App Instantly (Local Mode)
+                  {selectedProduct === 'soloaccount' ? "Launch App Instantly (Local Mode)" : "Launch SoloChat P2P Client"}
                 </a>
                 <a 
                   href="https://wa.me/919994120250"

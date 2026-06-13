@@ -34,7 +34,11 @@ import {
   Database,
   Layout,
   FileJson,
-  Terminal
+  Terminal,
+  MessageSquare,
+  EyeOff,
+  Mic,
+  Send
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -53,6 +57,7 @@ import {
 import appLogin from '../assets/app_login.png';
 import dashboard from '../assets/dashboard.png';
 import soloaccountLogo from '../assets/soloaccount-mark.svg';
+import solochatLogo from '../assets/solochat-mark.svg';
 import surf1 from '../assets/soloaccount_Surface_1.png';
 import surf2 from '../assets/soloaccount_Surface_2.png';
 import surf3 from '../assets/soloaccount_Surface_3.png';
@@ -507,11 +512,38 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
   const [activeSurfaceIndex, setActiveSurfaceIndex] = useState(0);
   const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
 
+  // SoloChat Home Mini Session State
+  const [homeChatMsg, setHomeChatMsg] = useState('');
+  const [homeChatLogs, setHomeChatLogs] = useState<Array<{ text: string; isOwn: boolean; time: string }>>([
+    { text: "P2P tunnel initialized. Safehouse Sec // Node 04 handshake verified. State matches 100%.", isOwn: false, time: "12:05" },
+    { text: "Perfect. Let's test double ratchet protocol layers. Zero trace cache enabled?", isOwn: true, time: "12:06" },
+    { text: "Active and secure. Tap or hover over keys below to verify.", isOwn: false, time: "12:06" }
+  ]);
+
   const handleCurrencyChange = (newCode: keyof typeof CURRENCIES) => {
     setCurrencyCode(newCode);
     const curr = CURRENCIES[newCode];
     setMonthlyIncome(curr.defaultIncome);
     setMonthlyExpenses(curr.defaultExpense);
+  };
+
+  const handleSendHomeChat = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!homeChatMsg.trim()) return;
+    const userText = homeChatMsg.trim();
+    const curTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    setHomeChatLogs(prev => [...prev, { text: userText, isOwn: true, time: curTime }]);
+    setHomeChatMsg('');
+
+    setTimeout(() => {
+      let reply = "Direct packet transmission successful. Key ratchet rolled forward.";
+      if (userText.toLowerCase().includes('hi') || userText.toLowerCase().includes('hello')) {
+        reply = "Hello peer! Ephemeral handshake is validated on our local secure enclave.";
+      } else if (userText.toLowerCase().includes('sec') || userText.toLowerCase().includes('private') || userText.toLowerCase().includes('shred')) {
+        reply = "Zero database storage log guaranteed. Encrypted with AES-256-GCM.";
+      }
+      setHomeChatLogs(prev => [...prev, { text: reply, isOwn: false, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
+    }, 1200);
   };
 
   useEffect(() => {
@@ -1957,6 +1989,166 @@ export default function HomePage({ isDarkMode, setIsDarkMode, theme, setTheme }:
                     })}
                   </AnimatePresence>
                 </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 🔮 Segment 4C: PROACTIVE INTRODUCING SOLOCHAT SECURE MESSAGE MATRIX */}
+      <section id="solochat" className="py-24 bg-brand-bg border-b border-brand-border relative overflow-hidden">
+        {/* Ambient background glows */}
+        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 h-80 w-80 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+        
+        <div className="mx-auto max-w-7xl px-6 relative z-10 text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            {/* Left Hand: Value Proposition */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="flex items-center gap-4">
+                <img 
+                  src={solochatLogo} 
+                  alt="SoloChat Logo" 
+                  className="h-16 w-16 object-contain rounded-2xl border border-brand-border/60 bg-brand-card p-1.5 shadow-md flex-shrink-0"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-brand-border bg-brand-card px-3 py-1 text-[11px] font-mono font-bold tracking-wider uppercase text-emerald-500">
+                    <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>NEW SOVEREIGN PROTOCOL</span>
+                  </div>
+                  <h2 className="font-display text-3.5xl sm:text-4xl font-bold tracking-tight text-brand-text leading-none pt-1">
+                    SoloChat Secure
+                  </h2>
+                </div>
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="font-display text-2xl font-bold tracking-tight text-brand-text">
+                  Peer-to-Peer Secure Channels
+                </h3>
+                <p className="text-sm sm:text-base text-brand-muted leading-relaxed font-light">
+                  A zero-knowledge messenger system featuring absolute client data isolation. Built with Double Ratchet cryptography and invisible ink capabilities to secure transient, peer-to-peer data flows with zero server tracking.
+                </p>
+              </div>
+
+              {/* Mini Highlights */}
+              <div className="space-y-4">
+                <div className="flex gap-3">
+                  <div className="h-6 w-6 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="h-3.5 w-3.5 text-emerald-500" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-brand-text">Double Ratchet Forward Secrecy</h4>
+                    <p className="text-xs text-brand-muted font-light mt-0.5">Rolling symmetric session keys continuously, securing previous dispatches.</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <div className="h-6 w-6 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="h-3.5 w-3.5 text-emerald-500" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-brand-text">Zero Storage Architecture</h4>
+                    <p className="text-xs text-brand-muted font-light mt-0.5">Messages bypass cloud databases completely. Memory states shred cleanly upon secure teardowns.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex items-center gap-3 pt-4">
+                <a 
+                  href="/product?tab=solochat" 
+                  className="rounded-full bg-brand-text px-6 py-3 text-xs sm:text-sm font-bold text-brand-bg hover:scale-105 active:scale-95 transition-all shadow-md inline-block text-center"
+                >
+                  Explore SoloChat Specification
+                </a>
+                <a 
+                  href="https://wa.me/919994120250"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-brand-border bg-brand-card hover:bg-brand-text/10 px-6 py-3 text-xs sm:text-sm font-bold text-brand-text transition-all block text-center"
+                >
+                  Request Integration
+                </a>
+              </div>
+            </div>
+
+            {/* Right Hand: Interactive Real-Chat Visualizer */}
+            <div className="lg:col-span-7 flex flex-col items-center">
+              <div className="w-full max-w-[460px] rounded-[2.5rem] bg-slate-950 border-[6px] border-slate-800 p-2.5 shadow-2.5xl relative overflow-hidden text-neutral-300">
+                
+                {/* Top Notch phone indicator */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-slate-800 h-4 w-24 rounded-b-lg z-20 flex items-center justify-center gap-1">
+                  <span className="h-1 w-1 rounded-full bg-slate-900" />
+                  <span className="h-0.5 w-2 bg-slate-900 rounded-full" />
+                </div>
+
+                <div className="h-[400px] rounded-[1.8rem] bg-zinc-900 border border-white/5 relative flex flex-col justify-between overflow-hidden">
+                  
+                  {/* Top Header of Chat App */}
+                  <div className="bg-zinc-950/80 backdrop-blur-md px-3.5 pt-4 pb-2 border-b border-white/5 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping" />
+                      <span className="text-[10px] font-mono tracking-wider text-neutral-300 font-bold block">Safehouse Sec // Node 04</span>
+                    </div>
+                    <span className="text-[8px] font-mono bg-white/10 px-2 py-0.5 text-zinc-400 rounded">
+                      AES-256 SYMMETRIC
+                    </span>
+                  </div>
+
+                  {/* Messages list */}
+                  <div className="flex-1 p-3 overflow-y-auto space-y-3 max-h-[290px]">
+                    <div className="mx-auto text-center max-w-[240px] px-2 py-1.5 bg-zinc-950/30 border border-white/5 rounded text-[8px] text-zinc-500 font-mono">
+                      100% ephemeral state session. Zero database log tags recorded.
+                    </div>
+
+                    {homeChatLogs.map((log, index) => (
+                      <div
+                        key={index}
+                        className={`flex flex-col max-w-[85%] ${log.isOwn ? 'ml-auto items-end' : 'mr-auto items-start'}`}
+                      >
+                        <div className={`p-2.5 rounded-xl text-xs leading-relaxed ${
+                          log.isOwn ? 'bg-emerald-600 text-white rounded-tr-none' : 'bg-zinc-850 text-neutral-200 border border-white/5 rounded-tl-none'
+                        }`}>
+                          <p>{log.text}</p>
+                        </div>
+                        <span className="text-[8px] text-zinc-600 mt-0.5 font-mono">{log.time}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Typing input */}
+                  <form onSubmit={handleSendHomeChat} className="p-2 border-t border-white/5 bg-zinc-950 flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="Type encrypted message..."
+                      value={homeChatMsg}
+                      onChange={(e) => setHomeChatMsg(e.target.value)}
+                      className="flex-1 bg-zinc-900 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white/30"
+                    />
+                    <button
+                      type="submit"
+                      className="h-7 w-7 rounded-lg bg-emerald-600 hover:bg-emerald-700 flex items-center justify-center text-white cursor-pointer transition-all shrink-0"
+                    >
+                      <Send className="h-3 w-3" />
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+              {/* Invisible Ink Interactive Demo */}
+              <div className="mt-4 p-3 rounded-xl bg-brand-card border border-brand-border max-w-[460px] text-center w-full select-none">
+                <span className="text-[10px] font-mono text-emerald-500 font-bold uppercase tracking-widest block mb-1">
+                  🔒 INVISIBLE INK PROTOCOL
+                </span>
+                <p className="text-[11px] text-brand-muted leading-relaxed font-light">
+                  Touch or hover over this encrypted block to temporarily reveal the handshake secrets:
+                </p>
+                <span className="text-xs font-mono font-medium text-emerald-500 select-none blur-sm hover:blur-none active:blur-none duration-300 transition-all cursor-pointer block mt-1.5">
+                  HANDSHAKE_HASH=ef72b_secp256k1_99w8
+                </span>
               </div>
             </div>
 
